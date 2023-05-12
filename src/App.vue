@@ -1,8 +1,16 @@
-<script setup>
-import HelloWorld from "./components/HelloWorld.vue";
-</script>
+<script setup></script>
 
-<template></template>
+<template>
+  <header>
+    <AppHeader />
+  </header>
+  <main>
+    <router-view></router-view>
+  </main>
+  <footer>
+    <AppFooter />
+  </footer>
+</template>
 
 <style scoped>
 .logo {
