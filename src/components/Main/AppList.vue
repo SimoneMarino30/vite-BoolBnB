@@ -1,5 +1,20 @@
-<script></script>
+<script>
+import AppHeader from "../Header/AppHeader.vue";
+import AppCard from "./AppCard.vue";
 
-<template></template>
+export default {
+  name: "AppList",
+  data() {
+    return {};
+  },
+
+  components: { AppHeader, AppCard },
+};
+</script>
+
+<template>
+  <AppHeader />
+  ucc
+</template>
 
 <style lang="scss" scoped></style>
