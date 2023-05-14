@@ -12,9 +12,8 @@ export default {
 </script>
 
 <template>
-  <header>
-    <AppHeader />
-  </header>
+  <AppHeader />
+
   <main>
     <h1>{{ title }}</h1>
     <router-view></router-view>
@@ -24,4 +23,6 @@ export default {
   </footer>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss">
+@use "./style/general.scss" as *;
+</style>

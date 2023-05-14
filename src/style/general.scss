@@ -1,0 +1,11 @@
+@use "./partials/variables.scss" as *;
+
+body {
+  background-color: $light_color;
+  color: $dark_color;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}

@@ -12,19 +12,41 @@ export default {
 
 <template>
   <header>
-    <div class="container h-100">
-      <div class="row d-flex align-items-center h-100">
-        <div class="col-3 logo">
-          <a href="http://localhost:5174" class=""> BoolBnB </a>
+    <nav class="navbar p-0">
+      <div class="container justify-content-between">
+        <!-- logo -->
+        <div>
+          <a
+            class="navbar-brand"
+            href="#"
+          >
+            <img
+              src="../../assets/images/logo-prova.png"
+              alt="Logo"
+              class="d-inline-block align-text-top logo"
+            />
+          </a>
         </div>
-
+        <!-- buttons -->
         <div class="col-3 d-flex justify-content-end gap-3">
-          <a href="http://127.0.0.1:8000/login"> Login </a>
-          <a href="http://127.0.0.1:8000/register"> Registrati </a>
+          <a href="http://127.0.0.1:8000/login"><button>Login</button> </a>
+          <a href="http://127.0.0.1:8000/login"><button>Registrati</button> </a>
+          <a href="http://127.0.0.1:8000/login"><button>&hearts;</button> </a>
         </div>
       </div>
-    </div>
+    </nav>
   </header>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@use "../../style/general.scss" as *;
+
+header {
+  height: 5rem;
+  background-color: #f3e4d4;
+  .logo {
+    width: 8rem;
+    height: 5rem;
+  }
+}
+</style>
