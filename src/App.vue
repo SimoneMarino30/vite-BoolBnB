@@ -4,9 +4,6 @@ import AppFooter from "./components/Footer/AppFooter.vue"
 
 export default {
 
-
-  components: { AppFooter },
-
   data() {
     return {
       title: "BoolBnB",
@@ -29,6 +26,5 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-@import "./style/partials/reset.scss";
 
 </style>
