@@ -1,10 +1,13 @@
 <script>
+import AppHeader from "./components/Header/AppHeader.vue";
+
 export default {
   data() {
     return {
       title: "BoolBnB",
     };
   },
+  components: { AppHeader },
 };
 </script>
 
