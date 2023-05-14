@@ -5,7 +5,16 @@ export default {
   components: {},
 
   data() {
-    return {};
+    return {
+      /* links: [
+        {
+          text: "Home",
+        },
+        {
+          text: "Appartamenti",
+        },
+      ], */
+    };
   },
 };
 </script>
@@ -27,11 +36,20 @@ export default {
             />
           </a>
         </div>
+
         <!-- buttons -->
-        <div class="col-3 d-flex justify-content-end gap-3">
-          <a href="http://127.0.0.1:8000/login"><button>Login</button> </a>
-          <a href="http://127.0.0.1:8000/login"><button>Registrati</button> </a>
-          <a href="http://127.0.0.1:8000/login"><button>&hearts;</button> </a>
+        <div class="d-flex align-items-center">
+          <a href="http://127.0.0.1:8000/login"
+            ><button class="nav-btn">Login</button>
+          </a>
+          <span class="fs-3">|</span>
+
+          <a href="http://127.0.0.1:8000/login"
+            ><button class="nav-btn">Registrati</button>
+          </a>
+          <a href="http://127.0.0.1:8000/login"
+            ><button class="nav-btn ps-3">&hearts;</button>
+          </a>
         </div>
       </div>
     </nav>
@@ -40,6 +58,7 @@ export default {
 
 <style lang="scss" scoped>
 @use "../../style/general.scss" as *;
+@use "../../style/partials/variables.scss" as *;
 
 header {
   height: 5rem;
@@ -47,6 +66,15 @@ header {
   .logo {
     width: 8rem;
     height: 5rem;
+  }
+
+  .nav-btn {
+    border: none;
+    background-color: inherit;
+    border-radius: 20px;
+    &:hover {
+      color: $primary_color;
+    }
   }
 }
 </style>
