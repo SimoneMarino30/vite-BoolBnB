@@ -10,7 +10,7 @@ export default {
       title: "BoolBnB",
     };
   },
-  components: { AppHeader },
+  components: { AppHeader, AppFooter },
 };
 </script>
 
@@ -21,9 +21,10 @@ export default {
     <h1>{{ title }}</h1>
     <router-view></router-view>
   </main>
-  <footer>
-    <AppFooter />
-  </footer>
+  
+  <!-- footer -->
+  <AppFooter />
+
 </template>
 
 <style lang="scss">

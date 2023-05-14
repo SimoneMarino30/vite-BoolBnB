@@ -1,9 +1,7 @@
 <script></script>
 
 <template>
-
-  <!-- Footer -->
-    <footer class="text-center text-lg-start text-muted">
+    <footer class="text-center text-lg-start mt-auto">
 
       <!-- Section: Links  -->
       <section class="py-1">
@@ -127,13 +125,11 @@
       <!-- Section: Links  -->
 
       <!-- Copyright -->
-      <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+      <div class="text-center p-4 copyright-banner">
         © 2023 Copyright: <span class="fw-bold">BoolBnB.com</span>
       </div>
       <!-- Copyright -->
     </footer>
-  <!-- Footer -->
-
 </template>
 
 <style lang="scss" scoped></style>
