@@ -25,10 +25,7 @@ export default {
       <div class="container justify-content-between">
         <!-- logo -->
         <div>
-          <a
-            class="navbar-brand"
-            href="#"
-          >
+          <a class="navbar-brand" href="#">
             <img
               src="../../assets/images/logo-prova.png"
               alt="Logo"
@@ -44,7 +41,7 @@ export default {
           </a>
           <span class="fs-3">|</span>
 
-          <a href="http://127.0.0.1:8000/login"
+          <a href="http://127.0.0.1:8000/register"
             ><button class="nav-btn">Registrati</button>
           </a>
           <a href="http://127.0.0.1:8000/login"
