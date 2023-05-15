@@ -1,7 +1,7 @@
 <script></script>
 
 <template>
-    <footer class="text-center text-lg-start mt-auto">
+    <footer class="text-center text-lg-start">
 
       <!-- Section: Links  -->
       <section class="py-1">
@@ -54,23 +54,23 @@
               </h6>
 
               <div class="pb-3">
-                <a href="https://github.com/SimoneMarino30" class="text-reset">Simone Marino</a>
+                <a href="https://github.com/SimoneMarino30" target="_blank" class="text-reset">Simone Marino</a>
               </div>
 
               <div class="pb-3">
-                <a href="https://github.com/GiuliaGlave" class="text-reset">Giulia Glave</a>
+                <a href="https://github.com/GiuliaGlave" target="_blank" class="text-reset">Giulia Glave</a>
               </div>
 
               <div class="pb-3">
-                <a href="https://github.com/Gianmarco-Leone" class="text-reset">Gianmarco Leone</a>
+                <a href="https://github.com/Gianmarco-Leone" target="_blank" class="text-reset">Gianmarco Leone</a>
               </div>
 
               <div class="pb-3">
-                <a href="https://github.com/MichelepioBombai" class="text-reset">Michele Pio Bombai</a>
+                <a href="https://github.com/MichelepioBombai" target="_blank" class="text-reset">Michele Pio Bombai</a>
               </div>
 
               <div class="pb-3">
-                <a href="https://github.com/CarloColletti?tab=repositories" class="text-reset">Carlo Colletti</a>
+                <a href="https://github.com/CarloColletti?tab=repositories" target="_blank" class="text-reset">Carlo Colletti</a>
               </div>
 
             </div>
