@@ -50,6 +50,7 @@ import { faBabyCarriage } from "@fortawesome/free-solid-svg-icons";
 import { faShirt } from "@fortawesome/free-solid-svg-icons";
 import { faSprayCanSparkles } from "@fortawesome/free-solid-svg-icons";
 import { faFire } from "@fortawesome/free-solid-svg-icons";
+import { faWheelchairMove } from "@fortawesome/free-solid-svg-icons";
 
 /* add icons to the library */
 library.add(faGlobe, faFilter, faLocationDot, faMagnifyingGlass, faEye);
@@ -80,7 +81,8 @@ library.add(
   faBabyCarriage,
   faShirt,
   faSprayCanSparkles,
-  faFire
+  faFire,
+  faWheelchairMove
 );
 
 /string syntax/;
@@ -112,6 +114,7 @@ library.add(
       <font-awesome-icon icon="fa-solid fa-shirt" />
       <font-awesome-icon icon="fa-solid fa-spray-can-sparkles" />
       <font-awesome-icon icon="fa-solid fa-fire" />
+      <font-awesome-icon icon="fa-solid fa-wheelchair-move" />
     </div> */
 
 const app = createApp(App);
