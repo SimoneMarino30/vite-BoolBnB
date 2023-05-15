@@ -25,7 +25,10 @@ export default {
       <div class="container justify-content-between">
         <!-- logo -->
         <div>
-          <a class="navbar-brand" href="#">
+          <a
+            class="navbar-brand"
+            href="#"
+          >
             <img
               src="../../assets/images/logo-prova.png"
               alt="Logo"
@@ -45,7 +48,9 @@ export default {
             ><button class="nav-btn">Registrati</button>
           </a>
           <a href="http://127.0.0.1:8000/login"
-            ><button class="nav-btn ps-3">&hearts;</button>
+            ><button class="nav-btn ps-3">
+              <font-awesome-icon icon="fa-solid fa-globe" />
+            </button>
           </a>
         </div>
       </div>
