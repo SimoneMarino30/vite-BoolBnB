@@ -14,8 +14,19 @@ a {
 // main *************************************
 
 main{
-  // DEBUG
-  height: 50vh;
+//  app card setting *******
+.card-settings {
+  color: aliceblue;
+
+    .card-back {
+      background-color: $dark_color;
+    }
+
+    .card-image-size {
+      width: 100%;
+    }
+  }
+
 }
 
 
