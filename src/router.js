@@ -15,13 +15,13 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      components: HomePage,
+      component: HomePage,
     },
 
     {
       path: "/apartments",
       name: "AllApartments",
-      components: AllApartments,
+      component: AllApartments,
     },
   ],
 });

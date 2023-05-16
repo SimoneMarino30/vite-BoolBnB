@@ -4,6 +4,7 @@ import AppHeader from "./components/Header/AppHeader.vue";
 
 // import footer
 import AppFooter from "./components/Footer/AppFooter.vue";
+// import AllApartments from "./components/pages/AllApartments.vue";
 
 export default {
   data() {
@@ -19,6 +20,7 @@ export default {
 
   <!-- Main -->
   <main class="py-5">
+    <!-- <AllApartments /> -->
     <router-view></router-view>
   </main>
 

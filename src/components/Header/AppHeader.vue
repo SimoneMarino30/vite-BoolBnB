@@ -22,7 +22,7 @@ export default {
 <template>
   <header>
     <nav class="navbar p-0">
-      <div class="container justify-content-between">
+      <div class="container">
         <!-- logo -->
         <div>
           <a class="navbar-brand" href="#">
@@ -34,12 +34,10 @@ export default {
           </a>
         </div>
 
-        <router-link :to="{ name: 'home' }" class="nav-link">
-          HomePage
-        </router-link>
-        <!-- <router-link :to="{ name: 'AllApartments' }" class="nav-link">
+        <router-link :to="{ name: 'home' }"> In Evidenza </router-link>
+        <router-link :to="{ name: 'AllApartments' }">
           Tutte le Case
-        </router-link> -->
+        </router-link>
 
         <!-- buttons -->
         <div class="d-flex align-items-center">
@@ -68,7 +66,7 @@ export default {
 
 header {
   height: 5rem;
-  background-color: #f3e4d4;
+  background-color: #efe4c8;
   .logo {
     width: 8rem;
     height: 5rem;
@@ -81,6 +79,10 @@ header {
     &:hover {
       color: $primary_color;
     }
+  }
+
+  .navbar {
+    border-bottom: 1px solid #222026;
   }
 }
 </style>

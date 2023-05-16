@@ -2,6 +2,7 @@
 import axios from "axios";
 import AppList from "../Main/AppList.vue";
 export default {
+  name: "AllApartments",
   data() {
     return {
       apartments: {
