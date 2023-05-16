@@ -1,35 +1,31 @@
 <script>
+// import header
 import AppHeader from "./components/Header/AppHeader.vue";
-// import footer 
+
+// import footer
 import AppFooter from "./components/Footer/AppFooter.vue";
-// import card 
-import AppCard from "./components/Main/AppCard.vue";
+// import AllApartments from "./components/pages/AllApartments.vue";
 
 export default {
-
   data() {
-    return {
-      title: "BoolBnB",
-    };
+    return {};
   },
-  components: { AppHeader, AppFooter, AppCard },
+  components: { AppHeader, AppFooter },
 };
 </script>
 
 <template>
+  <!-- Header -->
   <AppHeader />
 
+  <!-- Main -->
   <main class="py-5">
-    <h1>{{ title }}</h1>
-
-    <AppCard />
-
+    <!-- <AllApartments /> -->
     <router-view></router-view>
   </main>
-  
+
   <!-- footer -->
   <AppFooter />
-
 </template>
 
 <style lang="scss">
