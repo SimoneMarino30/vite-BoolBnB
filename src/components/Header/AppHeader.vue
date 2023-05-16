@@ -25,7 +25,7 @@ export default {
       <div class="container">
         <!-- logo -->
         <div>
-          <a class="navbar-brand" href="#">
+          <a class="navbar-brand" href="/">
             <img
               src="../../assets/images/logo-prova.png"
               alt="Logo"
@@ -66,7 +66,7 @@ export default {
 
 header {
   height: 5rem;
-  background-color: #efe4c8;
+  background-color: rgb(243 228 212);
   .logo {
     width: 8rem;
     height: 5rem;

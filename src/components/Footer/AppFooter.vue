@@ -34,28 +34,19 @@
             </div>
 
             <div class="pb-3">
-              <a
-                href="https://vuejs.org/"
-                target="_blank"
-                class="text-reset"
+              <a href="https://vuejs.org/" target="_blank" class="text-reset"
                 >Vue</a
               >
             </div>
 
             <div class="pb-3">
-              <a
-                href="https://vitejs.dev/"
-                target="_blank"
-                class="text-reset"
+              <a href="https://vitejs.dev/" target="_blank" class="text-reset"
                 >Vite</a
               >
             </div>
 
             <div class="pb-3">
-              <a
-                href="https://laravel.com/"
-                target="_blank"
-                class="text-reset"
+              <a href="https://laravel.com/" target="_blank" class="text-reset"
                 >Laravel</a
               >
             </div>
@@ -122,10 +113,7 @@
             <h6 class="text-uppercase fw-bold mb-4">SOCIAL</h6>
 
             <div class="pb-3">
-              <a
-                href="#!"
-                class="text-reset"
-              >
+              <a href="#!" class="text-reset">
                 <span class="px-1">
                   <font-awesome-icon icon="fa-brands fa-facebook" />
                 </span>
@@ -134,10 +122,7 @@
             </div>
 
             <div class="pb-3">
-              <a
-                href="#!"
-                class="text-reset"
-              >
+              <a href="#!" class="text-reset">
                 <span class="px-1">
                   <font-awesome-icon icon="fa-brands fa-instagram" />
                 </span>
@@ -146,10 +131,7 @@
             </div>
 
             <div class="pb-3">
-              <a
-                href="#!"
-                class="text-reset"
-              >
+              <a href="#!" class="text-reset">
                 <span class="px-1"
                   ><font-awesome-icon icon="fa-brands fa-twitter"
                 /></span>
@@ -158,10 +140,7 @@
             </div>
 
             <div class="pb-3">
-              <a
-                href="#!"
-                class="text-reset"
-              >
+              <a href="#!" class="text-reset">
                 <span class="px-1">
                   <font-awesome-icon icon="fa-brands fa-google" />
                 </span>
@@ -170,10 +149,7 @@
             </div>
 
             <div class="pb-3">
-              <a
-                href="#!"
-                class="text-reset"
-              >
+              <a href="#!" class="text-reset">
                 <span class="px-1"
                   ><font-awesome-icon icon="fa-brands fa-github"
                 /></span>
