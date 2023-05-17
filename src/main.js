@@ -19,6 +19,7 @@ import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 
+
 /brands/;
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
@@ -51,9 +52,11 @@ import { faShirt } from "@fortawesome/free-solid-svg-icons";
 import { faSprayCanSparkles } from "@fortawesome/free-solid-svg-icons";
 import { faFire } from "@fortawesome/free-solid-svg-icons";
 import { faWheelchairMove } from "@fortawesome/free-solid-svg-icons";
+import { faBed} from "@fortawesome/free-solid-svg-icons";
+import { faHouse } from '@fortawesome/free-solid-svg-icons';
 
 /* add icons to the library */
-library.add(faGlobe, faFilter, faLocationDot, faMagnifyingGlass, faEye);
+library.add(faGlobe, faFilter, faLocationDot, faMagnifyingGlass, faEye, faHouse);
 /brands/;
 library.add(faFacebook, faInstagram, faTwitter, faGoogle, faGithub);
 /services/;
@@ -82,7 +85,8 @@ library.add(
   faShirt,
   faSprayCanSparkles,
   faFire,
-  faWheelchairMove
+  faWheelchairMove,
+  faBed
 );
 
 /string syntax/;
