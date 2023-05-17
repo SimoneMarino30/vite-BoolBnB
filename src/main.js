@@ -54,6 +54,7 @@ import { faFire } from "@fortawesome/free-solid-svg-icons";
 import { faWheelchairMove } from "@fortawesome/free-solid-svg-icons";
 import { faBed} from "@fortawesome/free-solid-svg-icons";
 import { faHouse } from '@fortawesome/free-solid-svg-icons';
+import { faHotTubPerson} from '@fortawesome/free-solid-svg-icons';
 
 /* add icons to the library */
 library.add(faGlobe, faFilter, faLocationDot, faMagnifyingGlass, faEye, faHouse);
@@ -86,7 +87,8 @@ library.add(
   faSprayCanSparkles,
   faFire,
   faWheelchairMove,
-  faBed
+  faBed,
+  faHotTubPerson
 );
 
 /string syntax/;
