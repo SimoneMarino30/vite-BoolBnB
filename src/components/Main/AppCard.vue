@@ -11,7 +11,7 @@ export default {
     <!-- init card -->
     <div>
       <div class="px-3 py-3 card-settings">
-        <a href="#" class="text-reset">
+        <router-link :to="{ name: 'AppartmentDetail' }" :apartment="apartment" class="text-reset">
           <!-- card container  -->
           <div class="card-back py-3 px-3 rounded-4">
             <!-- image card  -->
@@ -42,7 +42,7 @@ export default {
             </div>
           </div>
           <!-- end card container  -->
-        </a>
+        </router-link>
       </div>
 
       <!-- end card  -->

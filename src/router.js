@@ -5,6 +5,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import AllApartments from "../src/components/pages/AllApartments.vue";
 import HomePage from "../src/components/pages/HomePage.vue";
 import AppSearch from "../src/components/pages/AppSearch.vue";
+import AppDetail from "../src/components/Main/AppDetail.vue";
 
 // creazione routes
 
@@ -29,6 +30,12 @@ const router = createRouter({
       path: "/AppSearch",
       name: "SearchApartments",
       component: AppSearch,
+    },
+
+    {
+      path: "/AppDetail",
+      name: "AppartmentDetail",
+      component: AppDetail,
     },
   ],
 });
