@@ -77,6 +77,17 @@ export default {
         drawer.style.width = "40%";
       }
     },
+
+    getPriceRange() {
+      var priceSlider = document.getElementById("priceRange");
+      var output = document.getElementById("displayedValue");
+      output.innerHTML = priceSlider.value; // Display the default slider value
+
+      // Update the current slider value (each time you drag the slider handle)
+      priceSlider.oninput = function () {
+        output.innerHTML = this.value;
+      };
+    },
   },
 };
 </script>
@@ -126,6 +137,19 @@ export default {
               min="0"
               placeholder="€"
             />
+            <!-- range bar-->
+
+            <input
+              type="range"
+              class="priceSlider"
+              min="0"
+              max="1000"
+              value="300"
+              id="priceRange"
+            />
+            <p>
+              Prezzo: <span id="displayedValue">{{ getPriceRange() }}</span>
+            </p>
           </div>
 
           <div class="brb">
@@ -256,6 +280,22 @@ export default {
     div {
       display: flex;
       flex-direction: column;
+    }
+
+    .priceSlider {
+      -webkit-appearance: none;
+      background: $dark_accent_color;
+      height: 0.5rem;
+      border-radius: 25px;
+    }
+    .priceSlider::-webkit-slider-thumb {
+      -webkit-appearance: none; /* Override default look */
+      appearance: none;
+      width: 1rem;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: $light_accent_color;
+      cursor: pointer;
     }
 
     .filters-form {
