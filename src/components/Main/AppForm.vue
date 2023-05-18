@@ -39,10 +39,10 @@ export default {
       axios
         .post("http://127.0.0.1:8000/api/messages", message)
         .then((response) => {
-          this.name = this.message.name;
-          this.surname = this.message.surname;
-          this.email = this.message.email;
-          this.text = this.message.text;
+          this.message.name = "";
+          this.message.surname = "";
+          this.message.email = "";
+          this.message.text = "";
           this.success = true;
         })
         .catch((error) => {
