@@ -1,6 +1,10 @@
 <script>
 import axios from "axios";
+
+// Componenti
 import AppCard from "./AppCard.vue";
+import AppForm from "./AppForm.vue";
+
 export default {
   name: "AppDetail",
   data() {
@@ -17,7 +21,7 @@ export default {
         this.apartment = response.data;
       });
   },
-  components: { AppCard },
+  components: { AppCard, AppForm },
 };
 </script>
 
@@ -31,7 +35,11 @@ export default {
       <div class="col-12 pt-3">
         <!-- image appartment  -->
         <div class="appartment-image-frame rounded-4">
-          <img src="../../assets/images/house-10b.jpg" class="image-appartment rounded-4" alt="#">
+          <img
+            src="../../assets/images/house-10b.jpg"
+            class="image-appartment rounded-4"
+            alt="#"
+          />
         </div>
       </div>
     </div>
@@ -93,88 +101,8 @@ export default {
       <!-- end detail  -->
 
       <!-- init form  -->
-      <div class="col-12 col-lg-4 my-4">
-        <div class="form-box d-flex flex-column p-2 rounded-4">
-          <div class="box">
-            <div class="message-box shadow-lg p-4 rounded-4">
-              <!-- form detail  -->
-              <form>
-                <div class="modal-body">
-                  <div class="my-4">
-                    <h5 class="text-center fw-bold color-primary">
-                      Vuoi più informazioni?
-                    </h5>
-                  </div>
-
-                  <div class="mb-3">
-                    <label for="name" class="pb-2">Nome</label>
-                    <input
-                      type="text"
-                      id="name"
-                      class="form-control"
-                      minlength="3"
-                      maxlength="50"
-                      required
-                    />
-                  </div>
-                  <div class="mb-3">
-                    <label for="surname" class="pb-2">Cognome</label>
-                    <input
-                      type="text"
-                      id="surname"
-                      class="form-control"
-                      minlength="3"
-                      maxlength="50"
-                      required
-                    />
-                  </div>
-
-                  <div class="mb-3">
-                    <label for="email" class="pb-2">Email</label>
-                    <input
-                      type="email"
-                      id="email"
-                      class="form-control"
-                      minlength="5"
-                      maxlength="255"
-                      required
-                    />
-                  </div>
-                  <div class="mb-3">
-                    <label for="subject" class="pb-2">Oggetto</label>
-                    <input
-                      type="text"
-                      id="subject"
-                      class="form-control"
-                      minlength="3"
-                      maxlength="70"
-                      required
-                    />
-                  </div>
-                  <div class="mb-3">
-                    <label for="text" class="pb-2">Messaggio</label>
-                    <textarea
-                      id="text"
-                      class="form-control"
-                      minlength="4"
-                      maxlength="4096"
-                      required
-                    ></textarea>
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button
-                    type="submit"
-                    class="btn my-btn-primary rounded-5 mt-2 fw-bold"
-                  >
-                    Contatta il proprietario
-                  </button>
-                </div>
-              </form>
-              <!-- end form detail  -->
-            </div>
-          </div>
-        </div>
+      <div class="col-4 my-4">
+        <AppForm :apartment_id="apartment.id" />
       </div>
       <!-- end form  -->
     </div>
@@ -198,9 +126,8 @@ export default {
     height: 450px;
     box-shadow: 3px 8px 10px rgba(0, 0, 0, 0.5);
     width: 100%;
-    
-    
-    .image-appartment{
+
+    .image-appartment {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -217,28 +144,6 @@ export default {
   .service-card {
     color: white;
     background-color: $dark_color;
-  }
-}
-
-// form box ************************************
-.form-box {
-  background-color: $dark_accent_color;
-  .message-box {
-    background-color: #f1f1f1;
-    .form-control:focus {
-      outline: none;
-      box-shadow: none;
-    }
-
-    input:focus,
-    textarea:focus {
-      border-color: green;
-    }
-
-    .my-btn-primary {
-      background-color: $success_color;
-      color: white;
-    }
   }
 }
 </style>
