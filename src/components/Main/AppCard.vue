@@ -26,7 +26,9 @@ export default {
           <h2 class="fw-semibolder fs-4">{{ apartment.title }}</h2>
 
           <!-- image appartment  -->
-          <div class="image image-frame-back rounded-4"></div>
+          <div class="image image-card rounded-4">
+            <img src="../../assets/images/house-10b.jpg" class="image-frame rounded-4" alt="#">
+          </div>
 
           <!-- detail container  -->
           <div class="details mb-3 rounded-2">
@@ -67,13 +69,14 @@ export default {
     width: 85%;
     height: 250px;
     margin: 0 auto -10rem;
-    background-size: cover;
-    background-position: center;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 10px rgba(0, 0, 0, 0.24);
     transition: all ease-in 0.15s;
   }
-  .image-frame-back {
-    background-image: url(../../assets/images/house-10b.jpg);
+    
+  .image-frame{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   .details {
     width: 95%;
