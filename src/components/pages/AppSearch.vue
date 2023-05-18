@@ -20,6 +20,9 @@ export default {
       searchedApartments: [],
       address: null,
       name: null,
+
+      /* filters */
+      currentPrice: null,
     };
   },
 
@@ -32,6 +35,7 @@ export default {
             rooms: this.rooms,
             bathrooms: this.bathrooms,
             price: this.price,
+            max_price: this.currentPrice, //per non avere gli app con il prezzo esatto ma quelli fino al prezzo settato
             services: this.services,
           },
         })
@@ -55,7 +59,7 @@ export default {
         });
     },
 
-    allServices() {
+    /*   allServices() {
       axios
         .get("http://127.0.0.1:8000/api/services", {
           params: {},
@@ -63,110 +67,190 @@ export default {
         .then((response) => {
           return (this.services = response.data.services);
         });
+    }, */
+
+    /*  created() {
+      this.allServices();
+    }, */
+
+    toggleAside() {
+      var drawer = document.getElementById("overlayFilters");
+      if (drawer.style.width == "40%") {
+        drawer.style.width = "0%";
+      } else {
+        drawer.style.width = "40%";
+      }
     },
 
-    created() {
-      this.allServices();
+    getPrice() {
+      var priceSlider = document.getElementById("priceRange");
+      var output = document.getElementById("displayedValue");
+      output.innerHTML = priceSlider.value; // Display the default slider value
+      this.currentPrice = priceSlider.value; // Assegna il valore corrente a currentPrice
+      // ...
     },
   },
 };
 </script>
 
 <template>
-  <div class="d-flex">
-    <button class="">overlay (work in progress)</button>
-    <aside class="overlay">
-      <div class="price">
-        <label for="price">Prezzo</label>
-        <input
-          type="number"
-          id="price"
-          v-model.number="price"
-          min="0"
-          placeholder="€"
-        />
-      </div>
-
-      <div class="brb">
-        <div class="room">
-          <label for="number_room">Stanze</label>
-          <input
-            id="number_room"
-            type="number"
-            min="1"
-            v-model.number="rooms"
-            placeholder="1"
-          />
-        </div>
-        <div class="bed">
-          <label for="number_bed">Letti</label>
-          <input
-            id="number_bed"
-            type="number"
-            min="1"
-            v-model.number="beds"
-            placeholder="1"
-          />
+  <div class="d-flex align-items-start">
+    <div
+      id="overlayFilters"
+      class="overlay-container d-flex"
+    >
+      <!-- aside -->
+      <aside class="px-sm-3 px-md-4 px-lg-5 py-5">
+        <!-- search bar -->
+        <div class="d-flex">
+          <div class="">
+            <form
+              class="d-flex"
+              role="search"
+              @submit.prevent="searchApartmentsBar()"
+            >
+              <input
+                class="form-control"
+                type="search"
+                :placeholder="placeholder"
+                aria-label="Search"
+                v-model="wordSearched"
+              />
+              <button
+                class="btn btn-primary ms-2"
+                type="submit"
+              >
+                <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
+              </button>
+            </form>
+          </div>
         </div>
 
-        <div class="bath">
-          <label for="number_bath"> Bagni</label>
-          <input
-            id="number_bath"
-            type="number"
-            min="1"
-            v-model.number="bathrooms"
-            placeholder="1"
-          />
-        </div>
-      </div>
+        <!-- form filtri -->
+        <div class="filters-form my-4">
+          <div class="price">
+            <label for="price">Prezzo</label>
+            <input
+              class="form-control"
+              type="number"
+              id="price"
+              v-model.number="currentPrice"
+              min="0"
+              placeholder="€"
+            />
 
-      <div>
-        <div
-          v-for="item in allServices"
-          :key="item.id"
+            <!-- range bar-->
+
+            <input
+              type="range"
+              class="priceSlider my-3"
+              min="0"
+              max="1000"
+              v-model="currentPrice"
+            />
+            <!-- <p>
+              Prezzo: <span id="displayedValue">{{ currentPrice }}</span>
+            </p> -->
+          </div>
+
+          <div class="brb">
+            <div class="room">
+              <label for="number_room">Stanze</label>
+              <input
+                class="form-control"
+                id="number_room"
+                type="number"
+                min="1"
+                v-model.number="rooms"
+                placeholder="1"
+              />
+            </div>
+            <div class="bed">
+              <label for="number_bed">Letti</label>
+              <input
+                class="form-control"
+                id="number_bed"
+                type="number"
+                min="1"
+                v-model.number="beds"
+                placeholder="1"
+              />
+            </div>
+
+            <div class="bath">
+              <label for="number_bath"> Bagni</label>
+              <input
+                class="form-control"
+                id="number_bath"
+                type="number"
+                min="1"
+                v-model.number="bathrooms"
+                placeholder="1"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <!--  <div
+            v-for="item in allServices"
+            :key="item.id"
+          >
+            <input
+              type="checkbox"
+              v-model="services"
+              :id="item.name"
+              name="services"
+              :value="item.name"
+            />
+            <label :for="item.name">{{ item.name }}</label
+            ><br />
+          </div> -->
+        </div>
+
+        <button
+          @click="searchApartmentsFilter()"
+          class="btn btn-primary"
         >
-          <input
-            type="checkbox"
-            v-model="services"
-            :id="item.name"
-            name="services"
-            :value="item.name"
-          />
-          <label :for="item.name">{{ item.name }}</label
-          ><br />
-        </div>
-      </div>
-
-      <button
-        @click="searchApartmentsFilter()"
-        class="btn btn-primary"
-      >
-        Filtra
-      </button>
-    </aside>
+          Filtra
+        </button>
+      </aside>
+    </div>
 
     <!-- search bar -->
-    <div class="container mt-4">
-      <form
-        class="d-flex"
-        role="search"
-        @submit.prevent="searchApartmentsBar()"
-      >
-        <input
-          class="form-control me-2"
-          type="search"
-          :placeholder="placeholder"
-          aria-label="Search"
-          v-model="wordSearched"
-        />
+    <div
+      class="search-bar-container my-3 d-flex align-items-end justify-content-between"
+    >
+      <!-- filter-btn -->
+      <div>
         <button
-          class="btn btn-primary"
-          type="submit"
+          class="btn btn-primary filter"
+          @click="toggleAside()"
         >
-          <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
+          <font-awesome-icon icon="fa-solid fa-filter" />
         </button>
-      </form>
+      </div>
+      <div class="search-bar">
+        <form
+          class="d-flex"
+          role="search"
+          @submit.prevent="searchApartmentsBar()"
+        >
+          <input
+            class="form-control"
+            type="search"
+            :placeholder="placeholder"
+            aria-label="Search"
+            v-model="wordSearched"
+          />
+          <button
+            class="btn btn-primary mx-2"
+            type="submit"
+          >
+            <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
+          </button>
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -178,30 +262,62 @@ export default {
 
 @include btn_hover();
 
-aside {
-  width: 30%;
-  height: calc(100vh + 60px);
-  align-items: start;
-  padding: 60px;
-  top: 70px;
-  box-shadow: 17px 0px 17px -5px rgba(0, 0, 0, 0.42);
+.overlay-container {
+  overflow-x: hidden;
+  transition: 0.7s;
+  width: 0;
+  position: relative;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  box-shadow: 0.5rem 0px 1rem -0.5rem rgba(0, 0, 0, 0.42);
   position: sticky;
   background-color: $light_color;
+  aside {
+    width: 100%;
+    align-items: start;
+    padding: 3rem 5rem;
 
-  /*   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  overflow: hidden;
-  width: 0; */
-
-  div {
-    display: flex;
-    flex-direction: column;
-
-    input {
-      margin-bottom: 1rem;
+    div {
+      display: flex;
+      flex-direction: column;
     }
+
+    .priceSlider {
+      -webkit-appearance: none;
+      background: $dark_accent_color;
+      height: 0.5rem;
+      border-radius: 25px;
+    }
+    .priceSlider::-webkit-slider-thumb {
+      -webkit-appearance: none; /* Override default look */
+      appearance: none;
+      width: 1rem;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: $light_accent_color;
+      cursor: pointer;
+    }
+
+    .filters-form {
+      div {
+        margin: 0.5rem 0;
+      }
+    }
+  }
+}
+
+.filter {
+  border-radius: 0 40% 40% 0;
+  width: 4rem;
+  padding: 1rem;
+  font-size: x-large;
+}
+
+.search-bar-container {
+  width: 100%;
+  .search-bar {
+    width: 70%;
   }
 }
 </style>
