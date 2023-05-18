@@ -20,6 +20,9 @@ export default {
       searchedApartments: [],
       address: null,
       name: null,
+
+      /* filters */
+      currentPrice: null,
     };
   },
 
@@ -32,6 +35,7 @@ export default {
             rooms: this.rooms,
             bathrooms: this.bathrooms,
             price: this.price,
+            max_price: this.currentPrice, //per non avere gli app con il prezzo esatto ma quelli fino al prezzo settato
             services: this.services,
           },
         })
@@ -55,7 +59,7 @@ export default {
         });
     },
 
-    allServices() {
+    /*   allServices() {
       axios
         .get("http://127.0.0.1:8000/api/services", {
           params: {},
@@ -63,11 +67,11 @@ export default {
         .then((response) => {
           return (this.services = response.data.services);
         });
-    },
+    }, */
 
-    created() {
+    /*  created() {
       this.allServices();
-    },
+    }, */
 
     toggleAside() {
       var drawer = document.getElementById("overlayFilters");
@@ -78,15 +82,12 @@ export default {
       }
     },
 
-    getPriceRange() {
+    getPrice() {
       var priceSlider = document.getElementById("priceRange");
       var output = document.getElementById("displayedValue");
       output.innerHTML = priceSlider.value; // Display the default slider value
-
-      // Update the current slider value (each time you drag the slider handle)
-      priceSlider.oninput = function () {
-        output.innerHTML = this.value;
-      };
+      this.currentPrice = priceSlider.value; // Assegna il valore corrente a currentPrice
+      // ...
     },
   },
 };
@@ -133,23 +134,23 @@ export default {
               class="form-control"
               type="number"
               id="price"
-              v-model.number="price"
+              v-model.number="currentPrice"
               min="0"
               placeholder="€"
             />
+
             <!-- range bar-->
 
             <input
               type="range"
-              class="priceSlider"
+              class="priceSlider my-3"
               min="0"
               max="1000"
-              value="300"
-              id="priceRange"
+              v-model="currentPrice"
             />
-            <p>
-              Prezzo: <span id="displayedValue">{{ getPriceRange() }}</span>
-            </p>
+            <!-- <p>
+              Prezzo: <span id="displayedValue">{{ currentPrice }}</span>
+            </p> -->
           </div>
 
           <div class="brb">
@@ -191,7 +192,7 @@ export default {
         </div>
 
         <div>
-          <div
+          <!--  <div
             v-for="item in allServices"
             :key="item.id"
           >
@@ -204,7 +205,7 @@ export default {
             />
             <label :for="item.name">{{ item.name }}</label
             ><br />
-          </div>
+          </div> -->
         </div>
 
         <button
