@@ -31,4 +31,8 @@ export default {
 @use "./style/partials/mixins.scss" as *;
 @use "./style/partials/variables.scss" as *;
 @include link_hover;
+
+main {
+  margin-top: 6rem;
+}
 </style>
