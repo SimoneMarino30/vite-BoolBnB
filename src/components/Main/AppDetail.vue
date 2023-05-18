@@ -38,7 +38,7 @@ export default {
 
     <!-- detail  -->
     <div class="row">
-      <div class="col-8 d-flex flex-column py-3 pe-5">
+      <div class="col-12 col-lg-8 d-flex flex-column py-3 pe-5">
         <h3>Proprietario: Iginio Massari</h3>
         <div class="pb-2">
           <span>Indirizzo: </span>
@@ -93,7 +93,7 @@ export default {
       <!-- end detail  -->
 
       <!-- init form  -->
-      <div class="col-4 my-4">
+      <div class="col-12 col-lg-4 my-4">
         <div class="form-box d-flex flex-column p-2 rounded-4">
           <div class="box">
             <div class="message-box shadow-lg p-4 rounded-4">
