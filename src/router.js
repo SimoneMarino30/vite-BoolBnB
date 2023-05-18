@@ -33,8 +33,8 @@ const router = createRouter({
     },
 
     {
-      path: "/AppDetail",
-      name: "AppartmentDetail",
+      path: "/AppDetail/:id",
+      name: "AppDetail",
       component: AppDetail,
     },
   ],
