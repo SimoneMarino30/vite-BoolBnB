@@ -30,7 +30,9 @@ export default {
       <span class="fw-bold">{{ apartment.mq }} mq</span>
       <div class="col-12 pt-3">
         <!-- image appartment  -->
-        <div class="appartment-image rounded-4"></div>
+        <div class="appartment-image-frame rounded-4">
+          <img src="../../assets/images/house-10b.jpg" class="image-appartment rounded-4" alt="#">
+        </div>
       </div>
     </div>
 
@@ -188,13 +190,21 @@ export default {
   background-color: #f1f1f1;
   color: $dark_color;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
-  .appartment-image {
-    background-image: url(../../assets/images/house-10b.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+  .appartment-image-frame {
+    // background-image: url(../../assets/images/house-10b.jpg);
+    // background-size: cover;
+    // background-repeat: no-repeat;
+    // background-position: center;
     height: 450px;
     box-shadow: 3px 8px 10px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    
+    
+    .image-appartment{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
 
   .fix-list {
