@@ -12,7 +12,7 @@ export default {
     <div class="py-3 d-flex justify-content-center w-100">
       <router-link
         :to="{
-          name: 'AppartmentDetail',
+          name: 'AppDetail',
           params: {
             id: apartment.id,
           },
