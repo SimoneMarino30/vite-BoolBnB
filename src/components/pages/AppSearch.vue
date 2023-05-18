@@ -23,12 +23,6 @@ export default {
     };
   },
 
-  /*   props: {
-    name: String,
-    placeholder: String,
-    search: String,
-  }, */
-
   methods: {
     searchApartmentsFilter() {
       axios
@@ -80,7 +74,8 @@ export default {
 
 <template>
   <div class="d-flex">
-    <aside>
+    <button class="">overlay (work in progress)</button>
+    <aside class="overlay">
       <div class="price">
         <label for="price">Prezzo</label>
         <input
@@ -153,7 +148,6 @@ export default {
 
     <!-- search bar -->
     <div class="container mt-4">
-      <a class="navbar-brand fs-1 text-danger">{{ name }}</a>
       <form
         class="d-flex"
         role="search"
@@ -170,7 +164,7 @@ export default {
           class="btn btn-primary"
           type="submit"
         >
-          trova
+          <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
         </button>
       </form>
     </div>
@@ -178,12 +172,36 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+@use "../../style/partials/variables.scss" as *;
+@use "../../style/partials/mixins.scss" as *;
+@use "../../style/general.scss" as *;
+
+@include btn_hover();
+
 aside {
   width: 30%;
   height: calc(100vh + 60px);
+  align-items: start;
   padding: 60px;
   top: 70px;
   box-shadow: 17px 0px 17px -5px rgba(0, 0, 0, 0.42);
   position: sticky;
+  background-color: $light_color;
+
+  /*   position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  width: 0; */
+
+  div {
+    display: flex;
+    flex-direction: column;
+
+    input {
+      margin-bottom: 1rem;
+    }
+  }
 }
 </style>

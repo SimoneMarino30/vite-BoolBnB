@@ -1,11 +1,12 @@
 @use "./partials/variables.scss" as *;
+@use "./partials/mixins.scss" as *;
 
 body {
   background-color: $light_color;
   color: $dark_color;
 }
 
-ul li{
+ul li {
   list-style: none;
 }
 
@@ -14,23 +15,24 @@ a {
   color: inherit;
 }
 
-
 // main *************************************
 
-main{
-//  app card setting *******
-
-
+main {
+  //  app card setting *******
 }
 
-
-
 // footer ***********************************
-footer{
+footer {
   background-color: $dark_color;
   color: $light_color;
-    .copyright-banner{
-      background-color: $light_color;
-      color: $dark_color;
-    }
+  .copyright-banner {
+    background-color: $light_color;
+    color: $dark_color;
+  }
+}
+
+.btn-primary {
+  background-color: $light_accent_color;
+  color: $light_color;
+  border: none;
 }
