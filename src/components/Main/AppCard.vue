@@ -14,7 +14,7 @@ export default {
         :to="{
           name: 'AppDetail',
           params: {
-            id: apartment.id,
+            slug: apartment.slug,
           },
         }"
         :apartment="apartment"
@@ -27,7 +27,11 @@ export default {
 
           <!-- image appartment  -->
           <div class="image image-card rounded-4">
-            <img src="../../assets/images/house-10b.jpg" class="image-frame rounded-4" alt="#">
+            <img
+              src="../../assets/images/house-10b.jpg"
+              class="image-frame rounded-4"
+              alt="#"
+            />
           </div>
 
           <!-- detail container  -->
@@ -72,8 +76,8 @@ export default {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 10px rgba(0, 0, 0, 0.24);
     transition: all ease-in 0.15s;
   }
-    
-  .image-frame{
+
+  .image-frame {
     width: 100%;
     height: 100%;
     object-fit: cover;

@@ -33,7 +33,7 @@ const router = createRouter({
     },
 
     {
-      path: "/AppDetail/:id",
+      path: "/AppDetail/:slug",
       name: "AppDetail",
       component: AppDetail,
     },
