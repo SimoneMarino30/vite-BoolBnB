@@ -1,6 +1,9 @@
 <script>
 import axios from "axios";
 import AppList from "../Main/AppList.vue";
+import SearchBar from "../Main/SearchBar.vue";
+import FilterSection from "../Main/FilterSection.vue";
+
 export default {
   name: "AllApartments",
   data() {
@@ -12,7 +15,7 @@ export default {
     };
   },
 
-  components: { AppList },
+  components: { AppList, SearchBar, FilterSection },
 
   emits: ["changePage"],
 
@@ -34,6 +37,11 @@ export default {
 </script>
 
 <template>
+  <div class="d-flex">
+    <FilterSection />
+    <SearchBar />
+  </div>
+
   <AppList
     :apartments="apartments.list"
     :pages="apartments.pages"
