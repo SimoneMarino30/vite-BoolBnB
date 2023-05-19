@@ -76,10 +76,14 @@ export default {
 
     toggleAside() {
       var drawer = document.getElementById("overlayFilters");
+      var searchBar = document.getElementById("searchBarContainer");
+
       if (drawer.style.width == "40%") {
         drawer.style.width = "0%";
+        searchBar.style.display = "block";
       } else {
         drawer.style.width = "40%";
+        searchBar.style.display = "none";
       }
     },
 
@@ -288,7 +292,10 @@ export default {
         </button>
       </div>
 
-      <div class="search-bar">
+      <div
+        class="search-bar"
+        id="searchBarContainer"
+      >
         <form
           class="d-flex"
           role="search"
@@ -329,7 +336,7 @@ export default {
   top: 0;
   left: 0;
   box-shadow: 0.5rem 0px 1rem -0.5rem rgba(0, 0, 0, 0.42);
-  position: sticky;
+  position: relative;
   background-color: $light_color;
   aside {
     width: 100%;
