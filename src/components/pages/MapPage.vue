@@ -1,5 +1,5 @@
 <script>
-import { onMounted, ref } from 'vue'
+import { onMounted } from 'vue'
 
 export default {
 
@@ -11,98 +11,36 @@ export default {
   },
 
   setup(props) {
+        let map = null;
 
-    const mapRef = ref(null);
+        onMounted(() => {
+            map = tt.map({
+                key: 'G3sSC0bt1YXLOMVWbGpRvxKI1medERrY',
+                container: 'map',
+                center: [props.lon, props.lat],
+                zoom: 12,
+                radius: 20000
+            });
 
-    onMounted(() => {
+            const marker = new tt.Marker().setLngLat([props.lon, props.lat]).addTo(map);
+            map.addControl(new tt.NavigationControl());
 
+        });
 
-      const tt = window.tt;
-
-      var map = tt.map({
-
-        key: 'G3sSC0bt1YXLOMVWbGpRvxKI1medERrY',
-
-        container: mapRef.value,
-
-        style: 'tomtom://vector/1/basic-main',
-
-      });
-
-      map.addControl(new tt.FullscreenControl());
-
-      map.addControl(new tt.NavigationControl());
-
-      // PUT MARKER
-      function addMarker(map) {
-
-        const tt = window.tt;
-
-        var location = [props.lon, props.lat];
-
-        var popupOffset = 25;
-
-
-        var marker = new tt.Marker().setLngLat(location).addTo(map);
-
-        var popup = new tt.Popup({ offset: popupOffset });
-
-        reverseGeocoding(marker, popup);
-
-        marker.setPopup(popup).togglePopup();
-
-        // GET ADDRESS
-        function reverseGeocoding(marker, popup) {
-
-          const tt = window.tt;
-
-          tt.services.reverseGeocode({
-
-            key: 'iTF86GRA2V5iGjM6LMMV54lrK8v6zC1w',
-
-            position: marker.getLngLat()
-
-          }).go().then(function (result) {
-
-            console.log(result.addresses[0].address.freeformAddress);
-
-            popup.setHTML(result.addresses[0].address.freeformAddress);
-
-          })
-
-        }
-
-      }
-      addMarker(map);
-    })
-
-
-    return {
-
-      mapRef,
-
-    };
-
+        return { map };
   }
-
 }
-
 </script> 
         
 
 <template>
-
-  <div id='map' ref="mapRef"></div>
+  <div id='map' class="map-container"></div>
 </template> 
  
 
 <style lang="scss" scoped>
-#map {
-
-  height: 50vh;
-
-  width: 50vw;
-
+.map-container {
+  height: 400px;
 }
 </style>
 
