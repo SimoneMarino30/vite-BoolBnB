@@ -147,13 +147,13 @@ export default {
     
 
     .service-name {
-      display: none;
+      // display: none;
       
     }
   }
 
   .service-card:hover span.service-name {
-    display: inline-block;
+    // display: inline-block;
   }
 
   .title-section{
