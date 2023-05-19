@@ -3,6 +3,7 @@ import axios from "axios";
 // Componenti
 import AppCard from "./AppCard.vue";
 import AppForm from "./AppForm.vue";
+import MapPage from "../pages/MapPage.vue";
 export default {
   name: "AppDetail",
   data() {
@@ -18,7 +19,7 @@ export default {
         this.apartment = response.data;
       });
   },
-  components: { AppCard, AppForm },
+  components: { AppCard, AppForm, MapPage },
 };
 </script>
 <template>
@@ -30,7 +31,7 @@ export default {
       <div class="col-12 pt-3">
         <!-- image appartment  -->
         <div class="appartment-image-frame rounded-4">
-          <img src="../../assets/images/house-10b.jpg" class="image-appartment rounded-4" alt="#" />
+          <img :src="apartment.image" class="image-appartment rounded-4" alt="#" />
         </div>
       </div>
     </div>
@@ -73,9 +74,9 @@ export default {
           <h3>Servizi presenti:</h3>
           <div>
             <ul class="d-flex flex-row flex-wrap p-0">
-              <li class="py-2 px-3 m-2 service-card rounded-4" v-for="service in apartment.services" :key="service.id">
-                <span><font-awesome-icon :icon="service.icon" /> : </span>
-                <span>{{ service.name }}</span>
+              <li class="py-2 px-3 m-2 service-card rounded-5" v-for="service in apartment.services" :key="service.id">
+                <span><font-awesome-icon :icon="service.icon" /></span>
+                <span class="service-name ms-2">{{ service.name }}</span>
               </li>
             </ul>
           </div>
@@ -90,6 +91,19 @@ export default {
     </div>
   </div>
   <!-- end container  -->
+
+  <!-- map container -->
+    <div class="container  detail-appartment py-2 px-5 my-4 rounded-4">
+      <div class="row">
+        <div class="col-12">
+          <MapPage 
+          :lat="apartment.latitude"
+          :lon="apartment.longitude"/>
+        </div>
+      </div>
+    </div>
+  <!-- end map container -->
+
 </template>
 <style lang="scss" scoped>
 @use "../../style/partials/variables.scss" as *;
@@ -127,6 +141,14 @@ export default {
   .service-card {
     color: white;
     background-color: $dark_color;
+
+    .service-name {
+      display: none;
+    }
+  }
+
+  .service-card:hover span.service-name {
+    display: inline-block;
   }
 }
 </style>

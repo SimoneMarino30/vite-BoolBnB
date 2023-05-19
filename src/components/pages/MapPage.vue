@@ -5,7 +5,12 @@ export default {
 
   name: 'Map',
 
-  setup() {
+  props:{
+    lat: String,
+    lon: String,
+  },
+
+  setup(props) {
 
     const mapRef = ref(null);
 
@@ -33,7 +38,7 @@ export default {
 
         const tt = window.tt;
 
-        var location = [12.484137, 41.894939];
+        var location = [props.lon, props.lat];
 
         var popupOffset = 25;
 
@@ -86,7 +91,6 @@ export default {
         
 
 <template>
-  <h1>Vue 3 TomTom Maps Demo</h1>
 
   <div id='map' ref="mapRef"></div>
 </template> 
