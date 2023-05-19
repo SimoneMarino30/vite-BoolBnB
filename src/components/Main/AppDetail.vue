@@ -70,15 +70,24 @@ export default {
           </p>
         </div>
         <!-- service  -->
-        <div class="pt-3 pb-1 border-bottom border-secondary">
+        <div class="pt-3 pb-4 border-bottom border-secondary">
           <h3 class="title-section pb-2">Servizi presenti:</h3>
-          <div>
-            <ul class="d-flex flex-row flex-wrap p-0">
+          <div class="">
+            <!-- <ul class="d-flex flex-row flex-wrap p-0">
               <li class="py-2 px-3 m-2 service-card rounded-5" v-for="service in apartment.services" :key="service.id">
                 <span><font-awesome-icon :icon="service.icon" /></span>
                 <span class="service-name ms-2">{{ service.name }}</span>
               </li>
-            </ul>
+            </ul> -->
+            <div class="container">
+              <div class="row p-0">
+                <div class="col-12 col-sm-11 col-md-5 col-lg-5 col-xl-3  service-card rounded-5 py-2 px-3 my-2 mx-2" v-for="service in apartment.services" :key="service.id">
+                  <span><font-awesome-icon :icon="service.icon" /></span>
+                  <span class="service-name ms-2">{{ service.name }}</span>
+                </div>
+              </div>
+            </div>
+            
           </div>
         </div>
       </div>
@@ -144,6 +153,7 @@ export default {
   .service-card {
     color: white;
     background-color: $dark_color;
+    font-size: 0.90rem;
     
 
     .service-name {
