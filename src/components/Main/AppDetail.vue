@@ -13,10 +13,10 @@ export default {
     };
   },
   created() {
-    console.log(this.$route.params.id);
+    console.log(this.$route.params.slug);
 
     axios
-      .get(`http://127.0.0.1:8000/api/apartments/${this.$route.params.id}`)
+      .get(`http://127.0.0.1:8000/api/apartments/${this.$route.params.slug}`)
       .then((response) => {
         this.apartment = response.data;
       });
