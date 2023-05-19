@@ -4,7 +4,7 @@ import axios from "axios";
 // import MyComponent from "./components/MyComponent.vue";
 
 export default {
-  name: "AppFrom",
+  name: "AppForm",
 
   props: {
     apartment_id: Number,
@@ -58,33 +58,17 @@ export default {
 
 <template>
   <!-- In caso di errore chiamata axios -->
-  <div
-    v-if="errors.length"
-    class="alert alert-danger d-flex justify-content-between"
-  >
+  <div v-if="errors.length" class="alert alert-danger d-flex justify-content-between">
     <ul>
       <li v-for="error in errors">{{ error }}</li>
     </ul>
-    <button
-      type="button"
-      class="btn-close"
-      data-bs-dismiss="alert"
-      aria-label="Close"
-    ></button>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
 
   <!-- In caso di invio messaggio effettuato -->
-  <div
-    v-if="success"
-    class="alert alert-success d-flex justify-content-between"
-  >
+  <div v-if="success" class="alert alert-success d-flex justify-content-between">
     Messaggio inviato con successo
-    <button
-      type="button"
-      class="btn-close"
-      data-bs-dismiss="alert"
-      aria-label="Close"
-    ></button>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
 
   <div class="form-box d-flex flex-column p-2 rounded-4">
@@ -101,58 +85,28 @@ export default {
 
             <div class="mb-3">
               <label for="name" class="pb-2">Nome</label>
-              <input
-                type="text"
-                id="name"
-                v-model="message.name"
-                class="form-control"
-                minlength="3"
-                maxlength="100"
-                required
-              />
+              <input type="text" id="name" v-model="message.name" class="form-control" minlength="3" maxlength="100"
+                required />
             </div>
             <div class="mb-3">
               <label for="surname" class="pb-2">Cognome</label>
-              <input
-                type="text"
-                id="surname"
-                v-model="message.surname"
-                class="form-control"
-                minlength="3"
-                maxlength="100"
-                required
-              />
+              <input type="text" id="surname" v-model="message.surname" class="form-control" minlength="3" maxlength="100"
+                required />
             </div>
 
             <div class="mb-3">
               <label for="email" class="pb-2">Email</label>
-              <input
-                type="email"
-                id="email"
-                v-model="message.email"
-                class="form-control"
-                minlength="5"
-                maxlength="100"
-                required
-              />
+              <input type="email" id="email" v-model="message.email" class="form-control" minlength="5" maxlength="100"
+                required />
             </div>
             <div class="mb-3">
               <label for="text" class="pb-2">Messaggio</label>
-              <textarea
-                id="text"
-                v-model="message.text"
-                class="form-control"
-                minlength="4"
-                maxlength="65535"
-                required
-              ></textarea>
+              <textarea id="text" v-model="message.text" class="form-control" minlength="4" maxlength="65535"
+                required></textarea>
             </div>
           </div>
           <div class="modal-footer">
-            <button
-              type="submit"
-              class="btn my-btn-primary rounded-5 mt-2 fw-bold"
-            >
+            <button type="submit" class="btn my-btn-primary rounded-5 mt-2 fw-bold">
               Contatta il proprietario
             </button>
           </div>
@@ -168,8 +122,10 @@ export default {
 
 .form-box {
   background-color: $dark_accent_color;
+
   .message-box {
     background-color: #f1f1f1;
+
     .form-control:focus {
       outline: none;
       box-shadow: none;

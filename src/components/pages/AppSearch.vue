@@ -78,92 +78,43 @@ export default {
     <aside class="overlay">
       <div class="price">
         <label for="price">Prezzo</label>
-        <input
-          type="number"
-          id="price"
-          v-model.number="price"
-          min="0"
-          placeholder="€"
-        />
+        <input type="number" id="price" v-model.number="price" min="0" placeholder="€" />
       </div>
 
       <div class="brb">
         <div class="room">
           <label for="number_room">Stanze</label>
-          <input
-            id="number_room"
-            type="number"
-            min="1"
-            v-model.number="rooms"
-            placeholder="1"
-          />
+          <input id="number_room" type="number" min="1" v-model.number="rooms" placeholder="1" />
         </div>
         <div class="bed">
           <label for="number_bed">Letti</label>
-          <input
-            id="number_bed"
-            type="number"
-            min="1"
-            v-model.number="beds"
-            placeholder="1"
-          />
+          <input id="number_bed" type="number" min="1" v-model.number="beds" placeholder="1" />
         </div>
 
         <div class="bath">
           <label for="number_bath"> Bagni</label>
-          <input
-            id="number_bath"
-            type="number"
-            min="1"
-            v-model.number="bathrooms"
-            placeholder="1"
-          />
+          <input id="number_bath" type="number" min="1" v-model.number="bathrooms" placeholder="1" />
         </div>
       </div>
 
       <div>
-        <div
-          v-for="item in allServices"
-          :key="item.id"
-        >
-          <input
-            type="checkbox"
-            v-model="services"
-            :id="item.name"
-            name="services"
-            :value="item.name"
-          />
-          <label :for="item.name">{{ item.name }}</label
-          ><br />
+        <div v-for="item in allServices" :key="item.id">
+          <input type="checkbox" v-model="services" :id="item.name" name="services" :value="item.name" />
+          <label :for="item.name">{{ item.name }}</label><br />
         </div>
       </div>
 
-      <button
-        @click="searchApartmentsFilter()"
-        class="btn btn-primary"
-      >
+      <button @click="searchApartmentsFilter()" class="btn btn-primary">
         Filtra
       </button>
     </aside>
 
     <!-- search bar -->
     <div class="container mt-4">
-      <form
-        class="d-flex"
-        role="search"
-        @submit.prevent="searchApartmentsBar()"
-      >
-        <input
-          class="form-control me-2"
-          type="search"
-          :placeholder="placeholder"
-          aria-label="Search"
-          v-model="wordSearched"
-        />
-        <button
-          class="btn btn-primary"
-          type="submit"
-        >
+      <form class="d-flex" role="search" @submit.prevent="searchApartmentsBar()">
+        <input class="form-control me-2" type="search" :placeholder="placeholder" aria-label="Search"
+          v-model="wordSearched" />
+        <button class="btn btn-primary" type="submit">
           <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
         </button>
       </form>

@@ -10,16 +10,12 @@ export default {
   <!-- init card -->
   <div class="">
     <div class="py-3 d-flex justify-content-center w-100">
-      <router-link
-        :to="{
-          name: 'AppDetail',
-          params: {
-            id: apartment.id,
-          },
-        }"
-        :apartment="apartment"
-        class="text-reset w-100"
-      >
+      <router-link :to="{
+        name: 'AppDetail',
+        params: {
+          id: apartment.id,
+        },
+      }" :apartment="apartment" class="text-reset w-100">
         <!-- card container  -->
         <div class="card-box px-3 py-3 text-center rounded-4">
           <!-- title appartment  -->
@@ -27,7 +23,8 @@ export default {
 
           <!-- image appartment  -->
           <div class="image image-card rounded-4">
-            <img src="../../assets/images/house-10b.jpg" class="image-frame rounded-4" alt="#">
+
+            <img :src="apartment.image" class="image-frame rounded-4" alt="#">
           </div>
 
           <!-- detail container  -->
@@ -59,10 +56,12 @@ export default {
 .card-box {
   background-color: #f1f1f1;
   box-shadow: 0 1px 30px rgba(0, 0, 0, 0.12), 0 3px 5px rgba(0, 0, 0, 0.24);
+
   h2 {
     font-family: "Playfair Display";
     color: #333;
   }
+
   .image {
     position: relative;
     z-index: 2;
@@ -72,12 +71,13 @@ export default {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 10px rgba(0, 0, 0, 0.24);
     transition: all ease-in 0.15s;
   }
-    
-  .image-frame{
+
+  .image-frame {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
+
   .details {
     width: 95%;
     margin: 0 auto;
@@ -87,10 +87,12 @@ export default {
     color: #333;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 5px rgba(0, 0, 0, 0.24);
     transition: all ease-in 0.15s;
+
     h2 {
       font-family: "Playfair Display";
       font-size: 1rem;
     }
+
     p {
       font-family: sans-serif;
       font-size: 1rem;
