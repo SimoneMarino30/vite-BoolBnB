@@ -1,8 +1,33 @@
 <script>
 import SearchBar from "../Main/SearchBar.vue";
+import AppCard from '../Main/AppCard.vue';
+
 export default {
   name: "HomePage",
-  components: { SearchBar },
+
+  components: {
+    AppCard,
+    SearchBar
+  },
+
+  data() {
+    return {
+
+      // Appartamento creato ora come obj statico, da aggiornare quando avremo chiamata API per appartamenti sponsorizzati
+      apartment: {
+        title: 'Appartamento sponsorizzato',
+        image: 'https://www.centrostoricoimmobiliare.it/vendor/paginesi/custom_sdk/src/php_classes/placeholder_immobiliari.jpg',
+        address: 'Via con la sponsorizzazione, 1',
+        beds: 2,
+        rooms: 1,
+        price: 68,
+        mq: 70,
+        slug: 'prova'
+      }
+    }
+  }
+
+  // Si potrebbe fare nei methods una chiamata per ricevere gli appartamenti sponsorizzati così da visualizzarli nella sezione in evidenza
 };
 </script>
 
@@ -44,8 +69,17 @@ export default {
       </div>
       <!-- fine jumbotron -->
     </div>
-    <div class="container">
+
+    <!-- Sezione In Evidenza -->
+    <div class="container pt-4">
       <h1 class="d-flex justify-content-center py-3">In Evidenza</h1>
+
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 py-5">
+        <AppCard :apartment="apartment" class="col d-flex" />
+        <AppCard :apartment="apartment" class="col d-flex" />
+        <AppCard :apartment="apartment" class="col d-flex" />
+        <AppCard :apartment="apartment" class="col d-flex" />
+      </div>
     </div>
   </main>
 </template>
