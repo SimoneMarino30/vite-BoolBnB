@@ -28,25 +28,34 @@
               <a
                 href="https://getbootstrap.com/"
                 target="_blank"
-                class="text-reset"
+                class=""
                 >Bootstrap</a
               >
             </div>
 
             <div class="pb-3">
-              <a href="https://vuejs.org/" target="_blank" class="text-reset"
+              <a
+                href="https://vuejs.org/"
+                target="_blank"
+                class=""
                 >Vue</a
               >
             </div>
 
             <div class="pb-3">
-              <a href="https://vitejs.dev/" target="_blank" class="text-reset"
+              <a
+                href="https://vitejs.dev/"
+                target="_blank"
+                class=""
                 >Vite</a
               >
             </div>
 
             <div class="pb-3">
-              <a href="https://laravel.com/" target="_blank" class="text-reset"
+              <a
+                href="https://laravel.com/"
+                target="_blank"
+                class=""
                 >Laravel</a
               >
             </div>
@@ -64,7 +73,7 @@
               <a
                 href="https://github.com/SimoneMarino30"
                 target="_blank"
-                class="text-reset"
+                class=""
                 >Simone Marino</a
               >
             </div>
@@ -73,7 +82,7 @@
               <a
                 href="https://github.com/GiuliaGlave"
                 target="_blank"
-                class="text-reset"
+                class=""
                 >Giulia Glave</a
               >
             </div>
@@ -82,7 +91,7 @@
               <a
                 href="https://github.com/Gianmarco-Leone"
                 target="_blank"
-                class="text-reset"
+                class=""
                 >Gianmarco Leone</a
               >
             </div>
@@ -91,7 +100,7 @@
               <a
                 href="https://github.com/MichelepioBombai"
                 target="_blank"
-                class="text-reset"
+                class=""
                 >Michele Pio Bombai</a
               >
             </div>
@@ -100,7 +109,7 @@
               <a
                 href="https://github.com/CarloColletti?tab=repositories"
                 target="_blank"
-                class="text-reset"
+                class=""
                 >Carlo Colletti</a
               >
             </div>
@@ -113,7 +122,10 @@
             <h6 class="text-uppercase fw-bold mb-4">SOCIAL</h6>
 
             <div class="pb-3">
-              <a href="#!" class="text-reset">
+              <a
+                href="#!"
+                class=""
+              >
                 <span class="px-1">
                   <font-awesome-icon icon="fa-brands fa-facebook" />
                 </span>
@@ -122,7 +134,10 @@
             </div>
 
             <div class="pb-3">
-              <a href="#!" class="text-reset">
+              <a
+                href="#!"
+                class=""
+              >
                 <span class="px-1">
                   <font-awesome-icon icon="fa-brands fa-instagram" />
                 </span>
@@ -131,7 +146,10 @@
             </div>
 
             <div class="pb-3">
-              <a href="#!" class="text-reset">
+              <a
+                href="#!"
+                class=""
+              >
                 <span class="px-1"
                   ><font-awesome-icon icon="fa-brands fa-twitter"
                 /></span>
@@ -140,7 +158,10 @@
             </div>
 
             <div class="pb-3">
-              <a href="#!" class="text-reset">
+              <a
+                href="#!"
+                class=""
+              >
                 <span class="px-1">
                   <font-awesome-icon icon="fa-brands fa-google" />
                 </span>
@@ -149,7 +170,10 @@
             </div>
 
             <div class="pb-3">
-              <a href="#!" class="text-reset">
+              <a
+                href="#!"
+                class=""
+              >
                 <span class="px-1"
                   ><font-awesome-icon icon="fa-brands fa-github"
                 /></span>
@@ -172,4 +196,11 @@
   </footer>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@use "../../style/general.scss" as *;
+@use "../../style/partials/variables.scss" as *;
+@use "../../style/partials/mixins.scss" as *;
+footer {
+  @include link_hover;
+}
+</style>

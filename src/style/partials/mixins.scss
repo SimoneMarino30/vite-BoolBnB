@@ -15,15 +15,16 @@
 @mixin btn_hover {
   button {
     &:hover {
-      background-color: $dark_accent_color;
-      color: $dark_color;
+      background-color: $dark_color;
+      color: $dark_accent_color;
     }
   }
 }
 @mixin link_hover {
   a {
     &:hover {
-      color: $light_accent_color;
+      color: $dark_accent_color;
+      background-color: inherit;
     }
   }
 }
