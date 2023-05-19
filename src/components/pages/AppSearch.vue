@@ -128,41 +128,63 @@ export default {
           <div class="brb">
             <div class="room">
               <label for="number_room">Stanze</label>
-              <input id="number_room" type="number" min="1" v-model.number="rooms" placeholder="1" />
+              <input class="form-control" id="number_room" type="number" min="1" v-model.number="rooms" placeholder="1" />
             </div>
             <div class="bed">
               <label for="number_bed">Letti</label>
-              <input id="number_bed" type="number" min="1" v-model.number="beds" placeholder="1" />
+              <input class="form-control" id="number_bed" type="number" min="1" v-model.number="beds" placeholder="1" />
             </div>
 
             <div class="bath">
               <label for="number_bath"> Bagni</label>
-              <input id="number_bath" type="number" min="1" v-model.number="bathrooms" placeholder="1" />
+              <input class="form-control" id="number_bath" type="number" min="1" v-model.number="bathrooms"
+                placeholder="1" />
             </div>
           </div>
+        </div>
 
-          <div>
-            <div v-for="item in allServices" :key="item.id">
-              <input type="checkbox" v-model="services" :id="item.name" name="services" :value="item.name" />
-              <label :for="item.name">{{ item.name }}</label><br />
-            </div>
+        <div>
+          <!--  <div
+            v-for="item in allServices"
+            :key="item.id"
+          >
+            <input
+              type="checkbox"
+              v-model="services"
+              :id="item.name"
+              name="services"
+              :value="item.name"
+            />
+            <label :for="item.name">{{ item.name }}</label
+            ><br />
+          </div> -->
+        </div>
 
-            <button @click="searchApartmentsFilter()" class="btn btn-primary">
-              Filtra
-            </button>
+        <button @click="searchApartmentsFilter()" class="btn btn-primary">
+          Filtra
+        </button>
       </aside>
+    </div>
 
-      <!-- search bar -->
-      <div class="container mt-4">
+    <!-- search bar -->
+    <div class="search-bar-container my-3 d-flex align-items-end justify-content-between">
+      <!-- filter-btn -->
+      <div>
+        <button class="btn btn-primary filter" @click="toggleAside()">
+          <font-awesome-icon icon="fa-solid fa-filter" />
+        </button>
+      </div>
+      <div class="search-bar">
         <form class="d-flex" role="search" @submit.prevent="searchApartmentsBar()">
-          <input class="form-control me-2" type="search" :placeholder="placeholder" aria-label="Search"
+          <input class="form-control" type="search" :placeholder="placeholder" aria-label="Search"
             v-model="wordSearched" />
-          <button class="btn btn-primary" type="submit">
+          <button class="btn btn-primary mx-2" type="submit">
             <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
           </button>
         </form>
       </div>
     </div>
+  </div>
 </template>
 
 <style lang="scss" scoped>
