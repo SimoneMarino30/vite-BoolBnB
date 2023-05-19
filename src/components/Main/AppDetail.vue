@@ -84,7 +84,7 @@ export default {
       </div>
       <!-- end detail  -->
       <!-- init form  -->
-      <div class="col-4 my-4">
+      <div class="col-12 col-lg-4 my-4">
         <AppForm :apartment_id="apartment.id" />
       </div>
       <!-- end form  -->

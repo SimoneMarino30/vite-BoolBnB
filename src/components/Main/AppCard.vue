@@ -54,6 +54,7 @@ export default {
   h2 {
     font-family: "Playfair Display";
     color: #333;
+    min-height: 60px;
   }
 
   .image {
@@ -94,14 +95,15 @@ export default {
     }
   }
 
-  .card-box:hover .details {
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 5px rgba(0, 0, 0, 0.22);
-    transform: translate(0px, -2px) scale(1.01);
-  }
+}
 
-  .card-box:hover .image {
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-    transform: translate(0px, -3px) scale(1.02);
-  }
+.card-box:hover .details {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 5px rgba(0, 0, 0, 0.22);
+  transform: translate(0px, -2px) scale(1.01);
+}
+
+.card-box:hover .image {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  transform: translate(0px, -3px) scale(1.02);
 }
 </style>
