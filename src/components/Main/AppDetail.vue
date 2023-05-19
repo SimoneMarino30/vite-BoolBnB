@@ -1,10 +1,8 @@
 <script>
 import axios from "axios";
-
 // Componenti
 import AppCard from "./AppCard.vue";
 import AppForm from "./AppForm.vue";
-
 export default {
   name: "AppDetail",
   data() {
@@ -14,7 +12,6 @@ export default {
   },
   created() {
     console.log(this.$route.params.slug);
-
     axios
       .get(`http://127.0.0.1:8000/api/apartments/${this.$route.params.slug}`)
       .then((response) => {
@@ -24,10 +21,8 @@ export default {
   components: { AppCard, AppForm },
 };
 </script>
-
 <template>
   <!-- <AppCard v-if="apartment" :apartment="apartment" /> -->
-
   <div class="container detail-appartment py-2 px-5 my-4 rounded-4">
     <div class="row py-3">
       <h2>{{ apartment.title }}</h2>
@@ -35,15 +30,10 @@ export default {
       <div class="col-12 pt-3">
         <!-- image appartment  -->
         <div class="appartment-image-frame rounded-4">
-          <img
-            src="../../assets/images/house-10b.jpg"
-            class="image-appartment rounded-4"
-            alt="#"
-          />
+          <img src="../../assets/images/house-10b.jpg" class="image-appartment rounded-4" alt="#" />
         </div>
       </div>
     </div>
-
     <!-- detail  -->
     <div class="row">
       <div class="col-12 col-lg-8 d-flex flex-column py-3 pe-5">
@@ -71,7 +61,6 @@ export default {
             </li>
           </ul>
         </div>
-
         <!-- description appartment  -->
         <div class="pt-3 pb-1 border-bottom border-secondary">
           <h3>Descrizione dell'appartamento:</h3>
@@ -79,18 +68,12 @@ export default {
             {{ apartment.description }}
           </p>
         </div>
-
         <!-- service  -->
         <div class="pt-3 pb-1 border-bottom border-secondary">
           <h3>Servizi presenti:</h3>
-
           <div>
             <ul class="d-flex flex-row flex-wrap p-0">
-              <li
-                class="py-2 px-3 m-2 service-card rounded-4"
-                v-for="service in apartment.services"
-                :key="service.id"
-              >
+              <li class="py-2 px-3 m-2 service-card rounded-4" v-for="service in apartment.services" :key="service.id">
                 <span><font-awesome-icon :icon="service.icon" /> : </span>
                 <span>{{ service.name }}</span>
               </li>
@@ -99,7 +82,6 @@ export default {
         </div>
       </div>
       <!-- end detail  -->
-
       <!-- init form  -->
       <div class="col-4 my-4">
         <AppForm :apartment_id="apartment.id" />
@@ -109,15 +91,15 @@ export default {
   </div>
   <!-- end container  -->
 </template>
-
 <style lang="scss" scoped>
 @use "../../style/partials/variables.scss" as *;
 
 // appartment detail ****************************
 .detail-appartment {
-  background-color: #f1f1f1;
+  background-color: #F1F1F1;
   color: $dark_color;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+
   .appartment-image-frame {
     // background-image: url(../../assets/images/house-10b.jpg);
     // background-size: cover;
@@ -136,6 +118,7 @@ export default {
 
   .fix-list {
     padding-left: 0;
+
     li {
       padding: 0 0.9rem 0 0;
     }
