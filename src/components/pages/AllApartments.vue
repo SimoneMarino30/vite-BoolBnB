@@ -37,16 +37,30 @@ export default {
 </script>
 
 <template>
-  <div class="d-flex">
-    <FilterSection />
-    <SearchBar />
-  </div>
+  <div class="page-container">
+    <div class="filter-container d-flex">
+      <FilterSection />
+    </div>
 
-  <AppList
-    :apartments="apartments.list"
-    :pages="apartments.pages"
-    @changePage="fetchApartments"
-  />
+    <div class="apartments-container">
+      <SearchBar />
+      <AppList
+        :apartments="apartments.list"
+        :pages="apartments.pages"
+        @changePage="fetchApartments"
+      />
+    </div>
+  </div>
 </template>
 
-<style></style>
+<style lang="scss" scoped>
+.page-container {
+  display: flex;
+  justify-content: center;
+}
+
+.apartments-container {
+  flex: 1;
+  align-self: center;
+}
+</style>

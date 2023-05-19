@@ -59,11 +59,11 @@ export default {
       var drawer = document.getElementById("overlayFilters");
       var searchBar = document.getElementById("searchBarContainer");
 
-      if (drawer.style.width == "40%") {
+      if (drawer.style.width == "100%") {
         drawer.style.width = "0%";
         searchBar.style.display = "block";
       } else {
-        drawer.style.width = "40%";
+        drawer.style.width = "100%";
         searchBar.style.display = "none";
       }
     },
@@ -80,14 +80,16 @@ export default {
 </script>
 
 <template>
-  <div class="d-flex align-items-start">
+  <div class="main-container d-flex align-items-start">
     <div
       id="overlayFilters"
       class="overlay-container d-flex"
     >
       <!-- aside -->
       <aside class="px-sm-3 px-md-4 px-lg-5 py-5">
-        <SearchBar />
+        <div>
+          <SearchBar />
+        </div>
 
         <!-- form filtri -->
         <div class="filters-form my-4">
@@ -254,48 +256,51 @@ export default {
 
 @include btn_hover();
 
-.overlay-container {
-  overflow-x: hidden;
-  transition: 0.7s;
-  width: 0;
-  position: relative;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  box-shadow: 0.5rem 0px 1rem -0.5rem rgba(0, 0, 0, 0.42);
-  position: relative;
-  background-color: $light_color;
-  aside {
-    width: 100%;
-    align-items: start;
-    padding: 3rem 5rem;
+div {
+  .overlay-container {
+    overflow-x: hidden;
+    transition: 0.7s;
+    width: 0;
+    position: relative;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    box-shadow: 0.5rem 0px 1rem -0.5rem rgba(0, 0, 0, 0.42);
+    position: relative;
+    background-color: $light_color;
 
-    div {
-      display: flex;
-      flex-direction: column;
-    }
+    aside {
+      width: 100%;
+      align-items: start;
+      padding: 3rem 5rem;
 
-    .rangeSlider {
-      -webkit-appearance: none;
-      background: $dark_accent_color;
-      height: 0.5rem;
-      border-radius: 25px;
-    }
-    .rangeSlider::-webkit-slider-thumb {
-      -webkit-appearance: none; /* Override default look */
-      appearance: none;
-      width: 1rem;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      background: $light_accent_color;
-      cursor: pointer;
-    }
-
-    .filters-form {
       div {
-        margin: 0.5rem 0;
-        .shorter-input {
-          width: 6rem;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .rangeSlider {
+        -webkit-appearance: none;
+        background: $dark_accent_color;
+        height: 0.5rem;
+        border-radius: 25px;
+      }
+      .rangeSlider::-webkit-slider-thumb {
+        -webkit-appearance: none; /* Override default look */
+        appearance: none;
+        width: 1rem;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: $light_accent_color;
+        cursor: pointer;
+      }
+
+      .filters-form {
+        div {
+          margin: 0.5rem 0;
+          .shorter-input {
+            width: 6rem;
+          }
         }
       }
     }
