@@ -1,6 +1,8 @@
 <script>
+import SearchBar from "../Main/SearchBar.vue";
 export default {
   name: "HomePage",
+  components: { SearchBar },
 };
 </script>
 
@@ -25,12 +27,16 @@ export default {
         <div class="row d-flex align-items-center">
           <div class="col h-25 d-flex justify-content-center">
             <div class="text-center">
+              <SearchBar />
               <!-- button per la searchBar -->
-              <button class="btn btn-primary">
-                <a href="AppSearch" class="linkSearch text-center text-white">
+              <!--  <button class="btn btn-primary">
+                <a
+                  href="AppSearch"
+                  class="linkSearch text-center text-white"
+                >
                   Cerca un Appartamento
                 </a>
-              </button>
+              </button> -->
             </div>
           </div>
         </div>
