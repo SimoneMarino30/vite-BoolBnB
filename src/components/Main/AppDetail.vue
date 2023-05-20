@@ -1,5 +1,7 @@
 <script>
+// AXIOS
 import axios from "axios";
+
 // Componenti
 import AppCard from "./AppCard.vue";
 import AppForm from "./AppForm.vue";
@@ -73,21 +75,24 @@ export default {
         <div class="pt-3 pb-4 border-bottom border-secondary">
           <h3 class="title-section pb-2">Servizi presenti:</h3>
           <div class="">
+
             <!-- <ul class="d-flex flex-row flex-wrap p-0">
               <li class="py-2 px-3 m-2 service-card rounded-5" v-for="service in apartment.services" :key="service.id">
                 <span><font-awesome-icon :icon="service.icon" /></span>
                 <span class="service-name ms-2">{{ service.name }}</span>
               </li>
             </ul> -->
-            <div class="container">
-              <div class="row p-0">
-                <div class="col-12 col-sm-11 col-md-5 col-lg-5 col-xl-3  service-card rounded-5 py-2 px-3 my-2 mx-2" v-for="service in apartment.services" :key="service.id">
-                  <span><font-awesome-icon :icon="service.icon" /></span>
-                  <span class="service-name ms-2">{{ service.name }}</span>
-                </div>
-              </div>
-            </div>
-            
+
+            <!-- * LAYOUT CON TOOLTIP -->
+            <ul class="d-flex flex-row flex-wrap p-0">
+              <li class="m-2 service-card" v-for="service in apartment.services" :key="service.id">
+                <span class="my-tooltip">
+                  <font-awesome-icon :icon="service.icon" />
+                  <span class="my-tooltip-text">{{ service.name }}</span>
+                </span>
+              </li>
+            </ul>
+
           </div>
         </div>
       </div>
@@ -102,18 +107,15 @@ export default {
   <!-- end container  -->
 
   <!-- map container -->
-    <div class="container  detail-appartment py-2 px-5 my-4 rounded-4">
-      <div class="row">
-        <div class="col-12 py-5">
-          <h2 class="pb-3">Noi Siamo qui</h2>
-            <MapPage 
-            :lat="apartment.latitude"
-            :lon="apartment.longitude"/>
-        </div>
+  <div class="container  detail-appartment py-2 px-5 my-4 rounded-4">
+    <div class="row">
+      <div class="col-12 py-5">
+        <h2 class="pb-3">Noi Siamo qui</h2>
+        <MapPage :lat="apartment.latitude" :lon="apartment.longitude" />
       </div>
     </div>
+  </div>
   <!-- end map container -->
-
 </template>
 <style lang="scss" scoped>
 @use "../../style/partials/variables.scss" as *;
@@ -152,24 +154,47 @@ export default {
 
   .service-card {
     color: white;
+    text-align: center;
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    vertical-align: middle;
+    border-radius: 50%;
     background-color: $dark_color;
     font-size: 0.90rem;
-    
 
-    .service-name {
-      // display: none;
-      
+  }
+
+  .title-section {
+    font-weight: 600;
+  }
+
+
+  /* Tooltip */
+  .my-tooltip {
+    position: relative;
+    display: inline-block;
+
+    /* Testo del tooltip */
+    .my-tooltip-text {
+      visibility: hidden;
+      width: 120px;
+      background-color: rgba(50, 50, 50, .8);
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+
+      /* Dove posizionare il tooltip*/
+      position: absolute;
+      bottom: 2rem;
+      right: -4rem;
+      z-index: 1;
     }
   }
 
-  .service-card:hover span.service-name {
-    // display: inline-block;
+  .my-tooltip:hover .my-tooltip-text {
+    visibility: visible;
   }
 
-  .title-section{
-    font-weight: 600;
-  }
-  
 }
-
 </style>
