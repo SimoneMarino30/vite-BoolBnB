@@ -17,6 +17,7 @@ export default {
       /* filters */
       currentMinPrice: null,
       currentMaxPrice: null,
+      currentDistance: null,
     };
   },
 
@@ -57,22 +58,29 @@ export default {
 
     toggleAside() {
       var drawer = document.getElementById("overlayFilters");
-      var searchBar = document.getElementById("searchBarContainer");
+      //var searchBar = document.getElementById("searchBarContainer");
 
       if (drawer.style.width == "100%") {
         drawer.style.width = "0%";
-        searchBar.style.display = "block";
+        //  searchBar.style.display = "block";
       } else {
         drawer.style.width = "100%";
-        searchBar.style.display = "none";
+        //searchBar.style.display = "none";
       }
     },
 
     getPrice() {
       var priceSlider = document.getElementById("priceRange");
-      var output = document.getElementById("displayedValue");
+      var output = document.getElementById("displayedPriceValue");
       output.innerHTML = priceSlider.value; // Display the default slider value
       this.currentPrice = priceSlider.value; // Assegna il valore corrente a currentPrice
+      // ...
+    },
+    getDistance() {
+      var distanceSlider = document.getElementById("kmRange");
+      var output = document.getElementById("displayedKmValue");
+      output.innerHTML = priceSlider.value; // Display the default slider value
+      this.currentDistance = distanceSlider.value; // Assegna il valore corrente a currentDistance
       // ...
     },
   },
@@ -87,16 +95,17 @@ export default {
     >
       <!-- aside -->
       <aside class="px-sm-3 px-md-4 px-lg-5 py-5">
-        <div>
+        <div class="searchBarContainer">
           <SearchBar />
         </div>
 
-        <!-- form filtri -->
+        <!-- FORM -->
         <div class="filters-form my-4">
+          <!-- price range -->
           <div class="price">
             <label for="price">Prezzo</label>
             <div class="d-flex flex-row justify-content-between">
-              <!-- prezzo minimo -->
+              <!-- min price-->
               <input
                 class="form-control shorter-input"
                 type="number"
@@ -105,7 +114,7 @@ export default {
                 min="0"
                 placeholder="Min €"
               />
-              <!-- prezzo massimo -->
+              <!-- max price -->
               <input
                 class="form-control shorter-input"
                 type="number"
@@ -116,7 +125,7 @@ export default {
               />
             </div>
 
-            <!--price range bar-->
+            <!--slide bar-->
             <input
               type="range"
               class="rangeSlider mt-3 mb-1"
@@ -137,6 +146,7 @@ export default {
             </div>
           </div>
 
+          <!-- number room bed bathroom -->
           <div class="brb">
             <div class="d-flex flex-row justify-content-between text-center">
               <div class="room">
@@ -182,37 +192,34 @@ export default {
           <!-- km range -->
           <div class="km">
             <label for="km">Distanza</label>
-            <div class="d-flex flex-row">
-              <!-- raggio km -->
+            <div class="d-flex">
+              <!-- displayed km -->
               <input
                 class="form-control mt-3"
                 type="number"
                 id="rangeKm"
-                v-model.number="currentKm"
+                v-model.number="currentDistance"
                 min="0"
                 max="100"
                 placeholder="Distanza Km"
               />
-            </div>
-
-            <!--km range bar-->
-
-            <input
-              type="range"
-              class="rangeSlider my-3"
-              min="0"
-              max="100"
-              v-model="currentKm"
-            />
-            <div class="d-flex flex-row justify-content-between m-0">
-              <p id="">0 Km</p>
-              <p id="">100 Km</p>
+              <!--slide bar-->
+              <input
+                type="range"
+                class="rangeSlider my-3"
+                min="0"
+                max="20"
+                v-model="currentDistance"
+              />
+              <div class="d-flex flex-row justify-content-between m-0">
+                <p id="">0 Km</p>
+                <p id="">20 Km</p>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- servizi -->
-        <!-- <div>
+          <!-- services -->
+          <!-- <div>
            <div
             v-for="item in allServices"
             :key="item.id"
@@ -228,6 +235,7 @@ export default {
             ><br />
           </div>
         </div> -->
+        </div>
 
         <button
           @click="searchApartmentsFilter()"
