@@ -6,17 +6,22 @@ export default {
   data() {
     return {
       /* aside */
-      allServices: [],
       filteredApartments: [],
       beds: null,
       rooms: null,
       bathrooms: null,
       price: null,
-      services: [],
 
-      /* filters */
+      //services: [],
+      allServices: [],
+      name: null,
+      icon: null,
+      selectServices: [],
+
+      /* slider */
       currentMinPrice: null,
       currentMaxPrice: null,
+      currentDistance: null,
     };
   },
 
@@ -31,8 +36,10 @@ export default {
             rooms: this.rooms,
             bathrooms: this.bathrooms,
             price: this.price,
+
             min_price: this.currentMinPrice,
             max_price: this.currentMaxPrice,
+            services: this.selectServices,
           },
         })
         .then((response) => {
@@ -41,38 +48,48 @@ export default {
         });
     },
 
-    /*   allServices() {
+    fetchServices() {
       axios
         .get("http://127.0.0.1:8000/api/services", {
-          params: {},
+          params: {
+            name: this.name,
+            icon: this.icon,
+          },
         })
         .then((response) => {
-          return (this.services = response.data.services);
-        });
-    }, */
+          this.allServices = response.data.services;
+          console.log("tutti i servizi", this.allServices);
 
-    /*  created() {
-      this.allServices();
-    }, */
+          //return (this.services = response.data.services);
+        });
+    },
 
     toggleAside() {
       var drawer = document.getElementById("overlayFilters");
-      var searchBar = document.getElementById("searchBarContainer");
+      //var searchBar = document.getElementById("searchBarContainer");
 
-      if (drawer.style.width == "40%") {
+      if (drawer.style.width == "100%") {
         drawer.style.width = "0%";
-        searchBar.style.display = "block";
+        //  searchBar.style.display = "block";
       } else {
-        drawer.style.width = "40%";
-        searchBar.style.display = "none";
+        drawer.style.width = "100%";
+        this.fetchServices();
+        //searchBar.style.display = "none";
       }
     },
 
     getPrice() {
       var priceSlider = document.getElementById("priceRange");
-      var output = document.getElementById("displayedValue");
+      var output = document.getElementById("displayedPriceValue");
       output.innerHTML = priceSlider.value; // Display the default slider value
       this.currentPrice = priceSlider.value; // Assegna il valore corrente a currentPrice
+      // ...
+    },
+    getDistance() {
+      var distanceSlider = document.getElementById("kmRange");
+      var output = document.getElementById("displayedKmValue");
+      output.innerHTML = priceSlider.value; // Display the default slider value
+      this.currentDistance = distanceSlider.value; // Assegna il valore corrente a currentDistance
       // ...
     },
   },
@@ -80,21 +97,53 @@ export default {
 </script>
 
 <template>
-  <div class="d-flex align-items-start">
+  <div class="main-container d-flex align-items-start">
     <div
       id="overlayFilters"
       class="overlay-container d-flex"
     >
       <!-- aside -->
       <aside class="px-sm-3 px-md-4 px-lg-5 py-5">
-        <SearchBar />
+        <!-- SEARCH BAR -->
+        <div class="searchBarContainer">
+          <SearchBar />
+        </div>
 
-        <!-- form filtri -->
-        <div class="filters-form my-4">
-          <div class="price">
+        <!-- FORM -->
+        <div class="filters-form">
+          <!-- km range -->
+          <div class="km-container m-0">
+            <label for="km">Raggio</label>
+            <div class="d-flex">
+              <!-- displayed km -->
+              <input
+                class="form-control mt-3"
+                type="number"
+                id="rangeKm"
+                v-model.number="currentDistance"
+                min="0"
+                max="100"
+                placeholder="Distanza Km"
+              />
+              <!--slide bar-->
+              <input
+                type="range"
+                class="rangeSlider my-3"
+                min="0"
+                max="20"
+                v-model="currentDistance"
+              />
+              <div class="d-flex flex-row justify-content-between m-0">
+                <p id="">0 Km</p>
+                <p id="">20 Km</p>
+              </div>
+            </div>
+          </div>
+          <!-- price range -->
+          <div class="price-container m-0">
             <label for="price">Prezzo</label>
             <div class="d-flex flex-row justify-content-between">
-              <!-- prezzo minimo -->
+              <!-- min price-->
               <input
                 class="form-control shorter-input"
                 type="number"
@@ -103,7 +152,7 @@ export default {
                 min="0"
                 placeholder="Min €"
               />
-              <!-- prezzo massimo -->
+              <!-- max price -->
               <input
                 class="form-control shorter-input"
                 type="number"
@@ -114,17 +163,17 @@ export default {
               />
             </div>
 
-            <!--price range bar-->
+            <!--slide bar-->
             <input
               type="range"
-              class="rangeSlider mt-3 mb-1"
+              class="rangeSlider mt-3"
               min="0"
               max="1000"
               v-model="currentMinPrice"
             />
             <input
               type="range"
-              class="rangeSlider mt-3 mb-1"
+              class="rangeSlider mt-3"
               min="0"
               max="1000"
               v-model="currentMaxPrice"
@@ -135,12 +184,13 @@ export default {
             </div>
           </div>
 
-          <div class="brb">
-            <div class="d-flex flex-row justify-content-between text-center">
-              <div class="room">
+          <!-- number room bed bathroom -->
+          <div class="brb-container m-0">
+            <div class="d-flex flex-row justify-content-between">
+              <div class="room d-flex align-items-center">
                 <label for="number_room">Stanze</label>
                 <input
-                  class="form-control shorter-input"
+                  class="form-control brb"
                   id="number_room"
                   type="number"
                   min="1"
@@ -149,10 +199,10 @@ export default {
                   placeholder="1"
                 />
               </div>
-              <div class="bed">
+              <div class="bed d-flex align-items-center">
                 <label for="number_bed">Posti letto</label>
                 <input
-                  class="form-control shorter-input"
+                  class="form-control brb"
                   id="number_bed"
                   type="number"
                   min="1"
@@ -162,10 +212,10 @@ export default {
                 />
               </div>
 
-              <div class="bath">
+              <div class="bath d-flex align-items-center">
                 <label for="number_bath">n° Bagni</label>
                 <input
-                  class="form-control shorter-input"
+                  class="form-control brb"
                   id="number_bath"
                   type="number"
                   min="1"
@@ -177,55 +227,36 @@ export default {
             </div>
           </div>
 
-          <!-- km range -->
-          <div class="km">
-            <label for="km">Distanza</label>
-            <div class="d-flex flex-row">
-              <!-- raggio km -->
-              <input
-                class="form-control mt-3"
-                type="number"
-                id="rangeKm"
-                v-model.number="currentKm"
-                min="0"
-                max="100"
-                placeholder="Distanza Km"
-              />
-            </div>
-
-            <!--km range bar-->
-
-            <input
-              type="range"
-              class="rangeSlider my-3"
-              min="0"
-              max="100"
-              v-model="currentKm"
-            />
-            <div class="d-flex flex-row justify-content-between m-0">
-              <p id="">0 Km</p>
-              <p id="">100 Km</p>
+          <!-- services -->
+          <div class="services-container">
+            <span class="fs-4">Seleziona servizi</span>
+            <div>
+              <ul
+                v-for="service in allServices"
+                :key="service.id"
+                class="d-flex flex-row flex-wrap p-0"
+              >
+                <label
+                  :class="[
+                    'py-2 px-3 m-2 service-card rounded-5 form-check',
+                    { 'selected-service': selectServices.includes(service.id) },
+                  ]"
+                >
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    :value="service.id"
+                    v-model="selectServices"
+                  />
+                  <div class="d-flex flex-row align-items-center">
+                    <span><font-awesome-icon :icon="service.icon" /></span>
+                    <span class="service-name ms-2">{{ service.name }}</span>
+                  </div>
+                </label>
+              </ul>
             </div>
           </div>
         </div>
-
-        <!-- servizi -->
-        <!-- <div>
-           <div
-            v-for="item in allServices"
-            :key="item.id"
-          >
-            <input
-              type="checkbox"
-              v-model="services"
-              :id="item.name"
-              name="services"
-              :value="item.name"
-            />
-            <label :for="item.name">{{ item.name }}</label
-            ><br />
-          </div>
-        </div> -->
 
         <button
           @click="searchApartmentsFilter()"
@@ -235,7 +266,8 @@ export default {
         </button>
       </aside>
     </div>
-    <!-- filter-btn -->
+
+    <!-- FILTER ICON -->
     <div>
       <button
         class="btn btn-primary filter"
@@ -254,48 +286,97 @@ export default {
 
 @include btn_hover();
 
-.overlay-container {
-  overflow-x: hidden;
-  transition: 0.7s;
-  width: 0;
-  position: relative;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  box-shadow: 0.5rem 0px 1rem -0.5rem rgba(0, 0, 0, 0.42);
-  position: relative;
-  background-color: $light_color;
-  aside {
-    width: 100%;
-    align-items: start;
-    padding: 3rem 5rem;
+.main-container {
+  position: fixed;
+  z-index: 5;
+  .overlay-container {
+    overflow-x: hidden;
+    transition: 0.7s;
+    width: 0;
+    position: relative;
+    z-index: 4;
+    top: 0;
+    left: 0;
+    box-shadow: 0.5rem 0px 1rem -0.5rem rgba(0, 0, 0, 0.42);
+    position: relative;
+    background-color: $light_color;
 
-    div {
-      display: flex;
-      flex-direction: column;
-    }
+    aside {
+      width: 100%;
+      max-height: 39rem;
 
-    .rangeSlider {
-      -webkit-appearance: none;
-      background: $dark_accent_color;
-      height: 0.5rem;
-      border-radius: 25px;
-    }
-    .rangeSlider::-webkit-slider-thumb {
-      -webkit-appearance: none; /* Override default look */
-      appearance: none;
-      width: 1rem;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      background: $light_accent_color;
-      cursor: pointer;
-    }
+      align-items: start;
+      padding: 3rem 5rem;
+      overflow-y: auto;
 
-    .filters-form {
       div {
-        margin: 0.5rem 0;
-        .shorter-input {
-          width: 6rem;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .rangeSlider {
+        -webkit-appearance: none;
+        background: $dark_accent_color;
+        height: 0.5rem;
+        border-radius: 25px;
+      }
+      .rangeSlider::-webkit-slider-thumb {
+        -webkit-appearance: none; /* Override default look */
+        appearance: none;
+        width: 1rem;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: $light_accent_color;
+        cursor: pointer;
+      }
+
+      .filters-form {
+        div {
+          margin: 0.5rem 0;
+          .shorter-input {
+            width: 6rem;
+          }
+
+          .brb {
+            width: 4rem;
+          }
+        }
+
+        .services-container {
+          .service-card {
+            color: $light_color;
+            background-color: $dark_color;
+            position: relative;
+
+            //faccio sparire il checkbox brutto di default
+            input[type="checkbox"] {
+              opacity: 0;
+              position: absolute;
+              top: 0;
+              left: 0;
+            }
+            &:hover {
+              background-color: $dark_accent_color;
+              color: $dark_color;
+            }
+
+            .service-name {
+              display: none;
+              transition: display 3.5s;
+            }
+          }
+
+          .service-card.selected-service {
+            background-color: $primary_color;
+            color: $light_color;
+            .service-name {
+              display: block;
+            }
+          }
+          .service-card:hover span.service-name {
+            display: inline-block;
+            transition: display 3.5s;
+          }
         }
       }
     }
@@ -307,5 +388,7 @@ export default {
   width: 4rem;
   padding: 1rem;
   font-size: x-large;
+  position: fixed;
+  z-index: 3;
 }
 </style>
