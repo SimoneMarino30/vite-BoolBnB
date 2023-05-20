@@ -6,15 +6,18 @@ export default {
   data() {
     return {
       /* aside */
-      allServices: [],
       filteredApartments: [],
       beds: null,
       rooms: null,
       bathrooms: null,
       price: null,
-      services: [],
 
-      /* filters */
+      //services: [],
+      allServices: [],
+      name: null,
+      icon: null,
+
+      /* slider */
       currentMinPrice: null,
       currentMaxPrice: null,
       currentDistance: null,
@@ -32,6 +35,7 @@ export default {
             rooms: this.rooms,
             bathrooms: this.bathrooms,
             price: this.price,
+
             min_price: this.currentMinPrice,
             max_price: this.currentMaxPrice,
           },
@@ -42,19 +46,25 @@ export default {
         });
     },
 
-    /*   allServices() {
+    fetchServices() {
       axios
         .get("http://127.0.0.1:8000/api/services", {
-          params: {},
+          params: {
+            name: this.name,
+            icon: this.icon,
+          },
         })
         .then((response) => {
-          return (this.services = response.data.services);
-        });
-    }, */
+          this.allServices = response.data.services;
+          console.log("tutti i servizi", this.allServices);
 
-    /*  created() {
-      this.allServices();
-    }, */
+          //return (this.services = response.data.services);
+        });
+    },
+
+    created() {
+      this.fetchServices();
+    },
 
     toggleAside() {
       var drawer = document.getElementById("overlayFilters");
@@ -95,6 +105,7 @@ export default {
     >
       <!-- aside -->
       <aside class="px-sm-3 px-md-4 px-lg-5 py-5">
+        <!-- SEARCH BAR -->
         <div class="searchBarContainer">
           <SearchBar />
         </div>
@@ -217,28 +228,27 @@ export default {
               </div>
             </div>
           </div>
+        </div>
 
-          <!-- services -->
-          <!-- <div>
-           <div
-            v-for="item in allServices"
-            :key="item.id"
+        <!-- services -->
+        <div>
+          <div
+            v-for="service in allServices"
+            :key="service.id"
           >
             <input
               type="checkbox"
               v-model="services"
-              :id="item.name"
+              :id="service.name"
               name="services"
-              :value="item.name"
+              :value="service.name"
             />
-            <label :for="item.name">{{ item.name }}</label
+            <label :for="service.name">{{ service.name }}</label
             ><br />
           </div>
-        </div> -->
         </div>
-
         <button
-          @click="searchApartmentsFilter()"
+          @click="searchApartmentsFilter(), fetchServices()"
           class="btn btn-primary"
         >
           Filtra
