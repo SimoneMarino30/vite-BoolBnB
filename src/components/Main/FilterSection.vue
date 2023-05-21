@@ -6,7 +6,7 @@ export default {
   data() {
     return {
       /* aside */
-      filteredApartments: [],
+      allApartments: [],
       beds: null,
       rooms: null,
       bathrooms: null,
@@ -28,6 +28,7 @@ export default {
   components: { SearchBar },
 
   methods: {
+    //CERCA APPARTAMENTI FILTRATI
     searchApartmentsFilter() {
       axios
         .get("http://127.0.0.1:8000/api/apartments", {
@@ -43,11 +44,33 @@ export default {
           },
         })
         .then((response) => {
-          this.filteredApartments = response.data.data;
-          console.log("appartamenti filtrati", this.filteredApartments);
+          this.allApartments = response.data.data;
+          console.log("appartamenti totali", this.allApartments);
+
+          // Stampa solo gli appartamenti che coincidono con i valori specificati
+          const filteredApartments = this.allApartments.filter((apartment) => {
+            return (
+              (this.beds === null || apartment.beds >= this.beds) &&
+              (this.rooms === null || apartment.rooms >= this.rooms) &&
+              (this.bathrooms === null ||
+                apartment.bathrooms >= this.bathrooms) &&
+              (this.price === null || apartment.price <= this.price)
+            );
+          });
+
+          console.log(
+            "appartamenti filtrati",
+            filteredApartments.map((apartment) => ({
+              name: apartment.title,
+              rooms: apartment.rooms,
+              beds: apartment.beds,
+              bathrooms: apartment.bathrooms,
+            }))
+          );
         });
     },
 
+    //CHIAMA TUTTI SERVIZI
     fetchServices() {
       axios
         .get("http://127.0.0.1:8000/api/services", {
@@ -58,12 +81,10 @@ export default {
         })
         .then((response) => {
           this.allServices = response.data.services;
-          console.log("tutti i servizi", this.allServices);
-
-          //return (this.services = response.data.services);
         });
     },
 
+    //APRE E CHIUDE LA TENDINA DEI FILTRI
     toggleAside() {
       var drawer = document.getElementById("overlayFilters");
       //var searchBar = document.getElementById("searchBarContainer");
@@ -78,13 +99,15 @@ export default {
       }
     },
 
+    //ASSEGNA IL PREZZO DALLO SLIDER
     getPrice() {
       var priceSlider = document.getElementById("priceRange");
       var output = document.getElementById("displayedPriceValue");
       output.innerHTML = priceSlider.value; // Display the default slider value
       this.currentPrice = priceSlider.value; // Assegna il valore corrente a currentPrice
-      // ...
     },
+
+    //ASSEGNA IL RAGGIO DALLO SLIDER
     getDistance() {
       var distanceSlider = document.getElementById("kmRange");
       var output = document.getElementById("displayedKmValue");
@@ -289,6 +312,7 @@ export default {
 .main-container {
   position: fixed;
   z-index: 5;
+  margin-top: 7rem;
   .overlay-container {
     overflow-x: hidden;
     transition: 0.7s;
@@ -322,7 +346,7 @@ export default {
       }
       .rangeSlider::-webkit-slider-thumb {
         -webkit-appearance: none; /* Override default look */
-        appearance: none;
+        //appearance: none;
         width: 1rem;
         aspect-ratio: 1;
         border-radius: 50%;
