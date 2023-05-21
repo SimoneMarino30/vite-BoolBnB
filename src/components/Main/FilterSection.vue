@@ -38,8 +38,9 @@ export default {
             bathrooms: this.bathrooms,
             price: this.price,
 
-            min_price: this.currentMinPrice,
-            max_price: this.currentMaxPrice,
+            /*  min_price: this.currentMinPrice,
+            max_price: this.currentMaxPrice, */
+
             services: this.selectServices,
           },
         })
@@ -100,11 +101,15 @@ export default {
     },
 
     //ASSEGNA IL PREZZO DALLO SLIDER
-    getPrice() {
-      var priceSlider = document.getElementById("priceRange");
-      var output = document.getElementById("displayedPriceValue");
-      output.innerHTML = priceSlider.value; // Display the default slider value
-      this.currentPrice = priceSlider.value; // Assegna il valore corrente a currentPrice
+    getPriceRange() {
+      const min_price = this.currentMinPrice;
+      const max_price = this.currentMaxPrice;
+
+      if (min_price > max_price) {
+        min_price === max_price;
+      } else if (max_price < min_price) {
+        max_price === min_price;
+      }
     },
 
     //ASSEGNA IL RAGGIO DALLO SLIDER
@@ -173,6 +178,7 @@ export default {
                 id="price"
                 v-model.number="currentMinPrice"
                 min="0"
+                :max="currentMaxPrice - 1"
                 placeholder="Min €"
               />
               <!-- max price -->
@@ -181,7 +187,8 @@ export default {
                 type="number"
                 id="price"
                 v-model.number="currentMaxPrice"
-                min="0"
+                :min="currentMinPrice + 1"
+                max="1000"
                 placeholder="Max €"
               />
             </div>
@@ -191,13 +198,13 @@ export default {
               type="range"
               class="rangeSlider mt-3"
               min="0"
-              max="1000"
+              :max="currentMaxPrice"
               v-model="currentMinPrice"
             />
             <input
               type="range"
               class="rangeSlider mt-3"
-              min="0"
+              :min="currentMinPrice"
               max="1000"
               v-model="currentMaxPrice"
             />
