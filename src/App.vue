@@ -42,8 +42,8 @@ export default {
         this.setSession('auth', urlParams.get('auth'));
 
         // Dopo aver salvato i dati di sessione li recupero con metodo getSession(), sia per 'login' che per 'auth'
-        const value = this.getSession('login');
-        const id = this.getSession('auth');
+        // const value = this.getSession('login');
+        // const id = this.getSession('auth');
 
         // console.log('CONDIZIONE LOGIN == TRUE - ', value, ' - VALORE AUTH(user_id): ' + id);
 
@@ -57,10 +57,10 @@ export default {
         // Cancello dati dalla sesione, sia login che auth
         this.removeSession('login');
         this.removeSession('auth');
-        // store.user = null;
 
-        // METODO VARIABILI DI SESSIONE
-        this.removeSession('user');
+        this.removeSession('name');
+        this.removeSession('surname');
+        this.removeSession('email');
       }
     },
 
@@ -95,27 +95,38 @@ export default {
         .then(response => {
           console.log(response.data);
 
-          // METODO VARIABILI DI SESSIONE
-          this.setSession('user', response.data);
-          console.log(this.getSession('user'));
+          // this.setSession('user', response.data);
+          // console.log(this.getSession('user'));
           // this.store.user = this.getSession('user');
-
+          // Salvo dati in sessione
+          this.setSession("name", response.data.name);
+          this.setSession("surname", response.data.surname);
+          this.setSession("email", response.data.email);
 
           // Salvo l'utente
-          this.store.user = response.data;
+          this.saveUser();
+
+          // this.store.user = response.data;
         })
-    }
+    },
+
+    // Funzione per salvare dati utente
+    saveUser() {
+      this.store.user_name = this.getSession("name");
+      this.store.user_surname = this.getSession("surname");
+      this.store.user_email = this.getSession("email");
+    },
 
   },
 
   created() {
     this.checkLogin();
 
-    // METODO VARIABILI DI SESSIONE
     // console.log(this.getSession('user'));
-    if (this.getSession('user')) {
-      this.store.user = this.getSession('user');
-      console.log('User: ', this.store.user)
+    if (this.getSession('auth')) {
+      this.saveUser();
+      // this.store.user = this.getSession('user');
+      // console.log('User: ', this.store.user)
     }
   },
 };
