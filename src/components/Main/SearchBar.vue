@@ -38,9 +38,7 @@ export default {
           });
         });
     },
-  },
 
-  computed: {
     saveCoordinate() {
       axios
         .get(
@@ -65,6 +63,8 @@ export default {
         });
     },
   },
+
+  computed: {},
 };
 </script>
 
