@@ -62,6 +62,10 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+.margin-fix{
+  margin-top: 106px;
+
+}
 .page-container {
   display: flex;
   justify-content: center;

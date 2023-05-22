@@ -33,7 +33,7 @@ export default {
 
 <template>
   <main>
-    <div class="jumbotron">
+    <div class="jumbotron margin-fix">
       <!-- inizio jumbotron -->
       <div class="container h-100">
         <!-- inizio container -->
@@ -85,6 +85,12 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+
+.margin-fix{
+  margin-top: 106px;
+
+}
+
 .jumbotron {
   background-size: cover;
   background-repeat: no-repeat;
