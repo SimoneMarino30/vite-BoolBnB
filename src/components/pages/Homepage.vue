@@ -1,33 +1,43 @@
 <script>
 import SearchBar from "../Main/SearchBar.vue";
-import AppCard from '../Main/AppCard.vue';
+import AppCard from "../Main/AppCard.vue";
+import axios from "axios";
 
 export default {
   name: "HomePage",
 
   components: {
     AppCard,
-    SearchBar
+    SearchBar,
   },
 
   data() {
     return {
-
       // Appartamento creato ora come obj statico, da aggiornare quando avremo chiamata API per appartamenti sponsorizzati
       apartment: {
-        title: 'Appartamento sponsorizzato',
-        image: 'https://www.centrostoricoimmobiliare.it/vendor/paginesi/custom_sdk/src/php_classes/placeholder_immobiliari.jpg',
-        address: 'Via con la sponsorizzazione, 1',
+        title: "Appartamento sponsorizzato",
+        image:
+          "https://www.centrostoricoimmobiliare.it/vendor/paginesi/custom_sdk/src/php_classes/placeholder_immobiliari.jpg",
+        address: "Via con la sponsorizzazione, 1",
         beds: 2,
         rooms: 1,
         price: 68,
         mq: 70,
-        slug: 'prova'
-      }
-    }
-  }
+        slug: "prova",
+      },
+    };
+  },
 
-  // Si potrebbe fare nei methods una chiamata per ricevere gli appartamenti sponsorizzati così da visualizzarli nella sezione in evidenza
+  methods: {
+    searchAdress() {
+      axios.get("http://127.0.0.1:8000/api/apartments", {
+        params: {
+          adress: this.address,
+          name: this.title,
+        },
+      });
+    },
+  },
 };
 </script>
 
@@ -51,18 +61,23 @@ export default {
         </div>
         <div class="row d-flex align-items-center">
           <div class="col h-25 d-flex justify-content-center">
-            <div class="text-center">
-              <SearchBar />
+            <form submit.prevent class="text-center d-flex">
               <!-- button per la searchBar -->
-              <!--  <button class="btn btn-primary">
-                <a
-                  href="AppSearch"
-                  class="linkSearch text-center text-white"
-                >
-                  Cerca un Appartamento
-                </a>
-              </button> -->
-            </div>
+              <input
+                class="form-control"
+                type="search"
+                :placeholder="placeholder"
+                aria-label="Search"
+                v-model="wordSearched"
+              />
+              <router-link
+                :to="{ name: 'AllApartments' }"
+                class="btn btn-primary mx-2"
+                type="submit"
+              >
+                <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
+              </router-link>
+            </form>
           </div>
         </div>
         <!-- fine container -->
@@ -74,7 +89,9 @@ export default {
     <div class="container pt-4">
       <h1 class="d-flex justify-content-center py-3">In Evidenza</h1>
 
-      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 py-5">
+      <div
+        class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 py-5"
+      >
         <AppCard :apartment="apartment" class="col d-flex" />
         <AppCard :apartment="apartment" class="col d-flex" />
         <AppCard :apartment="apartment" class="col d-flex" />
