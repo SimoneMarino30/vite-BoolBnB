@@ -45,11 +45,17 @@ export default {
           // Stampa solo gli appartamenti che coincidono con i valori specificati
           const filteredApartments = this.allApartments.filter((apartment) => {
             return (
+              //(this.name === null || apartment.name >= this.name) &&
               (this.beds === null || apartment.beds >= this.beds) &&
               (this.rooms === null || apartment.rooms >= this.rooms) &&
               (this.bathrooms === null ||
                 apartment.bathrooms >= this.bathrooms) &&
-              (this.price === null || apartment.price <= this.price)
+              //dal prezz minimo
+              (this.currentMinPrice === null ||
+                apartment.price >= this.currentMinPrice) &&
+              //al prezzo massimo
+              (this.currentMaxPrice === null ||
+                apartment.price <= this.currentMaxPrice)
             );
           });
 
