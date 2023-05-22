@@ -10,10 +10,7 @@ export default {
       address: "",
       latitudine: null,
       longitudine: null,
-      distanceNumber: 20,
-      distanceApartment: [],
       name: null,
-      radius: 20000,
     };
   },
 
@@ -47,19 +44,20 @@ export default {
             ".json?key=VTS7KTu4nrOLxN010rCYu364QXAVRCfK",
           {
             params: {
-              radius: 20000,
+              countrySet: "IT",
+              latitudine: "42.6384261",
+              longitudine: "12.674297",
+              radius: "20000",
             },
           }
         )
         .then((response) => {
           this.latitude = response.data.results[0].position.lat;
           this.longitude = response.data.results[0].position.lon;
-          this.radius = response.data.results[0].position.radius;
 
           console.log("coordinate:", response);
           console.log("latitudine:", this.latitude);
           console.log("longitudine:", this.longitude);
-          console.log("radius:", this.radius);
         });
     },
   },
