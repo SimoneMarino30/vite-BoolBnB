@@ -1,12 +1,11 @@
 <script>
 import axios from "axios";
-import SearchBar from "./SearchBar.vue";
 
 export default {
   data() {
     return {
       /* aside */
-      filteredApartments: [],
+      allApartments: [],
       beds: null,
       rooms: null,
       bathrooms: null,
@@ -25,9 +24,8 @@ export default {
     };
   },
 
-  components: { SearchBar },
-
   methods: {
+    //CERCA APPARTAMENTI FILTRATI
     searchApartmentsFilter() {
       axios
         .get("http://127.0.0.1:8000/api/apartments", {
@@ -37,17 +35,42 @@ export default {
             bathrooms: this.bathrooms,
             price: this.price,
 
-            min_price: this.currentMinPrice,
-            max_price: this.currentMaxPrice,
             services: this.selectServices,
           },
         })
         .then((response) => {
-          this.filteredApartments = response.data.data;
-          console.log("appartamenti filtrati", this.filteredApartments);
+          this.allApartments = response.data.data;
+          console.log("appartamenti totali", this.allApartments);
+
+          // Stampa solo gli appartamenti che coincidono con i valori specificati
+          const filteredApartments = this.allApartments.filter((apartment) => {
+            return (
+              (this.beds === null || apartment.beds >= this.beds) &&
+              (this.rooms === null || apartment.rooms >= this.rooms) &&
+              (this.bathrooms === null ||
+                apartment.bathrooms >= this.bathrooms) &&
+              (this.price === null || apartment.price <= this.price)
+            );
+          });
+
+          console.log(
+            "appartamenti filtrati",
+            filteredApartments.map((apartment) => ({
+              name: apartment.title,
+              rooms: apartment.rooms,
+              beds: apartment.beds,
+              bathrooms: apartment.bathrooms,
+            }))
+          );
+          // Aggiorna la lista degli appartamenti filtrati
+          this.$emit("filterApartments", filteredApartments);
+        })
+        .catch((error) => {
+          console.log("Errore durante il recupero degli appartamenti:", error);
         });
     },
 
+    //CHIAMA TUTTI SERVIZI
     fetchServices() {
       axios
         .get("http://127.0.0.1:8000/api/services", {
@@ -58,12 +81,10 @@ export default {
         })
         .then((response) => {
           this.allServices = response.data.services;
-          console.log("tutti i servizi", this.allServices);
-
-          //return (this.services = response.data.services);
         });
     },
 
+    //APRE E CHIUDE LA TENDINA DEI FILTRI
     toggleAside() {
       var drawer = document.getElementById("overlayFilters");
       //var searchBar = document.getElementById("searchBarContainer");
@@ -78,13 +99,19 @@ export default {
       }
     },
 
-    getPrice() {
-      var priceSlider = document.getElementById("priceRange");
-      var output = document.getElementById("displayedPriceValue");
-      output.innerHTML = priceSlider.value; // Display the default slider value
-      this.currentPrice = priceSlider.value; // Assegna il valore corrente a currentPrice
-      // ...
+    //ASSEGNA IL PREZZO DALLO SLIDER
+    getPriceRange() {
+      const min_price = this.currentMinPrice;
+      const max_price = this.currentMaxPrice;
+
+      if (min_price > max_price) {
+        min_price === max_price;
+      } else if (max_price < min_price) {
+        max_price === min_price;
+      }
     },
+
+    //ASSEGNA IL RAGGIO DALLO SLIDER
     getDistance() {
       var distanceSlider = document.getElementById("kmRange");
       var output = document.getElementById("displayedKmValue");
@@ -106,18 +133,35 @@ export default {
       <aside class="px-sm-3 px-md-4 px-lg-5 py-5">
         <!-- SEARCH BAR -->
         <div class="searchBarContainer">
-          <SearchBar />
+          <form
+            class="d-flex"
+            role="search"
+          >
+            <input
+              class="form-control"
+              type="search"
+              :placeholder="placeholder"
+              aria-label="Search"
+              v-model="wordSearched"
+            />
+            <button
+              class="btn btn-primary mx-2"
+              type="submit"
+            >
+              <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
+            </button>
+          </form>
         </div>
 
         <!-- FORM -->
         <div class="filters-form">
           <!-- km range -->
-          <div class="km-container m-0">
+          <div class="km-container mt-3">
             <label for="km">Raggio</label>
             <div class="d-flex">
               <!-- displayed km -->
               <input
-                class="form-control mt-3"
+                class="form-control"
                 type="number"
                 id="rangeKm"
                 v-model.number="currentDistance"
@@ -150,6 +194,7 @@ export default {
                 id="price"
                 v-model.number="currentMinPrice"
                 min="0"
+                :max="currentMaxPrice - 1"
                 placeholder="Min €"
               />
               <!-- max price -->
@@ -158,7 +203,8 @@ export default {
                 type="number"
                 id="price"
                 v-model.number="currentMaxPrice"
-                min="0"
+                :min="currentMinPrice + 1"
+                max="1000"
                 placeholder="Max €"
               />
             </div>
@@ -168,13 +214,13 @@ export default {
               type="range"
               class="rangeSlider mt-3"
               min="0"
-              max="1000"
+              :max="currentMaxPrice"
               v-model="currentMinPrice"
             />
             <input
               type="range"
               class="rangeSlider mt-3"
-              min="0"
+              :min="currentMinPrice"
               max="1000"
               v-model="currentMaxPrice"
             />
@@ -289,6 +335,7 @@ export default {
 .main-container {
   position: fixed;
   z-index: 5;
+  margin-top: 7rem;
   .overlay-container {
     overflow-x: hidden;
     transition: 0.7s;
@@ -322,7 +369,7 @@ export default {
       }
       .rangeSlider::-webkit-slider-thumb {
         -webkit-appearance: none; /* Override default look */
-        appearance: none;
+        //appearance: none;
         width: 1rem;
         aspect-ratio: 1;
         border-radius: 50%;
