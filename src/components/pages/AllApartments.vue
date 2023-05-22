@@ -44,7 +44,7 @@ export default {
 </script>
 
 <template>
-  <div class="page-container">
+  <div class="page-container margin-fix">
     <div class="filter-container d-flex">
       <FilterSection @filterApartments="filterApartments" />
     </div>
