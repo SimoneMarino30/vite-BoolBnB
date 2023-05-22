@@ -37,8 +37,8 @@ export default {
 </script>
 
 <template>
-  <div class="page-container">
-    <div class="filter-container d-flex">
+  <div class="page-container margin-fix">
+    <div class="filter-container d-flex mt-4">
       <FilterSection />
     </div>
 
@@ -54,6 +54,10 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+.margin-fix{
+  margin-top: 106px;
+
+}
 .page-container {
   display: flex;
   justify-content: center;
