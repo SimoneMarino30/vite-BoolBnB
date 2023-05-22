@@ -12,6 +12,8 @@ export default {
         list: [],
         pages: [],
       },
+
+      filteredApartments: [],
     };
   },
 
@@ -26,7 +28,12 @@ export default {
       axios.get(endpoint).then((response) => {
         this.apartments.list = response.data.data;
         this.apartments.pages = response.data.links;
+        this.filterApartments(this.apartments.list);
       });
+    },
+
+    filterApartments(apartments) {
+      this.filteredApartments = apartments;
     },
   },
 
@@ -39,13 +46,14 @@ export default {
 <template>
   <div class="page-container">
     <div class="filter-container d-flex">
-      <FilterSection />
+      <FilterSection @filterApartments="filterApartments" />
     </div>
 
     <div class="apartments-container">
       <SearchBar />
       <AppList
-        :apartments="apartments.list"
+        v-if="filteredApartments.length > 0"
+        :apartments="filteredApartments"
         :pages="apartments.pages"
         @changePage="fetchApartments"
       />

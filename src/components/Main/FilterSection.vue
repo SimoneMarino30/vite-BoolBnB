@@ -1,6 +1,5 @@
 <script>
 import axios from "axios";
-import SearchBar from "./SearchBar.vue";
 
 export default {
   data() {
@@ -25,8 +24,6 @@ export default {
     };
   },
 
-  components: { SearchBar },
-
   methods: {
     //CERCA APPARTAMENTI FILTRATI
     searchApartmentsFilter() {
@@ -37,9 +34,6 @@ export default {
             rooms: this.rooms,
             bathrooms: this.bathrooms,
             price: this.price,
-
-            /*  min_price: this.currentMinPrice,
-            max_price: this.currentMaxPrice, */
 
             services: this.selectServices,
           },
@@ -68,6 +62,11 @@ export default {
               bathrooms: apartment.bathrooms,
             }))
           );
+          // Aggiorna la lista degli appartamenti filtrati
+          this.$emit("filterApartments", filteredApartments);
+        })
+        .catch((error) => {
+          console.log("Errore durante il recupero degli appartamenti:", error);
         });
     },
 
@@ -134,18 +133,35 @@ export default {
       <aside class="px-sm-3 px-md-4 px-lg-5 py-5">
         <!-- SEARCH BAR -->
         <div class="searchBarContainer">
-          <SearchBar />
+          <form
+            class="d-flex"
+            role="search"
+          >
+            <input
+              class="form-control"
+              type="search"
+              :placeholder="placeholder"
+              aria-label="Search"
+              v-model="wordSearched"
+            />
+            <button
+              class="btn btn-primary mx-2"
+              type="submit"
+            >
+              <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
+            </button>
+          </form>
         </div>
 
         <!-- FORM -->
         <div class="filters-form">
           <!-- km range -->
-          <div class="km-container m-0">
+          <div class="km-container mt-3">
             <label for="km">Raggio</label>
             <div class="d-flex">
               <!-- displayed km -->
               <input
-                class="form-control mt-3"
+                class="form-control"
                 type="number"
                 id="rangeKm"
                 v-model.number="currentDistance"
