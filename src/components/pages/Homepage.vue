@@ -3,6 +3,9 @@ import SearchBar from "../Main/SearchBar.vue";
 import AppCard from "../Main/AppCard.vue";
 import axios from "axios";
 
+// STORE
+import { store } from "../../data/store.js";
+
 export default {
   name: "HomePage",
 
@@ -13,18 +16,8 @@ export default {
 
   data() {
     return {
-      // Appartamento creato ora come obj statico, da aggiornare quando avremo chiamata API per appartamenti sponsorizzati
-      apartment: {
-        title: "Appartamento sponsorizzato",
-        image:
-          "https://www.centrostoricoimmobiliare.it/vendor/paginesi/custom_sdk/src/php_classes/placeholder_immobiliari.jpg",
-        address: "Via con la sponsorizzazione, 1",
-        beds: 2,
-        rooms: 1,
-        price: 68,
-        mq: 70,
-        slug: "prova",
-      },
+      sponsoredApartments: [],
+      store,
     };
   },
 
@@ -37,6 +30,20 @@ export default {
         },
       });
     },
+
+    // Recupero appartamenti sponsorizzati
+    fetchSponsoredApartments() {
+      axios
+        .get(store.sponsoredApartmentsUrl)
+        .then((response) => {
+          console.log(response.data.apartments);
+          this.sponsoredApartments = response.data.apartments.data;
+        })
+    }
+  },
+
+  created() {
+    this.fetchSponsoredApartments();
   },
 };
 </script>
@@ -63,18 +70,9 @@ export default {
           <div class="col h-25 d-flex justify-content-center">
             <form submit.prevent class="text-center d-flex">
               <!-- button per la searchBar -->
-              <input
-                class="form-control"
-                type="search"
-                :placeholder="placeholder"
-                aria-label="Search"
-                v-model="wordSearched"
-              />
-              <router-link
-                :to="{ name: 'AllApartments' }"
-                class="btn btn-primary mx-2"
-                type="submit"
-              >
+              <input class="form-control" type="search" :placeholder="placeholder" aria-label="Search"
+                v-model="wordSearched" />
+              <router-link :to="{ name: 'AllApartments' }" class="btn btn-primary mx-2" type="submit">
                 <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
               </router-link>
             </form>
@@ -89,21 +87,15 @@ export default {
     <div class="container pt-4">
       <h1 class="d-flex justify-content-center py-3">In Evidenza</h1>
 
-      <div
-        class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 py-5"
-      >
-        <AppCard :apartment="apartment" class="col d-flex" />
-        <AppCard :apartment="apartment" class="col d-flex" />
-        <AppCard :apartment="apartment" class="col d-flex" />
-        <AppCard :apartment="apartment" class="col d-flex" />
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 py-5">
+        <AppCard v-for="apartment in sponsoredApartments" :key="apartment.id" :apartment="apartment" class="col d-flex" />
       </div>
     </div>
   </main>
 </template>
 
 <style lang="scss" scoped>
-
-.margin-fix{
+.margin-fix {
   margin-top: 106px;
 
 }
