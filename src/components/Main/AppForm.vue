@@ -1,6 +1,9 @@
 <script>
 import axios from "axios";
 
+// STORE
+import { store } from "../../data/store.js";
+
 // import MyComponent from "./components/MyComponent.vue";
 
 export default {
@@ -20,6 +23,7 @@ export default {
       },
       errors: [],
       success: false,
+      store,
     };
   },
 
@@ -96,8 +100,14 @@ export default {
 
             <div class="mb-3">
               <label for="email" class="pb-2">Email</label>
-              <input type="email" id="email" v-model="message.email" class="form-control" minlength="5" maxlength="100"
-                required />
+
+              <!-- INPUT SENZA LOGIN -->
+              <input v-if="store.user_email === ''" type="email" id="email" v-model="message.email" class="form-control"
+                minlength="5" maxlength="100" required />
+
+              <!-- INPUT CON LOGIN -->
+              <input v-else type="email" id="email" class="form-control" minlength="5" maxlength="100" disabled required
+                :value="store.user_email" />
             </div>
             <div class="mb-3">
               <label for="text" class="pb-2">Messaggio</label>
