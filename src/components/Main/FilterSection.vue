@@ -41,10 +41,37 @@ export default {
         })
         .then((response) => {
           this.allApartments = response.data.data;
-          console.log("appartamenti totali", this.allApartments);
+          //console.log("appartamenti totali", this.allApartments);
+
+          // Stampa solo i servizi con checkbox attiva
+          this.requiredServices = this.allServices.filter((service) => {
+            return this.services.includes(service.id);
+          });
+          console.log(
+            "questi sono i servizi richiesti con this.requiredServices.map",
+            this.requiredServices.map((service) => ({
+              id: service.id,
+              name: service.name,
+            }))
+          );
 
           // Stampa solo gli appartamenti che coincidono con i valori specificati
           const filteredApartments = this.allApartments.filter((apartment) => {
+            //ID dei servizi checkati
+            const checkedServices = this.services;
+            console.log("ID dei servizi checkati", checkedServices);
+
+            //ID dei servizi di ogni appartamento
+            const serviceIds = apartment.services.map((service) => service.id);
+            console.log("ID dei servizi di ogni appartamento", serviceIds);
+
+            // Verifica se tutti i valori di checkedServices sono presenti in serviceIds
+            const matchingServices = checkedServices.every((serviceId) =>
+              serviceIds.includes(serviceId)
+            );
+
+            console.log("Tutti i servizi corrispondono:", matchingServices);
+
             return (
               //(this.name === null || apartment.name >= this.name) &&
               (this.beds === null || apartment.beds >= this.beds) &&
@@ -56,9 +83,15 @@ export default {
                 apartment.price >= this.currentMinPrice) &&
               //al prezzo massimo
               (this.currentMaxPrice === null ||
-                apartment.price <= this.currentMaxPrice)
-              /*  //servizi selezionati
-              this.requiredServices === null */
+                apartment.price <= this.currentMaxPrice) &&
+              /* FILTRO PER SERVIZI */
+              matchingServices
+
+              // Controlla se in serviceIds ci sono i servizi richiesti
+
+              // i servizi devono contenere ALMENO tutti i requiredServices
+              //per ogni servizio in allServices
+              //se il servizio è uguale requiredServices
             );
           });
 
@@ -69,10 +102,10 @@ export default {
               rooms: apartment.rooms,
               beds: apartment.beds,
               bathrooms: apartment.bathrooms,
-              //VOGLIO STAMPARE I SERVIZI CHE HA QUESTO APPARTAMENTO
-              services: apartment.services.map((service) => service.name), // Get an array of service names
+              services: apartment.services,
             }))
           );
+
           // Aggiorna la lista degli appartamenti filtrati
           this.$emit("filterApartments", filteredApartments);
         });
@@ -105,19 +138,20 @@ export default {
         .then((response) => {
           // Stampa tutti i servizi
           this.allServices = response.data.services;
-          console.log("servizi totali", this.allServices);
+          //console.log("servizi totali", this.allServices);
 
           // Stampa solo i servizi con checkbox attiva
-          const requiredServices = this.allServices.filter((service) => {
+          this.requiredServices = this.allServices.filter((service) => {
             return this.services.includes(service.id);
           });
-          console.log(
+
+          /* console.log(
             "servizi richiesti",
-            requiredServices.map((service) => ({
+            this.requiredServices.map((service) => ({
               id: service.id,
               name: service.name,
             }))
-          );
+          ); */
         });
     },
 
@@ -408,7 +442,7 @@ export default {
 
     aside {
       max-width: 30rem;
-      height: 50rem;
+      height: 60rem;
 
       align-items: start;
       padding: 3rem 5rem;
