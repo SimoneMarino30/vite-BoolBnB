@@ -336,7 +336,6 @@ export default {
                       class="form-check-input"
                       :value="service.id"
                       v-model="services"
-                      @click="toggleServiceName(service.id)"
                     />
                     <div class="d-flex flex-row">
                       <div
