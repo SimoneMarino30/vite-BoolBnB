@@ -6,26 +6,32 @@ import axios from "axios";
 import AppCard from "./AppCard.vue";
 import AppForm from "./AppForm.vue";
 import MapPage from "../pages/MapPage.vue";
+import Loader from "../pages/Loader.vue";
 export default {
   name: "AppDetail",
   data() {
     return {
+      isLoading: false,
       apartment: null,
     };
   },
   created() {
     console.log(this.$route.params.slug);
+    this.isLoading = true; // Imposta isLoading su true prima della chiamata
     axios
-      .get(`http://127.0.0.1:8000/api/apartments/${this.$route.params.slug}`)
-      .then((response) => {
-        this.apartment = response.data;
+    .get(`http://127.0.0.1:8000/api/apartments/${this.$route.params.slug}`)
+    .then((response) => {
+      this.apartment = response.data;
+      this.isLoading = false; // Imposta isLoading su false dopo la chiamata
       });
   },
-  components: { AppCard, AppForm, MapPage },
+  components: { AppCard, AppForm, MapPage, Loader },
 };
 </script>
 <template>
-  <div class="margin-fix">
+  <Loader v-if="isLoading" /> <!-- Aggiungi il componente Loader quando isLoading è true -->
+
+  <div v-else-if="!isLoading" class="margin-fix">
 
     <!-- <AppCard v-if="apartment" :apartment="apartment" /> -->
     <div class="container detail-appartment py-2 px-5 my-4 rounded-4">
