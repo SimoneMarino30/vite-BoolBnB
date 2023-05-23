@@ -17,6 +17,7 @@ export default {
       icon: null,
       services: [],
       servicesWithNames: [],
+      requiredServices: [],
 
       /* slider */
       currentMinPrice: null,
@@ -35,6 +36,7 @@ export default {
             rooms: this.rooms,
             bathrooms: this.bathrooms,
             price: this.price,
+            services: this.services,
           },
         })
         .then((response) => {
@@ -55,6 +57,8 @@ export default {
               //al prezzo massimo
               (this.currentMaxPrice === null ||
                 apartment.price <= this.currentMaxPrice)
+              /*  //servizi selezionati
+              this.requiredServices === null */
             );
           });
 
@@ -65,6 +69,8 @@ export default {
               rooms: apartment.rooms,
               beds: apartment.beds,
               bathrooms: apartment.bathrooms,
+              //VOGLIO STAMPARE I SERVIZI CHE HA QUESTO APPARTAMENTO
+              services: apartment.services.map((service) => service.name), // Get an array of service names
             }))
           );
           // Aggiorna la lista degli appartamenti filtrati
@@ -72,7 +78,7 @@ export default {
         });
     },
 
-    //CHIAMA TUTTI SERVIZI
+    //CHIAMA TUTTI SERVIZI DENTRO L'ASIDE
     fetchServices() {
       axios
         .get("http://127.0.0.1:8000/api/services", {
@@ -84,26 +90,30 @@ export default {
         })
         .then((response) => {
           this.allServices = response.data.services;
+        });
+    },
+    //CERCA SERVIZI RICHIESTI
+    requireServices() {
+      axios
+        .get("http://127.0.0.1:8000/api/services", {
+          params: {
+            id: this.id,
+            name: this.name,
+            icon: this.icon,
+          },
+        })
+        .then((response) => {
+          // Stampa tutti i servizi
+          this.allServices = response.data.services;
           console.log("servizi totali", this.allServices);
 
-          // Stampa solo gli appartamenti che coincidono con i valori specificati
-          const filteredServices = this.allServices.filter((service) => {
-            return (
-              /* (this.id === null || service.id >= this.id) &&
-              (this.name === null || service.name >= this.name) &&
-              (this.icon === null || service.icon >= this.icon) */
-
-              //nessun servizio selezionato
-              this.services.length === null ||
-              this.services.every((serviceId) =>
-                apartment.services.includes(serviceId)
-              )
-            );
+          // Stampa solo i servizi con checkbox attiva
+          const requiredServices = this.allServices.filter((service) => {
+            return this.services.includes(service.id);
           });
-
           console.log(
-            "servizi filtrati",
-            filteredServices.map((service) => ({
+            "servizi richiesti",
+            requiredServices.map((service) => ({
               id: service.id,
               name: service.name,
             }))
@@ -179,13 +189,6 @@ export default {
             </button>
           </form>
         </div>
-
-        <button
-          @click="searchApartmentsFilter(), fetchServices()"
-          class="btn btn-primary"
-        >
-          Filtra
-        </button>
 
         <!-- FORM -->
         <div class="filters-form">
@@ -360,7 +363,7 @@ export default {
         </div>
 
         <button
-          @click="searchApartmentsFilter()"
+          @click="searchApartmentsFilter(), requireServices()"
           class="btn btn-primary"
         >
           Filtra
