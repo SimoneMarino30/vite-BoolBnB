@@ -6,6 +6,8 @@ export default {
     return {
       /* aside */
       // allApartments: [],
+      latitude: null,
+      longitude: null,
       beds: null,
       rooms: null,
       bathrooms: null,
@@ -63,18 +65,18 @@ export default {
           const filteredApartments = this.allApartments.filter((apartment) => {
             //ID dei servizi checkati
             const checkedServices = this.services;
-            console.log("ID dei servizi checkati", checkedServices);
+            //console.log("ID dei servizi checkati", checkedServices);
 
             //ID dei servizi di ogni appartamento
             const serviceIds = apartment.services.map((service) => service.id);
-            console.log("ID dei servizi di ogni appartamento", serviceIds);
+            //console.log("ID dei servizi di ogni appartamento", serviceIds);
 
             // Verifica se tutti i valori di checkedServices sono presenti in serviceIds
             const matchingServices = checkedServices.every((serviceId) =>
               serviceIds.includes(serviceId)
             );
 
-            console.log("Tutti i servizi corrispondono:", matchingServices);
+            //console.log("Tutti i servizi corrispondono:", matchingServices);
 
             return (
               //(this.name === null || apartment.name >= this.name) &&
@@ -107,6 +109,36 @@ export default {
           // Aggiorna la lista degli appartamenti filtrati
           this.$emit("filterApartments", filteredApartments);
         });
+    },
+
+    //CALCOLA DISTANZA TRA 2 COORDINATE
+    calculateDistance() {
+      const lat1 = 41.890665; // Latitudine del punto 1
+      const lon1 = 12.543268; // Longitudine del punto 1
+      const lat2 = 41.894939; // Latitudine del punto 2
+      const lon2 = 12.484137; // Longitudine del punto 2
+
+      const earthRadius = 6371; // Raggio medio della Terra in chilometri
+
+      const dLat = this.toRadians(lat2 - lat1);
+      const dLon = this.toRadians(lon2 - lon1);
+
+      const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(this.toRadians(lat1)) *
+          Math.cos(this.toRadians(lat2)) *
+          Math.sin(dLon / 2) *
+          Math.sin(dLon / 2);
+
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      const distance = earthRadius * c;
+
+      console.log(`Distanza: ${distance} km`);
+    },
+
+    //converte gradi in radianti
+    toRadians(degrees) {
+      return (degrees * Math.PI) / 180;
     },
 
     //CHIAMA TUTTI SERVIZI DENTRO L'ASIDE
@@ -194,11 +226,14 @@ export default {
 
 <template>
   <div class="main-container d-flex m-0">
-    <div id="overlayFilters" class="overlay-container d-flex">
+    <div
+      id="overlayFilters"
+      class="overlay-container d-flex"
+    >
       <!-- aside -->
       <aside class="px-sm-3 px-md-4 px-lg-5 py-5">
         <!-- SEARCH BAR -->
-        <!--  <div class="searchBarContainer">
+        <div class="searchBarContainer">
           <form
             class="d-flex"
             role="search"
@@ -217,19 +252,36 @@ export default {
               <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
             </button>
           </form>
-        </div> -->
+        </div>
 
         <!-- FORM -->
         <div class="filters-form">
           <!-- km range -->
           <div class="km-container mt-3 mb-0">
-            <label for="km" class="fs-5">Raggio</label>
+            <label
+              for="km"
+              class="fs-5"
+              >Raggio</label
+            >
             <div class="d-flex">
               <!-- displayed km -->
-              <input class="form-control" type="number" id="rangeKm" v-model.number="currentDistance" min="0" max="100"
-                placeholder="Distanza Km" />
+              <input
+                class="form-control"
+                type="number"
+                id="rangeKm"
+                v-model.number="currentDistance"
+                min="0"
+                max="100"
+                placeholder="Distanza Km"
+              />
               <!--slide bar-->
-              <input type="range" class="rangeSliderDistance my-3" min="0" max="20" v-model="currentDistance" />
+              <input
+                type="range"
+                class="rangeSliderDistance my-3"
+                min="0"
+                max="20"
+                v-model="currentDistance"
+              />
               <div class="d-flex flex-row justify-content-between m-0">
                 <p id="">0 Km</p>
                 <p id="">20 Km</p>
@@ -238,22 +290,48 @@ export default {
           </div>
           <!-- price range -->
           <div class="price-container m-0">
-            <label for="price" class="fs-5">Prezzo</label>
+            <label
+              for="price"
+              class="fs-5"
+              >Prezzo</label
+            >
             <div class="d-flex flex-row justify-content-between">
               <!-- min price-->
-              <input class="form-control shorter-input" type="number" v-model.number="currentMinPrice" min="0"
-                :max="currentMaxPrice - 1" placeholder="Min €" />
+              <input
+                class="form-control shorter-input"
+                type="number"
+                v-model.number="currentMinPrice"
+                min="0"
+                :max="currentMaxPrice - 1"
+                placeholder="Min €"
+              />
               <!--slide bar min price-->
-              <input type="range" class="rangeSliderPrice mt-3" min="0" :max="currentMaxPrice"
-                v-model="currentMinPrice" />
+              <input
+                type="range"
+                class="rangeSliderPrice mt-3"
+                min="0"
+                :max="currentMaxPrice"
+                v-model="currentMinPrice"
+              />
             </div>
             <div class="d-flex flex-row justify-content-between">
               <!-- max price -->
-              <input class="form-control shorter-input" type="number" v-model.number="currentMaxPrice"
-                :min="currentMinPrice + 1" max="1000" placeholder="Max €" />
+              <input
+                class="form-control shorter-input"
+                type="number"
+                v-model.number="currentMaxPrice"
+                :min="currentMinPrice + 1"
+                max="1000"
+                placeholder="Max €"
+              />
               <!--slide bar max price-->
-              <input type="range" class="rangeSliderPrice mt-3" :min="currentMinPrice" max="1000"
-                v-model="currentMaxPrice" />
+              <input
+                type="range"
+                class="rangeSliderPrice mt-3"
+                :min="currentMinPrice"
+                max="1000"
+                v-model="currentMaxPrice"
+              />
             </div>
 
             <!--    <div class="d-flex flex-row justify-content-between m-0">
@@ -267,19 +345,40 @@ export default {
             <div class="d-flex flex-row justify-content-between">
               <div class="room d-flex align-items-center">
                 <label for="number_room">Stanze</label>
-                <input class="form-control brb" id="number_room" type="number" min="1" max="10" v-model.number="rooms"
-                  placeholder="1" />
+                <input
+                  class="form-control brb"
+                  id="number_room"
+                  type="number"
+                  min="1"
+                  max="10"
+                  v-model.number="rooms"
+                  placeholder="1"
+                />
               </div>
               <div class="bed d-flex align-items-center">
                 <label for="number_bed">Posti letto</label>
-                <input class="form-control brb" id="number_bed" type="number" min="1" max="20" v-model.number="beds"
-                  placeholder="1" />
+                <input
+                  class="form-control brb"
+                  id="number_bed"
+                  type="number"
+                  min="1"
+                  max="20"
+                  v-model.number="beds"
+                  placeholder="1"
+                />
               </div>
 
               <div class="bath d-flex align-items-center">
                 <label for="number_bath">n° Bagni</label>
-                <input class="form-control brb" id="number_bath" type="number" min="1" max="8" v-model.number="bathrooms"
-                  placeholder="1" />
+                <input
+                  class="form-control brb"
+                  id="number_bath"
+                  type="number"
+                  min="1"
+                  max="8"
+                  v-model.number="bathrooms"
+                  placeholder="1"
+                />
               </div>
             </div>
           </div>
@@ -289,16 +388,33 @@ export default {
             <span class="fs-4">Seleziona servizi</span>
             <div>
               <ul class="d-flex flex-wrap">
-                <li v-for="service in allServices" :key="service.id">
-                  <label :class="[
-                    'service-label  form-check px-3 justify-content-center',
-                    { 'selected-service': services.includes(service.id) },
-                  ]">
-                    <input type="checkbox" class="form-check-input" :value="service.id" v-model="services" />
+                <li
+                  v-for="service in allServices"
+                  :key="service.id"
+                >
+                  <label
+                    :class="[
+                      'service-label  form-check px-3 justify-content-center',
+                      { 'selected-service': services.includes(service.id) },
+                    ]"
+                  >
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      :value="service.id"
+                      v-model="services"
+                    />
                     <div class="d-flex flex-row">
-                      <div class="service-icon d-flex flex-row align-items-center">
-                        <span class="align-items-center"><font-awesome-icon :icon="service.icon" /></span>
-                        <div class="service-name" v-if="services.includes(service.id)">
+                      <div
+                        class="service-icon d-flex flex-row align-items-center"
+                      >
+                        <span class="align-items-center"
+                          ><font-awesome-icon :icon="service.icon"
+                        /></span>
+                        <div
+                          class="service-name"
+                          v-if="services.includes(service.id)"
+                        >
                           <span class="ms-2">{{ service.name }}</span>
                         </div>
                       </div>
@@ -310,7 +426,12 @@ export default {
           </div>
         </div>
 
-        <button @click="searchApartmentsFilter(), requireServices()" class="btn btn-primary">
+        <button
+          @click="
+            searchApartmentsFilter(), requireServices(), calculateDistance()
+          "
+          class="btn btn-primary"
+        >
           Filtra
         </button>
       </aside>
@@ -318,7 +439,10 @@ export default {
 
     <!-- FILTER ICON -->
     <div>
-      <button class="btn btn-primary filter mt-2" @click="toggleAside()">
+      <button
+        class="btn btn-primary filter mt-2"
+        @click="toggleAside()"
+      >
         <font-awesome-icon icon="fa-solid fa-filter" />
       </button>
     </div>
