@@ -33,7 +33,7 @@ export default {
 <template>
   <!-- search bar -->
   <div
-    class="search-bar-container my-3 d-flex align-items-end justify-content-between"
+    class="search-bar-container my-3 d-flex align-items-end justify-content-end"
   >
     <div
       class="search-bar"

@@ -16,6 +16,7 @@ export default {
       name: null,
       icon: null,
       services: [],
+      servicesWithNames: [],
 
       /* slider */
       currentMinPrice: null,
@@ -150,7 +151,7 @@ export default {
 </script>
 
 <template>
-  <div class="main-container d-flex align-items-start">
+  <div class="main-container d-flex m-0">
     <div
       id="overlayFilters"
       class="overlay-container d-flex"
@@ -178,17 +179,23 @@ export default {
             </button>
           </form>
         </div>
+
         <button
           @click="searchApartmentsFilter(), fetchServices()"
           class="btn btn-primary"
         >
           Filtra
         </button>
+
         <!-- FORM -->
         <div class="filters-form">
           <!-- km range -->
-          <div class="km-container mt-3">
-            <label for="km">Raggio</label>
+          <div class="km-container mt-3 mb-0">
+            <label
+              for="km"
+              class="fs-5"
+              >Raggio</label
+            >
             <div class="d-flex">
               <!-- displayed km -->
               <input
@@ -203,7 +210,7 @@ export default {
               <!--slide bar-->
               <input
                 type="range"
-                class="rangeSlider my-3"
+                class="rangeSliderDistance my-3"
                 min="0"
                 max="20"
                 v-model="currentDistance"
@@ -216,49 +223,54 @@ export default {
           </div>
           <!-- price range -->
           <div class="price-container m-0">
-            <label for="price">Prezzo</label>
+            <label
+              for="price"
+              class="fs-5"
+              >Prezzo</label
+            >
             <div class="d-flex flex-row justify-content-between">
               <!-- min price-->
               <input
                 class="form-control shorter-input"
                 type="number"
-                id="price"
                 v-model.number="currentMinPrice"
                 min="0"
                 :max="currentMaxPrice - 1"
                 placeholder="Min €"
               />
+              <!--slide bar min price-->
+              <input
+                type="range"
+                class="rangeSliderPrice mt-3"
+                min="0"
+                :max="currentMaxPrice"
+                v-model="currentMinPrice"
+              />
+            </div>
+            <div class="d-flex flex-row justify-content-between">
               <!-- max price -->
               <input
                 class="form-control shorter-input"
                 type="number"
-                id="price"
                 v-model.number="currentMaxPrice"
                 :min="currentMinPrice + 1"
                 max="1000"
                 placeholder="Max €"
               />
+              <!--slide bar max price-->
+              <input
+                type="range"
+                class="rangeSliderPrice mt-3"
+                :min="currentMinPrice"
+                max="1000"
+                v-model="currentMaxPrice"
+              />
             </div>
 
-            <!--slide bar-->
-            <input
-              type="range"
-              class="rangeSlider mt-3"
-              min="0"
-              :max="currentMaxPrice"
-              v-model="currentMinPrice"
-            />
-            <input
-              type="range"
-              class="rangeSlider mt-3"
-              :min="currentMinPrice"
-              max="1000"
-              v-model="currentMaxPrice"
-            />
-            <div class="d-flex flex-row justify-content-between m-0">
+            <!--    <div class="d-flex flex-row justify-content-between m-0">
               <p id="">0 €</p>
               <p id="">1000 €</p>
-            </div>
+            </div> -->
           </div>
 
           <!-- number room bed bathroom -->
@@ -308,46 +320,59 @@ export default {
           <div class="services-container">
             <span class="fs-4">Seleziona servizi</span>
             <div>
-              <ul
-                v-for="service in allServices"
-                :key="service.id"
-                class="d-flex flex-row flex-wrap p-0"
-              >
-                <label
-                  :class="[
-                    'py-2 px-3 m-2 service-card rounded-5 form-check',
-                    { 'selected-service': services.includes(service.id) },
-                  ]"
+              <ul class="d-flex flex-wrap">
+                <li
+                  v-for="service in allServices"
+                  :key="service.id"
                 >
-                  <input
-                    type="checkbox"
-                    class="form-check-input"
-                    :value="service.id"
-                    v-model="services"
-                  />
-                  <div class="d-flex flex-row align-items-center">
-                    <span><font-awesome-icon :icon="service.icon" /></span>
-                    <span class="service-name ms-2">{{ service.name }}</span>
-                  </div>
-                </label>
+                  <label
+                    :class="[
+                      'service-label  form-check px-3 justify-content-center',
+                      { 'selected-service': services.includes(service.id) },
+                    ]"
+                  >
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      :value="service.id"
+                      v-model="services"
+                      @click="toggleServiceName(service.id)"
+                    />
+                    <div class="d-flex flex-row">
+                      <div
+                        class="service-icon d-flex flex-row align-items-center"
+                      >
+                        <span class="align-items-center"
+                          ><font-awesome-icon :icon="service.icon"
+                        /></span>
+                        <div
+                          class="service-name"
+                          v-if="services.includes(service.id)"
+                        >
+                          <span class="ms-2">{{ service.name }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </label>
+                </li>
               </ul>
             </div>
           </div>
         </div>
 
-        <!-- <button
+        <button
           @click="searchApartmentsFilter()"
           class="btn btn-primary"
         >
           Filtra
-        </button> -->
+        </button>
       </aside>
     </div>
 
     <!-- FILTER ICON -->
     <div>
       <button
-        class="btn btn-primary filter"
+        class="btn btn-primary filter mt-2"
         @click="toggleAside()"
       >
         <font-awesome-icon icon="fa-solid fa-filter" />
@@ -380,8 +405,8 @@ export default {
     background-color: $light_color;
 
     aside {
-      width: 100%;
-      max-height: 39rem;
+      max-width: 30rem;
+      height: 50rem;
 
       align-items: start;
       padding: 3rem 5rem;
@@ -392,13 +417,18 @@ export default {
         flex-direction: column;
       }
 
-      .rangeSlider {
+      .rangeSliderDistance,
+      .rangeSliderPrice {
         -webkit-appearance: none;
         background: $dark_accent_color;
         height: 0.5rem;
         border-radius: 25px;
       }
-      .rangeSlider::-webkit-slider-thumb {
+      .rangeSliderPrice {
+        width: 60%;
+      }
+      .rangeSliderDistance::-webkit-slider-thumb,
+      .rangeSliderPrice::-webkit-slider-thumb {
         -webkit-appearance: none; /* Override default look */
         //appearance: none;
         width: 1rem;
@@ -414,44 +444,61 @@ export default {
           .shorter-input {
             width: 6rem;
           }
-
           .brb {
             width: 4rem;
           }
         }
 
         .services-container {
-          .service-card {
-            color: $light_color;
-            background-color: $dark_color;
-            position: relative;
+          ul {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            gap: 1rem;
+            li {
+              height: 100%;
+              width: auto;
 
-            //faccio sparire il checkbox brutto di default
-            input[type="checkbox"] {
-              opacity: 0;
-              position: absolute;
-              top: 0;
-              left: 0;
-            }
-            &:hover {
-              background-color: $dark_accent_color;
-              color: $dark_color;
-            }
+              label {
+                color: $light_color;
+                border-radius: 50px;
+                height: 3rem;
+                //width: auto;
+                //aspect-ratio: 1;
+                background-color: $dark_color;
+                position: relative;
 
-            .service-name {
-              display: none;
-              transition: display 3.5s;
+                margin: 0;
+                display: flex;
+
+                //faccio sparire il checkbox brutto di default
+                input[type="checkbox"] {
+                  opacity: 0;
+                  position: absolute;
+                  bottom: 30%;
+                  right: 25%;
+                }
+                &:hover {
+                  background-color: $dark_accent_color;
+                  color: $dark_color;
+                }
+
+                .service-icon {
+                  justify-content: center;
+                  align-items: center;
+                }
+              }
             }
           }
 
-          .service-card.selected-service {
+          .service-label.selected-service {
             background-color: $primary_color;
             color: $light_color;
             .service-name {
               display: block;
             }
           }
-          .service-card:hover span.service-name {
+          .service-label:hover span.service-name {
             display: inline-block;
             transition: display 3.5s;
           }
