@@ -78,7 +78,7 @@ export default {
 <template>
   <div class="page-container margin-fix">
     <div class="filter-container d-flex">
-      <FilterSection @filterApartments="filterApartments" />
+      <FilterSection @filterApartments="filterApartments" :allApartments="filteredApartments" />
     </div>
 
     <div class="apartments-container min-height flex-column">
