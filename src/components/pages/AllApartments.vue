@@ -49,8 +49,9 @@ export default {
       <FilterSection @filterApartments="filterApartments" />
     </div>
 
-    <div class="apartments-container">
+    <div class="apartments-container d-flex flex-column">
       <SearchBar />
+
       <AppList
         v-if="filteredApartments.length > 0"
         :apartments="filteredApartments"
@@ -62,9 +63,8 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-.margin-fix{
+.margin-fix {
   margin-top: 106px;
-
 }
 .page-container {
   display: flex;
