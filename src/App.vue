@@ -129,6 +129,11 @@ export default {
       // console.log('User: ', this.store.user)
     }
   },
+
+  mounted() {
+    // CRIPTARE URL
+    this.$router.push('/');
+  },
 };
 </script>
 
