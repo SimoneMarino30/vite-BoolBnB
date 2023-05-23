@@ -86,12 +86,6 @@ export default {
                 apartment.price <= this.currentMaxPrice) &&
               /* FILTRO PER SERVIZI */
               matchingServices
-
-              // Controlla se in serviceIds ci sono i servizi richiesti
-
-              // i servizi devono contenere ALMENO tutti i requiredServices
-              //per ogni servizio in allServices
-              //se il servizio è uguale requiredServices
             );
           });
 
@@ -203,7 +197,7 @@ export default {
       <!-- aside -->
       <aside class="px-sm-3 px-md-4 px-lg-5 py-5">
         <!-- SEARCH BAR -->
-        <div class="searchBarContainer">
+        <!--  <div class="searchBarContainer">
           <form
             class="d-flex"
             role="search"
@@ -222,7 +216,7 @@ export default {
               <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
             </button>
           </form>
-        </div>
+        </div> -->
 
         <!-- FORM -->
         <div class="filters-form">
@@ -442,7 +436,7 @@ export default {
 
     aside {
       max-width: 30rem;
-      height: 60rem;
+      height: calc(100vh - 106px);
 
       align-items: start;
       padding: 3rem 5rem;
