@@ -1,5 +1,11 @@
 <script>
+// AXIOS
 import axios from "axios";
+
+// STORE
+import { store } from "../../data/store.js";
+
+// COMPONENTS
 import AppList from "../Main/AppList.vue";
 import SearchBar from "../Main/SearchBar.vue";
 import FilterSection from "../Main/FilterSection.vue";
@@ -9,6 +15,7 @@ export default {
   name: "AllApartments",
   data() {
     return {
+      store,
       isLoading: false,
       apartments: {
         list: [],
@@ -40,6 +47,26 @@ export default {
     filterApartments(apartments) {
       this.filteredApartments = apartments;
     },
+
+    // Funzione per cercare appartamento per indirizzo passato dall'emit della SearchBar
+    fetchApartmentsByAddress() {
+      this.isLoading = true;
+      this.apartments.list = [];
+      this.apartments.pages = [];
+      axios
+        .get(`${store.apiUrl}apartments?address=${address.value}`)
+        .then(response => {
+          console.log(response);
+          this.apartments.list = response.data.data;
+          this.apartments.pages = response.data.links;
+
+          this.filterApartments(this.apartments.list);
+        })
+        .finally(() => {
+          this.isLoading = false;
+        }
+        );
+    },
   },
 
   created() {
@@ -53,16 +80,17 @@ export default {
     <div class="filter-container d-flex">
       <FilterSection @filterApartments="filterApartments" />
     </div>
-    
+
     <div class="apartments-container min-height flex-column">
-      <SearchBar />
+      <SearchBar @on-search="fetchApartmentsByAddress()" />
       <Loader v-if="isLoading" /> <!-- Aggiungi il componente Loader quando isLoading è true -->
-      <AppList
-        v-else-if="filteredApartments.length > 0"
-        :apartments="filteredApartments"
-        :pages="apartments.pages"
-        @changePage="fetchApartments"
-      />
+
+      <!-- * Vecchio codice -->
+      <AppList v-else-if="filteredApartments.length > 0" :apartments="filteredApartments" :pages="apartments.pages"
+        @changePage="fetchApartments" />
+
+      <!-- * Nuovo codice -->
+      <!-- <AppList :apartments="apartments.list" :pages="apartments.pages" @changePage="fetchApartments" /> -->
     </div>
   </div>
 </template>
@@ -71,6 +99,7 @@ export default {
 .margin-fix {
   margin-top: 106px;
 }
+
 .page-container {
   display: flex;
   justify-content: center;
@@ -81,7 +110,7 @@ export default {
   align-self: center;
 }
 
-.min-height{
+.min-height {
   min-height: 1000px;
 }
 </style>
