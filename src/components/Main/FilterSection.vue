@@ -15,7 +15,7 @@ export default {
       allServices: [],
       name: null,
       icon: null,
-      selectServices: [],
+      services: [],
 
       /* slider */
       currentMinPrice: null,
@@ -34,8 +34,6 @@ export default {
             rooms: this.rooms,
             bathrooms: this.bathrooms,
             price: this.price,
-
-            services: this.selectServices,
           },
         })
         .then((response) => {
@@ -70,9 +68,6 @@ export default {
           );
           // Aggiorna la lista degli appartamenti filtrati
           this.$emit("filterApartments", filteredApartments);
-        })
-        .catch((error) => {
-          console.log("Errore durante il recupero degli appartamenti:", error);
         });
     },
 
@@ -81,12 +76,37 @@ export default {
       axios
         .get("http://127.0.0.1:8000/api/services", {
           params: {
+            id: this.id,
             name: this.name,
             icon: this.icon,
           },
         })
         .then((response) => {
           this.allServices = response.data.services;
+          console.log("servizi totali", this.allServices);
+
+          // Stampa solo gli appartamenti che coincidono con i valori specificati
+          const filteredServices = this.allServices.filter((service) => {
+            return (
+              /* (this.id === null || service.id >= this.id) &&
+              (this.name === null || service.name >= this.name) &&
+              (this.icon === null || service.icon >= this.icon) */
+
+              //nessun servizio selezionato
+              this.services.length === null ||
+              this.services.every((serviceId) =>
+                apartment.services.includes(serviceId)
+              )
+            );
+          });
+
+          console.log(
+            "servizi filtrati",
+            filteredServices.map((service) => ({
+              id: service.id,
+              name: service.name,
+            }))
+          );
         });
     },
 
@@ -158,7 +178,12 @@ export default {
             </button>
           </form>
         </div>
-
+        <button
+          @click="searchApartmentsFilter(), fetchServices()"
+          class="btn btn-primary"
+        >
+          Filtra
+        </button>
         <!-- FORM -->
         <div class="filters-form">
           <!-- km range -->
@@ -291,14 +316,14 @@ export default {
                 <label
                   :class="[
                     'py-2 px-3 m-2 service-card rounded-5 form-check',
-                    { 'selected-service': selectServices.includes(service.id) },
+                    { 'selected-service': services.includes(service.id) },
                   ]"
                 >
                   <input
                     type="checkbox"
                     class="form-check-input"
                     :value="service.id"
-                    v-model="selectServices"
+                    v-model="services"
                   />
                   <div class="d-flex flex-row align-items-center">
                     <span><font-awesome-icon :icon="service.icon" /></span>
@@ -310,12 +335,12 @@ export default {
           </div>
         </div>
 
-        <button
+        <!-- <button
           @click="searchApartmentsFilter()"
           class="btn btn-primary"
         >
           Filtra
-        </button>
+        </button> -->
       </aside>
     </div>
 
