@@ -16,7 +16,13 @@ export default {
         },
       }" :apartment="apartment" class="text-reset w-100">
         <!-- card container  -->
-        <div class="card-box px-3 py-3 text-center rounded-4">
+        <div class="card-box px-3 py-3 text-center rounded-4 position-relative">
+          <!-- Icona sponsorizzazione -->
+          <div v-show="apartment.sponsored == true" class="sponsored-icon m-2">
+            <span>
+              <font-awesome-icon :icon="['fas', 'crown']" />
+            </span>
+          </div>
           <!-- title appartment  -->
           <h2 class="fw-semibolder fs-4">{{ apartment.title }}</h2>
           <!-- image appartment  -->
@@ -45,11 +51,25 @@ export default {
   </div>
 </template>
 <style lang="scss" scoped>
+@use "../../style/partials/variables.scss" as *;
 @import url("https://fonts.googleapis.com/css?family=Lato:200,400|Playfair+Display");
 
 .card-box {
   background-color: #F1F1F1;
   box-shadow: 0 1px 30px rgba(0, 0, 0, 0.12), 0 3px 5px rgba(0, 0, 0, 0.24);
+
+  .sponsored-icon {
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    border-radius: 50%;
+    background-color: $light_color;
+    vertical-align: middle;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 
   h2 {
     font-family: "Playfair Display";
@@ -78,7 +98,7 @@ export default {
     margin: 0 auto;
     padding-top: 10.5rem;
     padding-bottom: 1rem;
-    background-color: #FFEBC8;
+    background-color: $light_color;
     color: #333;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 5px rgba(0, 0, 0, 0.24);
     transition: all ease-in 0.15s;
