@@ -21,6 +21,7 @@ import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
+import {faCrown} from "@fortawesome/free-solid-svg-icons";
 
 /brands/;
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
@@ -65,7 +66,8 @@ library.add(
   faLocationDot,
   faMagnifyingGlass,
   faEye,
-  faHouse
+  faHouse,
+  faCrown
 );
 /brands/;
 library.add(faFacebook, faInstagram, faTwitter, faGoogle, faGithub);
