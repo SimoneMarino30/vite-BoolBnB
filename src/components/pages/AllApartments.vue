@@ -88,6 +88,11 @@ export default {
       <!-- * Vecchio codice -->
       <AppList v-else-if="filteredApartments.length > 0" :apartments="filteredApartments" :pages="apartments.pages"
         @changePage="fetchApartments" />
+      
+      <div v-else class="text-muted text-center">
+        <h2>Nessun appartamento trovato</h2>
+        <h3>Prova Modificando i termini di ricerca</h3>
+      </div>
 
       <!-- * Nuovo codice -->
       <!-- <AppList :apartments="apartments.list" :pages="apartments.pages" @changePage="fetchApartments" /> -->

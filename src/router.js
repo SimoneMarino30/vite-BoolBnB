@@ -4,6 +4,8 @@ import AllApartments from "../src/components/pages/AllApartments.vue";
 import HomePage from "../src/components/pages/HomePage.vue";
 import AppSearch from "../src/components/pages/AppSearch.vue";
 import AppDetail from "../src/components/Main/AppDetail.vue";
+import Login from "./components/pages/Login.vue";
+
 // creazione routes
 const router = createRouter({
   history: createWebHistory(),
@@ -14,6 +16,11 @@ const router = createRouter({
       path: "/",
       name: "home",
       component: HomePage,
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: Login,
     },
     {
       path: "/apartments",

@@ -24,7 +24,6 @@ export default {
         class="col d-flex"
       />
     </div>
-    <h2 v-else class="text-muted">Non ci sono Appartamenti</h2>
 
     <nav aria-label="Apartments pagination">
       <ul class="pagination">
