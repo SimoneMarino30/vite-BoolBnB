@@ -131,8 +131,9 @@ export default {
   },
 
   mounted() {
-    // CRIPTARE URL
-    this.$router.push('/');
+    // CRIPTARE URL - Logica spostata nel component Login
+    // console.log('Guarda qui' + this.$router);
+    // this.$router.push('/');
   },
 };
 </script>
