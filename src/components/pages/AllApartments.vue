@@ -19,7 +19,6 @@ export default {
       isLoading: false,
       apartments: {
         list: [],
-        pages: [],
       },
 
       filteredApartments: [],
@@ -28,17 +27,15 @@ export default {
 
   components: { AppList, SearchBar, FilterSection, Loader },
 
-  emits: ["changePage"],
+  // emits: ["changePage"],
 
   methods: {
-    fetchApartments(endpoint = null) {
-      if (!endpoint) endpoint = "http://127.0.0.1:8000/api/apartments";
-
+    fetchApartments() {
       this.isLoading = true; // Imposta isLoading su true prima della chiamata
 
-      axios.get(endpoint).then((response) => {
-        this.apartments.list = response.data.data;
-        this.apartments.pages = response.data.links;
+      axios.get("http://127.0.0.1:8000/api/apartments").then((response) => {
+        this.apartments.list = response.data;
+        this.filteredApartments = response.data.links;
         this.filterApartments(this.apartments.list);
         this.isLoading = false; // Imposta isLoading su false dopo la chiamata
       });
@@ -52,20 +49,20 @@ export default {
     fetchApartmentsByAddress() {
       this.isLoading = true;
       this.apartments.list = [];
-      this.apartments.pages = [];
+      this.filteredApartments = [];
+      // this.apartments.pages = [];
       axios
         .get(`${store.apiUrl}apartments?address=${address.value}`)
-        .then(response => {
+        .then((response) => {
           console.log(response);
           this.apartments.list = response.data.data;
-          this.apartments.pages = response.data.links;
+          this.filteredApartments = response.data;
 
           this.filterApartments(this.apartments.list);
         })
         .finally(() => {
           this.isLoading = false;
-        }
-        );
+        });
     },
   },
 
@@ -78,17 +75,22 @@ export default {
 <template>
   <div class="page-container margin-fix">
     <div class="filter-container d-flex">
-      <FilterSection @filterApartments="filterApartments" :allApartments="filteredApartments" />
+      <FilterSection
+        @filterApartments="filterApartments"
+        :allApartments="filteredApartments"
+      />
     </div>
 
     <div class="apartments-container min-height flex-column">
       <SearchBar @on-search="fetchApartmentsByAddress()" />
-      <Loader v-if="isLoading" /> <!-- Aggiungi il componente Loader quando isLoading è true -->
+      <Loader v-if="isLoading" />
+      <!-- Aggiungi il componente Loader quando isLoading è true -->
 
       <!-- * Vecchio codice -->
-      <AppList v-else-if="filteredApartments.length > 0" :apartments="filteredApartments" :pages="apartments.pages"
-        @changePage="fetchApartments" />
-      
+      <AppList
+        v-else-if="filteredApartments.length > 0"
+        :apartments="filteredApartments"
+      />
       <div v-else class="text-muted text-center">
         <h2>Nessun appartamento trovato</h2>
         <h3>Prova Modificando i termini di ricerca</h3>
