@@ -4,7 +4,7 @@ import AppCard from "./AppCard.vue";
 export default {
   props: {
     apartments: Array,
-    pages: Array,
+    // pages: Array,
   },
 
   components: { AppCard },
@@ -26,7 +26,7 @@ export default {
     </div>
     <h2 v-else class="text-muted">Non ci sono Appartamenti</h2>
 
-    <nav aria-label="Apartments pagination">
+    <!-- <nav aria-label="Apartments pagination">
       <ul class="pagination">
         <li v-for="page in pages" class="page-item">
           <button
@@ -41,7 +41,7 @@ export default {
           ></button>
         </li>
       </ul>
-    </nav>
+    </nav> -->
   </div>
 </template>
 
