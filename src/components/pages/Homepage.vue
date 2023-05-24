@@ -33,13 +33,11 @@ export default {
 
     // Recupero appartamenti sponsorizzati
     fetchSponsoredApartments() {
-      axios
-        .get(store.sponsoredApartmentsUrl)
-        .then((response) => {
-          console.log(response.data.apartments);
-          this.sponsoredApartments = response.data.apartments.data;
-        })
-    }
+      axios.get(store.sponsoredApartmentsUrl).then((response) => {
+        console.log(response.data.apartments);
+        this.sponsoredApartments = response.data.apartments.data;
+      });
+    },
   },
 
   created() {
@@ -68,12 +66,23 @@ export default {
         </div>
         <div class="row d-flex align-items-center">
           <div class="col h-25 d-flex justify-content-center">
-            <form submit.prevent class="text-center d-flex">
+            <form
+              submit.prevent
+              class="text-center d-flex"
+            >
               <!-- button per la searchBar -->
-              <input class="form-control" type="search" :placeholder="placeholder" aria-label="Search"
-                v-model="wordSearched" />
-              <router-link :to="{ name: 'AllApartments' }" class="btn btn-primary mx-2" type="submit">
-                <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
+              <!-- <input class="form-control" type="search" :placeholder="placeholder" aria-label="Search"
+                v-model="wordSearched" /> -->
+              <router-link
+                :to="{ name: 'AllApartments' }"
+                class="btn btn-primary mx-2"
+                type="submit"
+              >
+                Cerca la soluzione migliore per te
+                <font-awesome-icon
+                  icon="fa-solid fa-magnifying-glass"
+                  class="ms-3"
+                />
               </router-link>
             </form>
           </div>
@@ -87,8 +96,15 @@ export default {
     <div class="container pt-4">
       <h1 class="d-flex justify-content-center py-3">In Evidenza</h1>
 
-      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 py-5">
-        <AppCard v-for="apartment in sponsoredApartments" :key="apartment.id" :apartment="apartment" class="col d-flex" />
+      <div
+        class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 py-5"
+      >
+        <AppCard
+          v-for="apartment in sponsoredApartments"
+          :key="apartment.id"
+          :apartment="apartment"
+          class="col d-flex"
+        />
       </div>
     </div>
   </main>
@@ -97,7 +113,6 @@ export default {
 <style lang="scss" scoped>
 .margin-fix {
   margin-top: 106px;
-
 }
 
 .jumbotron {

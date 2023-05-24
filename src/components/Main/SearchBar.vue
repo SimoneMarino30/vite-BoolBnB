@@ -17,7 +17,6 @@ export default {
   emits: ["on-search"],
 
   methods: {
-
     search() {
       this.$emit("on-search", this.address);
     },
@@ -73,12 +72,32 @@ export default {
 
 <template>
   <!-- search bar -->
-  <div class="search-bar-container my-3 d-flex align-items-end justify-content-end">
-    <div class="search-bar" id="searchBarContainer">
-      <form class="d-flex" role="search" @submit.prevent="search">
-        <input class="form-control" type="search" :placeholder="placeholder" aria-label="Search" v-model="address"
-          id="address" name="address" />
-        <button class="btn btn-primary mx-2" type="submit" @click="search()">
+  <div
+    class="search-bar-container my-3 d-flex align-items-end justify-content-end"
+  >
+    <div
+      class="search-bar"
+      id="searchBarContainer"
+    >
+      <form
+        class="d-flex"
+        role="search"
+        @submit.prevent="search"
+      >
+        <input
+          class="form-control"
+          type="search"
+          :placeholder="placeholder"
+          aria-label="Search"
+          v-model="address"
+          id="address"
+          name="address"
+        />
+        <button
+          class="btn btn-primary mx-2"
+          type="submit"
+          @click="search()"
+        >
           <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
         </button>
       </form>
@@ -97,7 +116,8 @@ export default {
   width: 100%;
 
   .search-bar {
-    //width: 70%;
+    width: 70%;
+    margin: 2rem auto;
   }
 }
 </style>
