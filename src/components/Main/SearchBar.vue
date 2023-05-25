@@ -8,6 +8,7 @@ export default {
       // wordSearched: "",
       allApartments: [],
       searchedApartments: [],
+      apartmentCoordinates: [],
       address: "",
       lat_a: "",
       lon_a: "",
@@ -28,12 +29,12 @@ export default {
 
     fetchApartments() {
       axios.get(`http://127.0.0.1:8000/api/apartments`).then((response) => {
-        this.allApartments = response.data;
+        this.allApartments = response.data.data;
         console.log("Apartments:", this.allApartments);
       });
     },
 
-    //PRENDE LE COORDINATE DEL PRIMO RISULTATO DELLA RICERCA
+    //PRENDE LE COORDINATE DI QUELLO CHE CERCO NELLA SEARCH BAR
     fetchCoordinates() {
       axios
         .get(
@@ -48,52 +49,31 @@ export default {
           this.lat_a = lat_a;
           this.lon_a = lon_a;
 
-          // Prendi le coordinate degli altri elementi
-          const otherCoordinates = response.data.results
-            .slice(1)
-            .map((result) => {
-              return {
-                lat: result.position.lat,
-                lon: result.position.lon,
-              };
-            });
-
-          // Assegna le coordinate a lat_b e lon_b
-          this.lat_b = otherCoordinates.map((coordinate) => coordinate.lat);
-          this.lon_b = otherCoordinates.map((coordinate) => coordinate.lon);
-          console.log("Coord di arrivo", this.lat_b, this.lon_b);
-
           this.calculateDistance();
         });
     },
 
-    calculateDistance() {
-      / Coordinate di riferimento /;
-      const lat_a = this.lat_a;
-      const lon_a = this.lon_a;
-      console.log("latitudine A", lat_a);
-      console.log("longitudine A", lon_a);
-
-      /Array di coordinate da confrontare /;
-      const lat_b = this.lat_b;
-      const lon_b = this.lon_b;
-      console.log("latitudine B", lat_b);
-      console.log("longitudine B", lon_b);
-
+    calculateDistance(range = 20) {
       for (let i = 0; i < this.allApartments.length; i++) {
-        const lat_b_i = lat_b[i];
-        const lon_b_i = lon_b[i];
+        const lat_a = this.lat_a; // Latitudine del punto 1
+        const lon_a = this.lon_a; // Longitudine del punto 1
 
-        /* FORMULA MATEMATICA CHE CALCOLA LA DISTANZA TRA 2 PUNTI */
+        //console.log(this.allApartments[i]);
+
+        const lat_b = this.allApartments[i].latitude; // Latitudine del punto 2
+        console.log("Latitudine dell'appartamento " + lat_b);
+        const lon_b = this.allApartments[i].longitude; // Longitudine del punto 2
+        console.log("Longitudine dell'appartamento " + lon_b);
+
         const earthRadius = 6371; // Raggio medio della Terra in chilometri
 
-        const dLat = this.toRadians(lat_b_i - lat_a);
-        const dLon = this.toRadians(lon_b_i - lon_a);
+        const dLat = this.toRadians(lat_b - lat_a);
+        const dLon = this.toRadians(lon_b - lon_a);
 
         const a =
           Math.sin(dLat / 2) * Math.sin(dLat / 2) +
           Math.cos(this.toRadians(lat_a)) *
-            Math.cos(this.toRadians(lat_b_i)) *
+            Math.cos(this.toRadians(lat_b)) *
             Math.sin(dLon / 2) *
             Math.sin(dLon / 2);
 
@@ -102,7 +82,12 @@ export default {
 
         console.log(`Distanza: ${distance} km`);
 
-        //stampo gli appartamenti che hanno distanza di max 20 km (poi li ordino in maniera crescente)
+        if (distance <= range) {
+          this.searchedApartments.push(this.allApartments[i]);
+        }
+        console.log("ApP filtrati " + this.searchedApartments);
+        console.log("i " + i);
+        console.log("range " + range);
       }
     },
 
@@ -114,6 +99,7 @@ export default {
 
   created() {
     this.fetchApartments();
+    //this.fetchAllApartmentsCoordinates();
   },
 };
 </script>
@@ -144,7 +130,6 @@ export default {
         <button
           class="btn btn-primary mx-2"
           type="submit"
-          @click="search()"
         >
           <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
         </button>
