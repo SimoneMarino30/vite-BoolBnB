@@ -22,6 +22,7 @@ export default {
       },
 
       filteredApartments: [],
+      resetApartments: [],
     };
   },
 
@@ -36,13 +37,19 @@ export default {
       axios.get("http://127.0.0.1:8000/api/apartments").then((response) => {
         this.apartments.list = response.data;
         this.filteredApartments = response.data.links;
+        this.resetApartments = response.data.links;
         this.filterApartments(this.apartments.list);
+        this.resettingApartments(this.apartments.list);
         this.isLoading = false; // Imposta isLoading su false dopo la chiamata
       });
     },
 
     filterApartments(apartments) {
       this.filteredApartments = apartments;
+    },
+
+    resettingApartments(apartments) {
+      this.resetApartments = apartments;
     },
 
     // Funzione per cercare appartamento per indirizzo passato dall'emit della SearchBar
@@ -91,7 +98,10 @@ export default {
         v-else-if="filteredApartments.length > 0"
         :apartments="filteredApartments"
       />
-      <div v-else class="text-muted text-center">
+      <div
+        v-else
+        class="text-muted text-center"
+      >
         <h2>Nessun appartamento trovato</h2>
         <h3>Prova Modificando i termini di ricerca</h3>
       </div>

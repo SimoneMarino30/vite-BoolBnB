@@ -5,7 +5,9 @@ export default {
   data() {
     return {
       /* aside */
-      // allApartments: [],
+      apartments: {
+        list: [],
+      },
       beds: null,
       rooms: null,
       bathrooms: null,
@@ -63,21 +65,19 @@ export default {
           const filteredApartments = this.allApartments.filter((apartment) => {
             //ID dei servizi checkati
             const checkedServices = this.services;
-            console.log("ID dei servizi checkati", checkedServices);
 
             //ID dei servizi di ogni appartamento
             const serviceIds = apartment.services.map((service) => service.id);
-            console.log("ID dei servizi di ogni appartamento", serviceIds);
 
             // Verifica se tutti i valori di checkedServices sono presenti in serviceIds
             const matchingServices = checkedServices.every((serviceId) =>
               serviceIds.includes(serviceId)
             );
-
-            console.log("Tutti i servizi corrispondono:", matchingServices);
+            /* console.log("ID dei servizi checkati", checkedServices);
+            console.log("ID dei servizi di ogni appartamento", serviceIds);
+            console.log("Tutti i servizi corrispondono:", matchingServices); */
 
             return (
-              //(this.name === null || apartment.name >= this.name) &&
               (this.beds === null || apartment.beds >= this.beds) &&
               (this.rooms === null || apartment.rooms >= this.rooms) &&
               (this.bathrooms === null ||
@@ -106,6 +106,41 @@ export default {
 
           // Aggiorna la lista degli appartamenti filtrati
           this.$emit("filterApartments", filteredApartments);
+        });
+    },
+
+    //RESETTA FILTRI
+    resetFilters() {
+      axios
+        .get("http://127.0.0.1:8000/api/apartments", {
+          params: {
+            beds: this.beds,
+            rooms: this.rooms,
+            bathrooms: this.bathrooms,
+            price: this.price,
+            services: this.services,
+          },
+        })
+        .then((response) => {
+          console.log(response);
+          // Stampa tutti gli appartamenti
+          this.apartments.list = response.data;
+          const resetApartments = this.apartments.list;
+          //return resetApartments;
+
+          console.log(
+            "appartamenti post reset",
+            resetApartments.map((apartment) => ({
+              name: apartment.title,
+              rooms: apartment.rooms,
+              beds: apartment.beds,
+              bathrooms: apartment.bathrooms,
+              services: apartment.services,
+            }))
+          );
+
+          // Aggiorna la lista degli appartamenti resettati
+          this.$emit("reset appartamenti", resetApartments);
         });
     },
 
@@ -404,6 +439,12 @@ export default {
           class="btn btn-primary"
         >
           Filtra
+        </button>
+        <button
+          @click="resetFilters()"
+          class="btn btn-primary"
+        >
+          Reset
         </button>
       </aside>
     </div>
