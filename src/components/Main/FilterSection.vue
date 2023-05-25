@@ -5,6 +5,7 @@ export default {
   data() {
     return {
       /* aside */
+      filteredApartments: [], // Resetta la variabile filteredApartments
       apartments: {
         list: [],
       },
@@ -30,11 +31,13 @@ export default {
 
   props: {
     allApartments: Array,
+    filteredApartments: Array,
   },
 
   methods: {
     //CERCA APPARTAMENTI FILTRATI
     searchApartmentsFilter() {
+      this.filteredApartments = []; // Resetta la variabile filteredApartments
       axios
         .get("http://127.0.0.1:8000/api/apartments", {
           params: {
@@ -46,9 +49,6 @@ export default {
           },
         })
         .then((response) => {
-          // this.allApartments = response.data.data;
-          //console.log("appartamenti totali", this.allApartments);
-
           // Stampa solo i servizi con checkbox attiva
           this.requiredServices = this.allServices.filter((service) => {
             return this.services.includes(service.id);
@@ -440,18 +440,20 @@ export default {
           </div>
         </div>
 
-        <button
-          @click="searchApartmentsFilter(), requireServices()"
-          class="btn btn-primary"
-        >
-          Filtra
-        </button>
-        <button
-          @click="resetFilters()"
-          class="btn btn-primary"
-        >
-          Reset
-        </button>
+        <div class="d-flex flex-row justify-content-between mt-3">
+          <button
+            @click="searchApartmentsFilter(), requireServices()"
+            class="btn btn-primary"
+          >
+            Filtra
+          </button>
+          <button
+            @click="resetFilters()"
+            class="btn btn-secondary"
+          >
+            Resetta filtri
+          </button>
+        </div>
       </aside>
     </div>
 
