@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 // import pages
 import AllApartments from "../src/components/pages/AllApartments.vue";
 import HomePage from "../src/components/pages/HomePage.vue";
-import AppSearch from "../src/components/pages/AppSearch.vue";
+//import AppSearch from "../src/components/pages/AppSearch.vue";
 import AppDetail from "../src/components/Main/AppDetail.vue";
 import Login from "./components/pages/Login.vue";
 
@@ -27,11 +27,11 @@ const router = createRouter({
       name: "AllApartments",
       component: AllApartments,
     },
-    {
+    /* {
       path: "/AppSearch",
       name: "SearchApartments",
       component: AppSearch,
-    },
+    }, */
     {
       path: "/AppDetail/:slug",
       name: "AppDetail",
