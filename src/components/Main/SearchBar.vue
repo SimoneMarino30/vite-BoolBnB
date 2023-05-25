@@ -11,7 +11,7 @@ export default {
       address: "",
       lat_a: "",
       lon_a: "",
-      lat_b: [], // Aggiungi la proprietà lat_b
+      lat_b: [],
       lon_b: [],
       // name: null,
     };
@@ -28,7 +28,8 @@ export default {
 
     fetchApartments() {
       axios.get(`http://127.0.0.1:8000/api/apartments`).then((response) => {
-        this.allApartments = response.data.data;
+        this.allApartments = response.data;
+        console.log("Apartments:", this.allApartments);
       });
     },
 
@@ -44,8 +45,8 @@ export default {
           const lon_a = response.data.results[0].position.lon;
           console.log("Coord di riferimento", lat_a, lon_a);
 
-          this.lat = lat_a;
-          this.lon = lon_a;
+          this.lat_a = lat_a;
+          this.lon_a = lon_a;
 
           // Prendi le coordinate degli altri elementi
           const otherCoordinates = response.data.results
@@ -66,49 +67,33 @@ export default {
         });
     },
 
-    //CALCOLA DISTANZA TRA 2 COORDINATE
     calculateDistance() {
-      /coordinate di riferimento/;
+      / Coordinate di riferimento /;
       const lat_a = this.lat_a;
       const lon_a = this.lon_a;
-
       console.log("latitudine A", lat_a);
       console.log("longitudine A", lon_a);
 
-      /array di coordinate da confrontare/;
-      // array di coordinate da confrontare
+      /Array di coordinate da confrontare /;
       const lat_b = this.lat_b;
       const lon_b = this.lon_b;
-
       console.log("latitudine B", lat_b);
       console.log("longitudine B", lon_b);
 
       for (let i = 0; i < this.allApartments.length; i++) {
-        //lat e lon 2 saranno l'array degli appartamenti che escono dopo la ricerca e saranno mostrati in ordine di distanza chilometrica
-
-        const lat2 = 41.890665;
-        const lon2 = 12.543268;
-
-        /*  const lat1 = this.lat; // Latitudine del punto 1
-        const lon1 = this.lon; // Longitudine del punto 1
-
-        console.log(this.allApartments[i]);
-
-        const lat2 = this.allApartments[i].latitude; // Latitudine del punto 2
-        console.log("Latitudine dell'appartamento " + lat2);
-        const lon2 = this.allApartments[i].longitude; // Longitudine del punto 2
-        console.log("Longitudine dell'appartamento " + lon2); */
+        const lat_b_i = lat_b[i];
+        const lon_b_i = lon_b[i];
 
         /* FORMULA MATEMATICA CHE CALCOLA LA DISTANZA TRA 2 PUNTI */
         const earthRadius = 6371; // Raggio medio della Terra in chilometri
 
-        const dLat = this.toRadians(lat2 - lat1);
-        const dLon = this.toRadians(lon2 - lon1);
+        const dLat = this.toRadians(lat_b_i - lat_a);
+        const dLon = this.toRadians(lon_b_i - lon_a);
 
         const a =
           Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-          Math.cos(this.toRadians(lat1)) *
-            Math.cos(this.toRadians(lat2)) *
+          Math.cos(this.toRadians(lat_a)) *
+            Math.cos(this.toRadians(lat_b_i)) *
             Math.sin(dLon / 2) *
             Math.sin(dLon / 2);
 
@@ -118,11 +103,6 @@ export default {
         console.log(`Distanza: ${distance} km`);
 
         //stampo gli appartamenti che hanno distanza di max 20 km (poi li ordino in maniera crescente)
-
-        /*  if (distance <= 20) {
-          this.searchedApartments.push(this.allApartments[i]);
-        }
-        console.log("Ap filtrati " + this.searchedApartments); */
       }
     },
 
@@ -150,7 +130,7 @@ export default {
       <form
         class="d-flex"
         role="search"
-        @submit.prevent="search, fetchCoordinates, calculateDistance"
+        @submit.prevent="search"
       >
         <input
           class="form-control"
