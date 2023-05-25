@@ -122,7 +122,13 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response);
+          (this.beds = null),
+            (this.rooms = null),
+            (this.bathrooms = null),
+            (this.currentMinPrice = null),
+            (this.currentMaxPrice = null),
+            (this.services = []);
+
           // Stampa tutti gli appartamenti
           this.apartments.list = response.data;
           const resetApartments = this.apartments.list;
