@@ -129,7 +129,7 @@ export default {
           //return resetApartments;
 
           console.log(
-            "appartamenti post reset",
+            "appartamenti resettati",
             resetApartments.map((apartment) => ({
               name: apartment.title,
               rooms: apartment.rooms,
@@ -140,7 +140,7 @@ export default {
           );
 
           // Aggiorna la lista degli appartamenti resettati
-          this.$emit("reset appartamenti", resetApartments);
+          this.$emit("resetFilters", this.resetApartments);
         });
     },
 

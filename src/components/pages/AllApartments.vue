@@ -39,7 +39,6 @@ export default {
         this.filteredApartments = response.data.links;
         this.resetApartments = response.data.links;
         this.filterApartments(this.apartments.list);
-        this.resettingApartments(this.apartments.list);
         this.isLoading = false; // Imposta isLoading su false dopo la chiamata
       });
     },
@@ -48,8 +47,8 @@ export default {
       this.filteredApartments = apartments;
     },
 
-    resettingApartments(apartments) {
-      this.resetApartments = apartments;
+    resetFilters() {
+      this.fetchApartments();
     },
 
     // Funzione per cercare appartamento per indirizzo passato dall'emit della SearchBar
@@ -85,6 +84,7 @@ export default {
       <FilterSection
         @filterApartments="filterApartments"
         :allApartments="filteredApartments"
+        @resetFilters="resetFilters"
       />
     </div>
 
