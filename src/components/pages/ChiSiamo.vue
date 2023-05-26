@@ -153,10 +153,6 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-main {
-  min-height: calc(100vh - 140px);
-}
-
 .container {
   margin-top: 14rem;
 }
