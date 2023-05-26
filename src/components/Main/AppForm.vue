@@ -182,7 +182,7 @@ export default {
           <div class="modal-footer">
             <button
               type="submit"
-              class="btn my-btn-primary rounded-5 mt-2 fw-bold"
+              class="btn form-btn rounded-5 mt-2 fw-bold"
             >
               Contatta il proprietario
             </button>
@@ -213,8 +213,8 @@ export default {
       border-color: green;
     }
 
-    .my-btn-primary {
-      background-color: $success_color;
+    .form-btn {
+      background-color: $primary_color;
       color: white;
     }
   }

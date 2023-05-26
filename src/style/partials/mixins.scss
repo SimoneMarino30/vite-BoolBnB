@@ -18,6 +18,10 @@
       background-color: $dark_color;
       color: $light_color;
     }
+    &:active {
+      background-color: inherit;
+      color: inherit;
+    }
   }
 }
 

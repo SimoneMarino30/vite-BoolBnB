@@ -44,10 +44,12 @@ export default {
     fetchApartments() {
       this.isLoading = true; // Imposta isLoading su true prima della chiamata
 
-      axios.get("http://127.0.0.1:8000/api/apartments").then((response) => {
-        this.apartments.list = response.data.data;
-        // console.log(this.apartments.list);
-      })
+      axios
+        .get("http://127.0.0.1:8000/api/apartments")
+        .then((response) => {
+          this.apartments.list = response.data.data;
+          // console.log(this.apartments.list);
+        })
         .finally(() => {
           this.isLoading = false; // Imposta isLoading su false dopo la chiamata
         });
@@ -187,7 +189,7 @@ export default {
               name="address"
             />
             <button
-              class="btn btn-primary mx-2"
+              class="btn primary-btn mx-2"
               type="submit"
             >
               <font-awesome-icon icon="fa-solid fa-magnifying-glass" />

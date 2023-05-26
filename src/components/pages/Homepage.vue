@@ -72,7 +72,7 @@ export default {
           </p>
         </div> -->
 
-        <div class="my-card">
+        <div class="my-card mb-4">
           <h5 class="text-center mb-0">Benvenuto su BoolBnB</h5>
           <span class="text-muted"> Cerca la soluzione migliore per te </span>
           <!-- BUTTON -->
@@ -110,7 +110,7 @@ export default {
 
       <div
         v-else-if="sponsoredApartments.length > 0 && !isLoading"
-        class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 py-5"
+        class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 pb-5 pt-3"
       >
         <AppCard
           v-for="apartment in sponsoredApartments"
@@ -120,7 +120,10 @@ export default {
         />
       </div>
 
-      <div v-else-if="!isLoading" class="text-center">
+      <div
+        v-else-if="!isLoading"
+        class="text-center"
+      >
         <h2>Non ci sono appartamenti in evidenza.</h2>
       </div>
     </div>
@@ -140,6 +143,7 @@ export default {
   background-image: url("./src/assets/images/jumbo-classico.jpg");
   background-position: center;
   height: 540px;
+  object-fit: cover;
 }
 
 main {
@@ -224,6 +228,7 @@ main {
   .container {
     h1.d-flex {
       margin-top: 3rem;
+      font-size: 3rem;
     }
   }
 }

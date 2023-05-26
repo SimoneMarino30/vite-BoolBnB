@@ -20,23 +20,23 @@ export default {
         class="text-reset w-100"
       >
         <!-- card container  -->
-        <div class="card-box px-3 py-3 text-center rounded-4 position-relative">
+        <div class="card-box px-3 pt-3 text-center rounded-3 position-relative">
           <!-- Icona sponsorizzazione -->
           <div
             v-show="apartment.sponsored == true"
-            class="sponsored-icon m-2"
+            class="sponsored-icon m-3"
           >
             <span>
               <font-awesome-icon :icon="['fas', 'crown']" />
             </span>
           </div>
           <!-- title appartment  -->
-          <h2 class="name fw-semibolder fs-4">{{ apartment.title }}</h2>
+          <h2 class="name fw-semibolder fs-4 pt-3">{{ apartment.title }}</h2>
           <!-- image appartment  -->
-          <div class="image image-card rounded-4">
+          <div class="image image-card rounded-3">
             <img
               :src="apartment.image"
-              class="image-frame rounded-4"
+              class="image-frame rounded-3"
               alt="#"
             />
           </div>
@@ -80,10 +80,10 @@ export default {
     position: absolute;
     top: 0;
     right: 0;
+    background-color: wheat;
   }
 
   h2 {
-    font-family: "Playfair Display";
     color: #fff;
     min-height: 60px;
   }
@@ -95,8 +95,8 @@ export default {
 
   .image {
     position: relative;
-    z-index: 2;
-    width: 85%;
+    z-index: 3;
+    width: 97%;
     height: 250px;
     margin: 0 auto -10rem;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 10px rgba(0, 0, 0, 0.24);
@@ -107,10 +107,11 @@ export default {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    background-color: $light_color;
   }
 
   .details {
-    width: 95%;
+    width: 85%;
     margin: 0 auto;
     padding-top: 10.5rem;
     padding-bottom: 1rem;
@@ -122,12 +123,10 @@ export default {
     transition: all ease-in 0.15s;
 
     h2 {
-      font-family: "Playfair Display";
       font-size: 1rem;
     }
 
     p {
-      font-family: sans-serif;
       font-size: 1rem;
       font-weight: 200;
     }
