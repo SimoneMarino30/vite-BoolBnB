@@ -73,12 +73,13 @@
 footer {
   @include link_hover;
   font-family: 'Roboto', sans-serif;
-  color: $primary-color;
+  color: $lighter_accent_color;
   background-color: #eee;
-
-
   font-size: small;
 
+  a:hover {
+    color: $dark_accent_color;
+  }
 
   #stack_list {
     a {

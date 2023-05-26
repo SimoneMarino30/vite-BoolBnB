@@ -157,7 +157,7 @@ main {
     position: relative;
     display: inline-block;
     padding: 15px;
-    background-color: $primary_color;
+    background-color: $lighter_accent_color;
     cursor: pointer;
     outline: none;
     border: 0;
@@ -169,7 +169,7 @@ main {
     transition: 1s;
 
     &:hover {
-      background-color: $main_color;
+      background-color: $dark_accent_color;
     }
   }
 
@@ -181,7 +181,7 @@ main {
     vertical-align: top;
     white-space: nowrap;
     overflow: hidden;
-    color: $secondary_color;
+    color: $dark_color;
     animation-fill-mode: forwards;
     animation-name: stretch;
     animation-duration: 4s;
