@@ -16,23 +16,26 @@ export default {
     };
   },
   created() {
-    console.log(this.$route.params.slug);
+    //console.log(this.$route.params.slug);
     this.isLoading = true; // Imposta isLoading su true prima della chiamata
     axios
-    .get(`http://127.0.0.1:8000/api/apartments/${this.$route.params.slug}`)
-    .then((response) => {
-      this.apartment = response.data;
-      this.isLoading = false; // Imposta isLoading su false dopo la chiamata
+      .get(`http://127.0.0.1:8000/api/apartments/${this.$route.params.slug}`)
+      .then((response) => {
+        this.apartment = response.data;
+        this.isLoading = false; // Imposta isLoading su false dopo la chiamata
       });
   },
   components: { AppCard, AppForm, MapPage, Loader },
 };
 </script>
 <template>
-  <Loader v-if="isLoading" /> <!-- Aggiungi il componente Loader quando isLoading è true -->
+  <Loader v-if="isLoading" />
+  <!-- Aggiungi il componente Loader quando isLoading è true -->
 
-  <div v-else-if="!isLoading" class="margin-fix">
-
+  <div
+    v-else-if="!isLoading"
+    class="margin-fix"
+  >
     <!-- <AppCard v-if="apartment" :apartment="apartment" /> -->
     <div class="container detail-appartment py-2 px-5 my-4 rounded-4">
       <div class="row py-3">
@@ -40,7 +43,11 @@ export default {
         <div class="col-12 pt-3">
           <!-- image appartment  -->
           <div class="appartment-image-frame rounded-4">
-            <img :src="apartment.image" class="image-appartment rounded-4" alt="#" />
+            <img
+              :src="apartment.image"
+              class="image-appartment rounded-4"
+              alt="#"
+            />
           </div>
         </div>
       </div>
@@ -67,9 +74,7 @@ export default {
                 <span v-if="apartment.bathrooms < 2"> Bagno</span>
                 <span v-else>Bagni</span>
               </li>
-              <li>
-                {{ apartment.mq }} <span>Mq</span>
-              </li>
+              <li>{{ apartment.mq }} <span>Mq</span></li>
             </ul>
           </div>
           <!-- description appartment  -->
@@ -83,24 +88,26 @@ export default {
           <div class="pt-3 pb-4 border-bottom border-secondary">
             <h3 class="title-section pb-2">Servizi presenti:</h3>
             <div class="">
-  
               <!-- <ul class="d-flex flex-row flex-wrap p-0">
                 <li class="py-2 px-3 m-2 service-card rounded-5" v-for="service in apartment.services" :key="service.id">
                   <span><font-awesome-icon :icon="service.icon" /></span>
                   <span class="service-name ms-2">{{ service.name }}</span>
                 </li>
               </ul> -->
-  
+
               <!-- * LAYOUT CON TOOLTIP -->
               <ul class="d-flex flex-row flex-wrap p-0">
-                <li class="m-2 service-card" v-for="service in apartment.services" :key="service.id">
+                <li
+                  class="m-2 service-card"
+                  v-for="service in apartment.services"
+                  :key="service.id"
+                >
                   <span class="my-tooltip">
                     <font-awesome-icon :icon="service.icon" />
                     <span class="my-tooltip-text">{{ service.name }}</span>
                   </span>
                 </li>
               </ul>
-  
             </div>
           </div>
         </div>
@@ -113,37 +120,36 @@ export default {
       </div>
     </div>
     <!-- end container  -->
-  
+
     <!-- map container -->
-    <div class="container  detail-appartment py-2 px-5 my-4 rounded-4">
+    <div class="container detail-appartment py-2 px-5 my-4 rounded-4">
       <div class="row">
         <div class="col-12 py-5">
           <h2 class="pb-3">Noi Siamo qui</h2>
-          <MapPage :lat="apartment.latitude" :lon="apartment.longitude" />
+          <MapPage
+            :lat="apartment.latitude"
+            :lon="apartment.longitude"
+          />
         </div>
       </div>
     </div>
     <!-- end map container -->
-
   </div>
-
-
-
 </template>
 <style lang="scss" scoped>
 @use "../../style/partials/variables.scss" as *;
 
 // appartment detail ****************************
 
-.margin-fix{
+.margin-fix {
   margin-top: 10rem;
   margin-bottom: 4rem;
   .detail-appartment {
-    background-color: #F1F1F1;
+    background-color: #f1f1f1;
     color: $dark_color;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
     margin: 18rem auto;
-  
+
     .appartment-image-frame {
       // background-image: url(../../assets/images/house-10b.jpg);
       // background-size: cover;
@@ -152,23 +158,23 @@ export default {
       height: 450px;
       box-shadow: 3px 8px 10px rgba(0, 0, 0, 0.5);
       width: 100%;
-  
+
       .image-appartment {
         width: 100%;
         height: 100%;
         object-fit: cover;
       }
     }
-  
+
     .fix-list {
       padding-left: 0;
-  
+
       li {
         font-size: 1.2rem;
         padding: 0 0.9rem 0 0;
       }
     }
-  
+
     .service-card {
       color: white;
       text-align: center;
@@ -178,29 +184,27 @@ export default {
       vertical-align: middle;
       border-radius: 50%;
       background-color: $dark_color;
-      font-size: 0.90rem;
-  
+      font-size: 0.9rem;
     }
-  
+
     .title-section {
       font-weight: 600;
     }
-  
-  
+
     /* Tooltip */
     .my-tooltip {
       position: relative;
       display: inline-block;
-  
+
       /* Testo del tooltip */
       .my-tooltip-text {
         visibility: hidden;
         width: 120px;
-        background-color: rgba(50, 50, 50, .8);
+        background-color: rgba(50, 50, 50, 0.8);
         color: #fff;
         text-align: center;
         border-radius: 6px;
-  
+
         /* Dove posizionare il tooltip*/
         position: absolute;
         bottom: 2rem;
@@ -208,14 +212,10 @@ export default {
         z-index: 1;
       }
     }
-  
+
     .my-tooltip:hover .my-tooltip-text {
       visibility: visible;
     }
-  
   }
-
-
 }
-
 </style>

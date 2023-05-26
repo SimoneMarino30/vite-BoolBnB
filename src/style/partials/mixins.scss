@@ -16,7 +16,7 @@
   button {
     &:hover {
       background-color: $dark_color;
-      color: $dark_accent_color;
+      color: $light_color;
     }
   }
 }
@@ -24,7 +24,7 @@
 @mixin link_hover {
   a {
     &:hover {
-      color: $dark_accent_color;
+      color: $lighter_accent_color;
       background-color: inherit;
     }
   }

@@ -46,6 +46,7 @@ export default {
             bathrooms: this.bathrooms,
             price: this.price,
             services: this.services,
+            range: this.range,
           },
         })
         .then((response) => {
@@ -122,9 +123,9 @@ export default {
           },
         })
         .then((response) => {
-          (this.beds = null),
-            (this.rooms = null),
-            (this.bathrooms = null),
+          this.beds = null;
+          this.rooms = null;
+          (this.bathrooms = null),
             (this.currentMinPrice = null),
             (this.currentMaxPrice = null),
             (this.services = []);
@@ -232,6 +233,11 @@ export default {
       // ...
     },
   },
+  watch: {
+    rangeValue(newValue) {
+      this.$emit("changeRange", newValue);
+    },
+  },
 };
 </script>
 
@@ -277,13 +283,19 @@ export default {
               class="fs-5"
               >Raggio</label
             >
+            <input
+              type="number"
+              v-model="rangeValue"
+              min="0"
+              max="20"
+            />
             <div class="d-flex">
               <!-- displayed km -->
               <input
                 class="form-control"
                 type="number"
                 id="rangeKm"
-                v-model.number="currentDistance"
+                v-model.number="rangeKm"
                 min="0"
                 max="100"
                 placeholder="Distanza Km"
@@ -510,7 +522,7 @@ export default {
       .rangeSliderDistance,
       .rangeSliderPrice {
         -webkit-appearance: none;
-        background: $dark_accent_color;
+        background: $main_color;
         height: 0.5rem;
         border-radius: 25px;
       }
@@ -527,7 +539,7 @@ export default {
         width: 1rem;
         aspect-ratio: 1;
         border-radius: 50%;
-        background: $light_accent_color;
+        background: $dark_color;
         cursor: pointer;
       }
 
@@ -577,7 +589,7 @@ export default {
 
                 &:hover {
                   background-color: $dark_accent_color;
-                  color: $dark_color;
+                  color: $light_color;
                 }
 
                 .service-icon {
@@ -589,7 +601,7 @@ export default {
           }
 
           .service-label.selected-service {
-            background-color: $primary_color;
+            background-color: $dark_accent_color;
             color: $light_color;
 
             .service-name {
