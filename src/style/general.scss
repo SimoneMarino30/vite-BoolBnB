@@ -25,14 +25,7 @@ main {
 }
 
 // footer ***********************************
-footer {
-  background-color: $dark_color;
-  color: $light_color;
-  .copyright-banner {
-    background-color: $light_color;
-    color: $dark_color;
-  }
-}
+
 
 .btn-primary {
   background-color: $light_accent_color;
