@@ -1,95 +1,64 @@
 <script></script>
 
 <template>
-  <footer class="text-center text-lg-start">
-    <!-- Section: Links  -->
-    <section class="py-1">
-      <div class="container text-center text-md-start mt-5">
-        <!-- Grid row -->
-        <div class="row mt-3">
-          <!-- Grid column -->
-          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-            <!-- Content -->
-            <h6 class="text-uppercase fw-bold mb-4">
-              <i class="fas fa-gem me-3"></i>BoolBnB S.p.a.
-            </h6>
-            <p>
-              Per maggiori informazioni consultare i nostri link di riferimento
-            </p>
-          </div>
-          <!-- Grid column -->
-
-          <!-- STACK -->
-          <div id="stack_list" class="col-md-5 col-lg-5 col-xl-4 mx-auto mb-4">
-            <!-- Links -->
-            <h6 class="text-uppercase text-center fw-bold mb-4">Stack</h6>
-
-            <div class="row text-center">
-              <div class="col-4 mb-4 mb-md-0">
-                <a href="https://getbootstrap.com/" target="_blank">
-                  <font-awesome-icon :icon="['fab', 'bootstrap']" />
-                </a>
-              </div>
-
-              <div class="col-4 mb-4 mb-md-0">
-                <a href="https://vuejs.org/" target="_blank">
-                  <font-awesome-icon :icon="['fab', 'vuejs']" />
-                </a>
-              </div>
-
-              <!-- <div class="col-4 mb-4 mb-md-0">
-              <a href="https://vitejs.dev/" target="_blank" class="">Vite</a>
-            </div> -->
-
-              <div class="col-4 mb-4 mb-md-0">
-                <a href="https://laravel.com/" target="_blank">
-                  <font-awesome-icon :icon="['fab', 'laravel']" />
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Grid column -->
-          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-            <!-- Links -->
-            <h6 class="text-uppercase fw-bold mb-4">
-              Developers <Span class=""></Span>
-            </h6>
-
-            <div class="pb-3">
-              <a href="https://github.com/SimoneMarino30" target="_blank" class="">Simone Marino</a>
-            </div>
-
-            <div class="pb-3">
-              <a href="https://github.com/GiuliaGlave" target="_blank" class="">Giulia Glave</a>
-            </div>
-
-            <div class="pb-3">
-              <a href="https://github.com/Gianmarco-Leone" target="_blank" class="">Gianmarco Leone</a>
-            </div>
-
-            <div class="pb-3">
-              <a href="https://github.com/MichelepioBombai" target="_blank" class="">Michele Pio Bombai</a>
-            </div>
-
-            <div class="pb-3">
-              <a href="https://github.com/CarloColletti?tab=repositories" target="_blank" class="">Carlo Colletti</a>
-            </div>
-          </div>
-          <!-- Grid column -->
-
-          <!--  -->
-        </div>
-        <!-- Grid row -->
+  <footer class="text-lg-start d-flex p-4 p-xl-4">
+    <!-- DEVELOPERS -->
+    <div class="col-4 col-xl-7">
+      <div id="developers_list" class="row h-100 align-items-center">
+        <p class="mb-0">
+          <span class="d-block d-md-inline">
+            <a href="https://github.com/SimoneMarino30" target="_blank" class="">Simone Marino</a>
+          </span>
+          <span class="mx-2 d-none d-md-inline-block">
+            &middot;
+          </span>
+          <span class="d-block d-md-inline my-2 my-xl-0">
+            <a href="https://github.com/GiuliaGlave" target="_blank" class="">Giulia Glave</a>
+          </span>
+          <span class="mx-2 d-none d-md-inline-block">
+            &middot;
+          </span>
+          <span class="d-block d-md-inline my-2 my-xl-0">
+            <a href="https://github.com/Gianmarco-Leone" target="_blank" class="">Gianmarco Leone</a>
+          </span>
+          <span class="mx-2 d-none d-md-inline-block">
+            &middot;
+          </span>
+          <span class="d-block d-md-inline my-2 my-xl-0">
+            <a href="https://github.com/MichelepioBombai" target="_blank" class="">Michele Pio Bombai</a>
+          </span>
+          <span class="mx-2 d-none d-md-inline-block">
+            &middot;
+          </span>
+          <span class="d-block d-md-inline">
+            <a href="https://github.com/CarloColletti?tab=repositories" target="_blank" class="">Carlo Colletti</a>
+          </span>
+        </p>
       </div>
-    </section>
-    <!-- Section: Links  -->
-
-    <!-- Copyright -->
-    <div class="text-center p-4 copyright-banner">
-      © 2023 Copyright: <span class="fw-bold">BoolBnB.com</span>
     </div>
-    <!-- Copyright -->
+
+    <!-- COPYRIGHT -->
+    <div id="banner" class="col-6 col-xl-3 text-center">
+      <div class="row h-100 align-items-center">
+        <span>© 2023 Copyright: <b>BoolBnB.com</b></span>
+      </div>
+    </div>
+
+    <!-- STACK -->
+    <div id="stack_list"
+      class="col-2 col-xl-2 d-flex flex-column flex-md-row align-items-center justify-content-center justify-content-md-end">
+      <a href="https://getbootstrap.com/" target="_blank">
+        <font-awesome-icon :icon="['fab', 'bootstrap']" />
+      </a>
+
+      <a href="https://vuejs.org/" target="_blank" class="mx-3">
+        <font-awesome-icon :icon="['fab', 'vuejs']" />
+      </a>
+
+      <a href="https://laravel.com/" target="_blank">
+        <font-awesome-icon :icon="['fab', 'laravel']" />
+      </a>
+    </div>
   </footer>
 </template>
 
@@ -98,12 +67,22 @@
 @use "../../style/partials/variables.scss" as *;
 @use "../../style/partials/mixins.scss" as *;
 
+// IMPORT GOOGLE FONT
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
 footer {
   @include link_hover;
+  font-family: 'Roboto', sans-serif;
+  color: $primary-color;
+  background-color: #eee;
+
+
+  font-size: small;
+
 
   #stack_list {
     a {
-      font-size: 2rem;
+      font-size: 1.2rem;
     }
   }
 }
