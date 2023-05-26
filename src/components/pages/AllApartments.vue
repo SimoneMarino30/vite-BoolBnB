@@ -33,7 +33,6 @@ export default {
   // emits: ["changePage"],
 
   methods: {
-
     // Recupero tutti gli appartamenti
     fetchApartments() {
       this.isLoading = true; // Imposta isLoading su true prima della chiamata
@@ -93,20 +92,25 @@ export default {
         const a =
           Math.sin(dLat / 2) * Math.sin(dLat / 2) +
           Math.cos(this.toRadians(lat_a)) *
-          Math.cos(this.toRadians(lat_b)) *
-          Math.sin(dLon / 2) *
-          Math.sin(dLon / 2);
+            Math.cos(this.toRadians(lat_b)) *
+            Math.sin(dLon / 2) *
+            Math.sin(dLon / 2);
 
         const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         const distance = earthRadius * c;
         // console.log(`Distanza: ${distance} km`);
         if (distance <= range) {
-          this.filteredApartments.push(this.apartments.list[i]);
+          this.filteredApartments.push({
+            ...this.apartments.list[i],
+            distance: distance, // Add the distance property to each filtered apartment
+          });
         }
         // console.log("ApP filtrati " + this.searchedApartments);
         // console.log("i " + i);
-        // console.log("range " + range);
+        console.log("distance " + distance); // console.log("range " + range);
+        this.filteredApartments.sort((a, b) => a.distance - b.distance); // Sort the filtered apartments by distance
       }
+      console.log("n App filtrati " + this.filteredApartments.length);
     },
 
     //converte gradi in radianti (serve a calculateDistance())
@@ -123,25 +127,54 @@ export default {
   created() {
     this.fetchApartments();
   },
+  computed: {
+    sortedFilteredApartments() {
+      return this.filteredApartments
+        .slice()
+        .sort((a, b) => a.distance - b.distance);
+    },
+  },
 };
 </script>
 
 <template>
   <div class="page-container margin-fix">
     <div class="filter-container d-flex">
-      <FilterSection @filterApartments="filterApartments" :allApartments="filteredApartments"
-        @resetFilters="resetFilters" />
+      <FilterSection
+        @filterApartments="filterApartments"
+        :allApartments="filteredApartments"
+        @resetFilters="resetFilters"
+      />
     </div>
 
     <div class="apartments-container min-height flex-column">
       <!-- <SearchBar @on-search="fetchApartmentsByAddress()" /> -->
       <!-- * SEARCHBAR -->
-      <div class="search-bar-container my-3 d-flex align-items-end justify-content-end">
-        <div class="search-bar" id="searchBarContainer">
-          <form class="d-flex" role="search" @submit.prevent="fetchCoordinates()">
-            <input class="form-control" type="search" :placeholder="placeholder" aria-label="Search" v-model="address"
-              id="address" name="address" />
-            <button class="btn btn-primary mx-2" type="submit">
+      <div
+        class="search-bar-container my-3 d-flex align-items-end justify-content-end"
+      >
+        <div
+          class="search-bar"
+          id="searchBarContainer"
+        >
+          <form
+            class="d-flex"
+            role="search"
+            @submit.prevent="fetchCoordinates()"
+          >
+            <input
+              class="form-control"
+              type="search"
+              :placeholder="placeholder"
+              aria-label="Search"
+              v-model="address"
+              id="address"
+              name="address"
+            />
+            <button
+              class="btn btn-primary mx-2"
+              type="submit"
+            >
               <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
             </button>
           </form>
@@ -151,9 +184,18 @@ export default {
       <Loader v-if="isLoading" />
       <!-- Aggiungi il componente Loader quando isLoading è true -->
 
-      <AppList v-else-if="showAll" :apartments="apartments.list" />
-      <AppList v-else-if="!showAll" :apartments="filteredApartments" />
-      <div v-else class="text-muted text-center">
+      <AppList
+        v-else-if="showAll"
+        :apartments="apartments.list"
+      />
+      <AppList
+        v-else-if="!showAll"
+        :apartments="sortedFilteredApartments"
+      />
+      <div
+        v-else
+        class="text-muted text-center"
+      >
         <h2>Nessun appartamento trovato</h2>
         <h3>Prova Modificando i termini di ricerca</h3>
       </div>
