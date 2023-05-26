@@ -130,7 +130,7 @@ export default {
             (this.services = []);
 
           // Stampa tutti gli appartamenti
-          this.apartments.list = response.data;
+          this.apartments.list = response.data.data;
           const resetApartments = this.apartments.list;
           //return resetApartments;
 
