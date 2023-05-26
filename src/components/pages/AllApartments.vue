@@ -27,6 +27,13 @@ export default {
       showAll: true, // Variabile che serve nel template come parametro della condizione per la prop di AppList
     };
   },
+  props: {
+    // ...
+    range: {
+      type: Number,
+      default: 20,
+    },
+  },
 
   components: { AppList, FilterSection, Loader },
 
@@ -69,7 +76,9 @@ export default {
     },
 
     // Calcola il raggio e aggiunge appartamenti all'array appartamenti filtrati se la distanza è minore o uguale al range nel parametro
-    calculateDistance(range = 20) {
+    calculateDistance() {
+      const range = this.range;
+      console.log(range);
       this.filteredApartments = [];
       // Variabile per non stampare tutti gli appartamenti ma solo quelli filtrati per raggio
       this.showAll = false;
@@ -117,6 +126,9 @@ export default {
     toRadians(degrees) {
       return (degrees * Math.PI) / 180;
     },
+    updateRange(range) {
+      this.searchApartmentsFilter(range);
+    },
 
     // Ritorna l'array chiamato sul created
     resetFilters() {
@@ -145,6 +157,7 @@ export default {
         @filterApartments="filterApartments"
         :allApartments="filteredApartments"
         @resetFilters="resetFilters"
+        @changeRange="updateRange"
       />
     </div>
 

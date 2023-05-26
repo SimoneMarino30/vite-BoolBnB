@@ -9,25 +9,36 @@ export default {
   <!-- init card -->
   <div class="">
     <div class="py-3 d-flex justify-content-center w-100">
-      <router-link :to="{
-        name: 'AppDetail',
-        params: {
-          slug: apartment.slug,
-        },
-      }" :apartment="apartment" class="text-reset w-100">
+      <router-link
+        :to="{
+          name: 'AppDetail',
+          params: {
+            slug: apartment.slug,
+          },
+        }"
+        :apartment="apartment"
+        class="text-reset w-100"
+      >
         <!-- card container  -->
         <div class="card-box px-3 py-3 text-center rounded-4 position-relative">
           <!-- Icona sponsorizzazione -->
-          <div v-show="apartment.sponsored == true" class="sponsored-icon m-2">
+          <div
+            v-show="apartment.sponsored == true"
+            class="sponsored-icon m-2"
+          >
             <span>
               <font-awesome-icon :icon="['fas', 'crown']" />
             </span>
           </div>
           <!-- title appartment  -->
-          <h2 class="fw-semibolder fs-4">{{ apartment.title }}</h2>
+          <h2 class="name fw-semibolder fs-4">{{ apartment.title }}</h2>
           <!-- image appartment  -->
           <div class="image image-card rounded-4">
-            <img :src="apartment.image" class="image-frame rounded-4" alt="#" />
+            <img
+              :src="apartment.image"
+              class="image-frame rounded-4"
+              alt="#"
+            />
           </div>
           <!-- detail container  -->
           <div class="details mb-3 rounded-2">
@@ -41,7 +52,7 @@ export default {
               {{ apartment.mq }}mq
             </p>
           </div>
-          <h2 class="fs-4">€ {{ apartment.price }}</h2>
+          <h2 class="price fs-4">€ {{ apartment.price }}</h2>
           <!-- end deatil  -->
         </div>
         <!-- end container  -->
@@ -55,7 +66,7 @@ export default {
 @import url("https://fonts.googleapis.com/css?family=Lato:200,400|Playfair+Display");
 
 .card-box {
-  background-color: #F1F1F1;
+  background-color: #f1f1f1;
   box-shadow: 0 1px 30px rgba(0, 0, 0, 0.12), 0 3px 5px rgba(0, 0, 0, 0.24);
 
   .sponsored-icon {
@@ -73,8 +84,13 @@ export default {
 
   h2 {
     font-family: "Playfair Display";
-    color: #333;
+    color: #fff;
     min-height: 60px;
+  }
+
+  .name,
+  .price {
+    color: #333;
   }
 
   .image {
@@ -98,8 +114,8 @@ export default {
     margin: 0 auto;
     padding-top: 10.5rem;
     padding-bottom: 1rem;
-    background-color: $light_color;
-    color: #333;
+    background-color: $dark_accent_color;
+    color: #f1f1f1;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 5px rgba(0, 0, 0, 0.24);
     transition: all ease-in 0.15s;
 
@@ -114,7 +130,6 @@ export default {
       font-weight: 200;
     }
   }
-
 }
 
 .card-box:hover .details {
