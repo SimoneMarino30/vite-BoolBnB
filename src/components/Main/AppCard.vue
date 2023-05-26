@@ -9,12 +9,16 @@ export default {
   <!-- init card -->
   <div class="">
     <div class="py-3 d-flex justify-content-center w-100">
-      <router-link :to="{
-        name: 'AppDetail',
-        params: {
-          slug: apartment.slug,
-        },
-      }" :apartment="apartment" class="text-reset w-100">
+      <router-link
+        :to="{
+          name: 'AppDetail',
+          params: {
+            slug: apartment.slug,
+          },
+        }"
+        :apartment="apartment"
+        class="text-reset w-100"
+      >
         <!-- card container  -->
         <div class="card-box px-3 py-3 text-center rounded-4 position-relative">
           <!-- Icona sponsorizzazione -->
@@ -55,7 +59,7 @@ export default {
 @import url("https://fonts.googleapis.com/css?family=Lato:200,400|Playfair+Display");
 
 .card-box {
-  background-color: #F1F1F1;
+  background-color: #f1f1f1;
   box-shadow: 0 1px 30px rgba(0, 0, 0, 0.12), 0 3px 5px rgba(0, 0, 0, 0.24);
 
   .sponsored-icon {
@@ -63,7 +67,7 @@ export default {
     height: 2rem;
     line-height: 2rem;
     border-radius: 50%;
-    background-color: $light_color;
+    color: $warning_color;
     vertical-align: middle;
     text-align: center;
     position: absolute;
@@ -98,7 +102,7 @@ export default {
     margin: 0 auto;
     padding-top: 10.5rem;
     padding-bottom: 1rem;
-    background-color: $light_color;
+    background-color: rgb(243, 228, 212);
     color: #333;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 5px rgba(0, 0, 0, 0.24);
     transition: all ease-in 0.15s;
@@ -114,7 +118,6 @@ export default {
       font-weight: 200;
     }
   }
-
 }
 
 .card-box:hover .details {

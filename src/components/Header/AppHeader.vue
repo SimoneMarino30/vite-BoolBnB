@@ -58,10 +58,7 @@ export default {
     <div class="container p-0">
       <nav class="navbar navbar-expand-lg">
         <div class="container-fluid text-center">
-          <a
-            class="navbar-brand"
-            href="/"
-          >
+          <a class="navbar-brand" href="/">
             <img
               src="../../assets/images/logo-prova.png"
               alt="Logo"
@@ -85,21 +82,14 @@ export default {
           >
             <ul class="navbar-nav my-2 my-lg-0">
               <li class="nav-item link-space">
-                <a
-                  class="nav-link"
-                  aria-current="page"
-                  href="/"
-                  >Home</a
-                >
+                <a class="nav-link" aria-current="page" href="/">Home</a>
               </li>
               <li class="nav-item link-space">
-                <router-link
-                  class="nav-link"
-                  :to="{ name: 'AllApartments' }"
-                >
+                <router-link class="nav-link" :to="{ name: 'AllApartments' }">
                   Tutte le Case
                 </router-link>
               </li>
+              <li class="nav-item link-space nav-link">Chi Siamo</li>
             </ul>
             <!-- buttons -->
             <div
@@ -115,7 +105,7 @@ export default {
                 ><button class="nav-btn">Registrati</button>
               </a>
               <!-- Dropdown LINGUA -->
-              <div class="dropdown">
+              <!-- <div class="dropdown">
                 <a
                   href="#"
                   class="nav-btn ps-3 dropdown-toggle-no-caret"
@@ -145,7 +135,7 @@ export default {
                     >
                   </li>
                 </ul>
-              </div>
+              </div> -->
             </div>
 
             <div
@@ -198,12 +188,14 @@ export default {
 header {
   @include link_hover;
   color: $light_color;
-  background-color: rgb(243 228 212);
-  background-color: rgba(34, 32, 38, 0.7);
+  background-color: $light_color;
+  height: 127px;
+  // background-color: rgba(34, 32, 38, 0.7);
   /* Colore di sfondo con trasparenza */
 
   .link-space {
     margin: 0 6rem;
+    color: $dark_color;
   }
 
   .color {
@@ -211,12 +203,12 @@ header {
   }
 
   .logo {
-    width: 8rem;
-    height: 5rem;
+    width: 15rem;
+    height: 7rem;
   }
 
   .nav-btn {
-    color: inherit;
+    color: $dark_color;
     border: none;
     background-color: inherit;
     border-radius: 20px;

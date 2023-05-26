@@ -11,7 +11,7 @@ export default {
 
   components: {
     AppCard,
-    Loader
+    Loader,
   },
 
   data() {
@@ -34,7 +34,7 @@ export default {
 
     // Recupero appartamenti sponsorizzati
     fetchSponsoredApartments() {
-      this.isLoading = true,
+      (this.isLoading = true),
         axios
           .get(store.sponsoredApartmentsUrl)
           .then((response) => {
@@ -58,7 +58,9 @@ export default {
   <main>
     <div class="jumbotron margin-fix">
       <!-- inizio jumbotron -->
-      <div class="container h-100 position-relative d-flex justify-content-center align-items-center">
+      <div
+        class="container h-100 position-relative d-flex justify-content-center align-items-center"
+      >
         <!-- inizio container -->
 
         <!-- <div>
@@ -72,18 +74,25 @@ export default {
 
         <div class="my-card">
           <h5 class="text-center mb-0">Benvenuto su BoolBnB</h5>
-          <span class="text-muted">
-            Cerca la soluzione migliore per te
-          </span>
+          <span class="text-muted"> Cerca la soluzione migliore per te </span>
           <!-- BUTTON -->
           <div class="my-button-container mt-3">
-            <form submit.prevent class="text-center d-flex justify-content-center">
-              <router-link :to="{ name: 'AllApartments' }" class="btn btn-primary mx-2" type="submit">
+            <form
+              submit.prevent
+              class="text-center d-flex justify-content-center"
+            >
+              <router-link
+                :to="{ name: 'AllApartments' }"
+                class="btn btn-primary mx-2"
+                type="submit"
+              >
                 <span class="btn-icon">
-                  <font-awesome-icon icon="fa-solid fa-magnifying-glass" aria-hidden="true" />
+                  <font-awesome-icon
+                    icon="fa-solid fa-magnifying-glass"
+                    aria-hidden="true"
+                  />
                 </span>
                 <span class="btn-text ms-2">Scopri di più</span>
-
               </router-link>
             </form>
           </div>
@@ -99,15 +108,20 @@ export default {
 
       <Loader v-if="isLoading" />
 
-      <div v-else-if="sponsoredApartments.length > 0 && !isLoading"
-        class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 py-5">
-        <AppCard v-for="apartment in sponsoredApartments" :key="apartment.id" :apartment="apartment" class="col d-flex" />
+      <div
+        v-else-if="sponsoredApartments.length > 0 && !isLoading"
+        class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 py-5"
+      >
+        <AppCard
+          v-for="apartment in sponsoredApartments"
+          :key="apartment.id"
+          :apartment="apartment"
+          class="col d-flex"
+        />
       </div>
 
       <div v-else-if="!isLoading" class="text-center">
-        <h2>
-          Non ci sono appartamenti in evidenza.
-        </h2>
+        <h2>Non ci sono appartamenti in evidenza.</h2>
       </div>
     </div>
   </main>
@@ -125,7 +139,7 @@ export default {
   background-repeat: no-repeat;
   background-image: url("./src/assets/images/jumbo-classico.jpg");
   background-position: center;
-  height: 540px;
+  height: 690px;
 }
 
 main {
@@ -158,7 +172,6 @@ main {
   position: absolute;
   bottom: -4rem;
 
-
   .btn {
     position: relative;
     display: inline-block;
@@ -182,8 +195,8 @@ main {
   .btn .btn-text {
     max-width: 0;
     display: inline-block;
-    -webkit-transition: color .25s 1.5s, max-width 2s;
-    transition: color .25s 1.5s, max-width 2s;
+    -webkit-transition: color 0.25s 1.5s, max-width 2s;
+    transition: color 0.25s 1.5s, max-width 2s;
     vertical-align: top;
     white-space: nowrap;
     overflow: hidden;
@@ -201,7 +214,6 @@ main {
     }
   }
 }
-
 
 // MEDIA QUERY
 @media screen and (min-width: 0) {
@@ -224,7 +236,6 @@ main {
 
 @media screen and (min-width: 767px) {
   .container {
-
     h1.d-flex {
       margin-top: 2rem;
     }
