@@ -89,7 +89,11 @@ export default {
                   Tutte le Case
                 </router-link>
               </li>
-              <li class="nav-item link-space nav-link">Chi Siamo</li>
+              <li class="nav-item link-space">
+                <router-link class="nav-link" :to="{ name: 'ChiSiamo' }">
+                  Chi siamo
+                </router-link>
+              </li>
             </ul>
             <!-- buttons -->
             <div

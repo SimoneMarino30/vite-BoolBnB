@@ -21,7 +21,7 @@ import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
-import {faCrown} from "@fortawesome/free-solid-svg-icons";
+import { faCrown } from "@fortawesome/free-solid-svg-icons";
 
 /brands/;
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
@@ -73,7 +73,16 @@ library.add(
   faCrown
 );
 /brands/;
-library.add(faFacebook, faInstagram, faTwitter, faGoogle, faGithub, faBootstrap, faVuejs, faLaravel);
+library.add(
+  faFacebook,
+  faInstagram,
+  faTwitter,
+  faGoogle,
+  faGithub,
+  faBootstrap,
+  faVuejs,
+  faLaravel
+);
 /services/;
 library.add(
   faWifi,

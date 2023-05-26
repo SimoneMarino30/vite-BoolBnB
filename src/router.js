@@ -5,6 +5,7 @@ import HomePage from "../src/components/pages/HomePage.vue";
 import AppSearch from "../src/components/pages/AppSearch.vue";
 import AppDetail from "../src/components/Main/AppDetail.vue";
 import Login from "./components/pages/Login.vue";
+import ChiSiamo from "../src/components/pages/ChiSiamo.vue";
 
 // creazione routes
 const router = createRouter({
@@ -36,6 +37,11 @@ const router = createRouter({
       path: "/AppDetail/:slug",
       name: "AppDetail",
       component: AppDetail,
+    },
+    {
+      path: "/ChiSiamo",
+      name: "ChiSiamo",
+      component: ChiSiamo,
     },
   ],
 });
