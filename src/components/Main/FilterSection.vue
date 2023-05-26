@@ -122,9 +122,9 @@ export default {
           },
         })
         .then((response) => {
-          (this.beds = null),
-            (this.rooms = null),
-            (this.bathrooms = null),
+          this.beds = null;
+          this.rooms = null;
+          (this.bathrooms = null),
             (this.currentMinPrice = null),
             (this.currentMaxPrice = null),
             (this.services = []);

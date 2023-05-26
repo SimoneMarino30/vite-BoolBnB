@@ -121,6 +121,7 @@ export default {
     // Ritorna l'array chiamato sul created
     resetFilters() {
       this.fetchApartments();
+      this.showAll = true;
     },
   },
 
