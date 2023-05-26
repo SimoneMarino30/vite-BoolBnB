@@ -56,14 +56,18 @@ export default {
 <template>
   <header class="fixed-top">
     <div class="container p-0">
-      <nav class="navbar navbar-expand-lg">
+      <nav class="navbar navbar-expand-lg pt-0">
         <div class="container-fluid text-center">
-          <a class="navbar-brand" href="/">
+          <a
+            class="navbar-brand p-0"
+            href="/"
+          >
             <img
-              src="../../assets/images/logo-prova.png"
+              src="../../assets/images/logo_boolbnb.png"
               alt="Logo"
               class="d-inline-block align-text-top logo"
             />
+            <span></span>
           </a>
           <button
             class="navbar-toggler color"
@@ -82,30 +86,34 @@ export default {
           >
             <ul class="navbar-nav my-2 my-lg-0">
               <li class="nav-item link-space">
-                <a class="nav-link" aria-current="page" href="/">Home</a>
+                <a
+                  class="nav-link"
+                  aria-current="page"
+                  href="/"
+                  >Home</a
+                >
               </li>
               <li class="nav-item link-space">
-                <router-link class="nav-link" :to="{ name: 'AllApartments' }">
+                <router-link
+                  class="nav-link"
+                  :to="{ name: 'AllApartments' }"
+                >
                   Tutte le Case
                 </router-link>
               </li>
-              <li class="nav-item link-space nav-link">Chi Siamo</li>
+              <!-- <li class="nav-item link-space nav-link">Chi Siamo</li> -->
             </ul>
             <!-- buttons -->
             <div
               v-if="store.user_email === ''"
               class="d-flex align-items-center text-center justify-content-center"
             >
-              <a href="http://127.0.0.1:8000/login">
-                <button class="nav-btn">Login</button>
-              </a>
-              <span class="fs-3">|</span>
+              <a href="http://127.0.0.1:8000/login"> Login </a>
+              <span class="fs-3 px-2">|</span>
 
-              <a href="http://127.0.0.1:8000/register"
-                ><button class="nav-btn">Registrati</button>
-              </a>
+              <a href="http://127.0.0.1:8000/register">Registrati </a>
               <!-- Dropdown LINGUA -->
-              <!-- <div class="dropdown">
+              <div class="dropdown">
                 <a
                   href="#"
                   class="nav-btn ps-3 dropdown-toggle-no-caret"
@@ -135,7 +143,7 @@ export default {
                     >
                   </li>
                 </ul>
-              </div> -->
+              </div>
             </div>
 
             <div
@@ -144,7 +152,7 @@ export default {
             >
               <div class="dropdown">
                 <button
-                  class="btn btn-secondary dropdown-toggle"
+                  class="user-btn btn btn-secondary dropdown-toggle"
                   type="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
@@ -172,6 +180,38 @@ export default {
                   </li>
                 </ul>
               </div>
+              <!-- Dropdown LINGUA -->
+              <div class="dropdown">
+                <a
+                  href="#"
+                  class="nav-btn ps-3 dropdown-toggle-no-caret"
+                  role="button"
+                  id="languageDropdown"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <font-awesome-icon icon="fa-solid fa-globe" />
+                </a>
+                <ul
+                  class="dropdown-menu"
+                  aria-labelledby="languageDropdown"
+                >
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="#"
+                      >Italiano</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="#"
+                      >English</a
+                    >
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -187,15 +227,23 @@ export default {
 
 header {
   @include link_hover;
-  color: $light_color;
-  background-color: $light_color;
-  height: 127px;
+  background-color: #fff;
+  color: $dark_color;
+  //height: 127px;
   // background-color: rgba(34, 32, 38, 0.7);
   /* Colore di sfondo con trasparenza */
 
   .link-space {
     margin: 0 6rem;
     color: $dark_color;
+    display: flex;
+    align-items: end;
+    font-size: large;
+    font-weight: 500;
+    a {
+      padding: 0;
+      margin-top: 1rem;
+    }
   }
 
   .color {
@@ -204,9 +252,11 @@ header {
 
   .logo {
     width: 15rem;
-    height: 7rem;
+    //height: 7rem;
   }
 
+  li {
+  }
   .nav-btn {
     color: $dark_color;
     border: none;
@@ -220,19 +270,25 @@ header {
     color: inherit;
   }
 
+  .user-btn {
+    &:active {
+      color: inherit;
+      background-color: inherit;
+    }
+  }
   .dropdown-menu {
-    color: $light_color;
-    background-color: rgba(34, 32, 38, 0.7);
+    color: $dark_accent_color;
+    background-color: rgba(120, 89, 95, 0.5);
 
     text-align: center;
     min-width: 5rem;
     top: 150%;
     left: -50%;
 
-    #logout_button {
-      color: inherit;
+    a,
+    button {
       &:hover {
-        color: $dark_accent_color;
+        color: $light_color;
         background-color: inherit;
       }
     }

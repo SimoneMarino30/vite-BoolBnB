@@ -207,8 +207,8 @@ export default {
 
         /* Dove posizionare il tooltip*/
         position: absolute;
-        bottom: 2rem;
-        right: -4rem;
+        bottom: 2.3rem;
+        right: -3.5rem;
         z-index: 1;
       }
     }

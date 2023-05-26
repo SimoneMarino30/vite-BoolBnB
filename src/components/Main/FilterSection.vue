@@ -266,7 +266,7 @@ export default {
               v-model="wordSearched"
             />
             <button
-              class="btn btn-primary mx-2"
+              class="btn primary-btn mx-2"
               type="submit"
             >
               <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
@@ -455,7 +455,7 @@ export default {
         <div class="d-flex flex-row justify-content-between mt-3">
           <button
             @click="searchApartmentsFilter(), requireServices()"
-            class="btn btn-primary"
+            class="btn primary-btn"
           >
             Filtra
           </button>
@@ -472,7 +472,7 @@ export default {
     <!-- FILTER ICON -->
     <div>
       <button
-        class="btn btn-primary filter mt-2"
+        class="btn primary-btn filter mt-2"
         @click="toggleAside()"
       >
         <font-awesome-icon icon="fa-solid fa-filter" />
@@ -522,7 +522,7 @@ export default {
       .rangeSliderDistance,
       .rangeSliderPrice {
         -webkit-appearance: none;
-        background: $main_color;
+        background: $secondary_color;
         height: 0.5rem;
         border-radius: 25px;
       }
