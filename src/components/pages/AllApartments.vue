@@ -41,9 +41,10 @@ export default {
       axios.get("http://127.0.0.1:8000/api/apartments").then((response) => {
         this.apartments.list = response.data.data;
         // console.log(this.apartments.list);
-
-        this.isLoading = false; // Imposta isLoading su false dopo la chiamata
-      });
+      })
+        .finally(() => {
+          this.isLoading = false; // Imposta isLoading su false dopo la chiamata
+        });
     },
 
     // Uso tomtom per recuperare coordinate stringa nella searchbar
