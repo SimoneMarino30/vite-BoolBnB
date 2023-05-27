@@ -128,31 +128,11 @@ export default {
         // console.log("ApP filtrati " + this.searchedApartments);
         // console.log("i " + i);
         console.log("distance " + distance); // console.log("range " + range);
-        // QUESTO FUNZIONA:
-        // this.filteredApartments.sort((a, b) => a.distance - b.distance);
 
 
 
-        this.filteredApartments.sort(function (a, b) {
-
-          // Verifica se a ha la caratteristica desiderata
-          const hasCharacteristicA = a.hasOwnProperty('sponsored');
-
-          // Verifica se b ha la caratteristica desiderata
-          const hasCharacteristicB = b.hasOwnProperty('sponsored');
-
-          // Se a ha la caratteristica e b non l'ha, a viene considerato minore di b
-          if (hasCharacteristicA && !hasCharacteristicB) {
-            return -1;
-          }
-
-          // Se b ha la caratteristica e a non l'ha, a viene considerato maggiore di b
-          if (!hasCharacteristicA && hasCharacteristicB) {
-            return 1;
-          }
-
-          return a.distance - b.distance;
-        }); // Sort the filtered apartments by distance
+        // ORDINAMENTO PER DISTANZA FUNZIONA:
+        // this.filteredApartments.sort((a, b) => a.distance - b.distance); // Sort the filtered apartments by distance
 
       }
 
@@ -178,13 +158,16 @@ export default {
   created() {
     this.fetchApartments();
   },
-  computed: {
-    sortedFilteredApartments() {
-      return this.filteredApartments
-        .slice()
-        .sort((a, b) => a.distance - b.distance);
-    },
-  },
+
+
+  // ORDINAMENTO DISTANZA
+  // computed: {
+  //   sortedFilteredApartments() {
+  //     return this.filteredApartments
+  //       .slice()
+  //       .sort((a, b) => a.distance - b.distance);
+  //   },
+  // },
 };
 </script>
 
@@ -231,7 +214,9 @@ export default {
       <!-- Aggiungi il componente Loader quando isLoading è true -->
 
       <AppList v-else-if="showAll" :apartments="apartments.list" />
-      <AppList v-else-if="!showAll" :apartments="sortedFilteredApartments" />
+      <!-- * ORDINAMENTO DISTANZA -->
+      <!-- <AppList v-else-if="!showAll" :apartments="sortedFilteredApartments" /> -->
+      <AppList v-else-if="!showAll" :apartments="filteredApartments" />
       <div v-else class="text-muted text-center">
         <h2>Nessun appartamento trovato</h2>
         <h3>Prova Modificando i termini di ricerca</h3>
