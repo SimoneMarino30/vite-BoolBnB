@@ -314,7 +314,7 @@ export default {
 
           <!-- number room bed bathroom -->
           <div class="brb-container m-0">
-            <div class="d-flex flex-row justify-content-between">
+            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start">
               <div class="room d-flex align-items-center">
                 <label for="number_room">Stanze</label>
                 <input class="form-control brb" id="number_room" type="number" min="1" max="10" v-model.number="rooms"
