@@ -29,6 +29,7 @@ import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { faBootstrap } from "@fortawesome/free-brands-svg-icons";
 import { faVuejs } from "@fortawesome/free-brands-svg-icons";
 import { faLaravel } from "@fortawesome/free-brands-svg-icons";
@@ -79,6 +80,7 @@ library.add(
   faTwitter,
   faGoogle,
   faGithub,
+  faLinkedin,
   faBootstrap,
   faVuejs,
   faLaravel
