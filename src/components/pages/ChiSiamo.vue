@@ -68,11 +68,18 @@ export default {
         <div class="col-lg-3 col-md-6 col-sm-12 responsive medium">
           <div class="card h-100">
             <div class="img1">
-              <img src="" />
+              <img
+                src="https://media.licdn.com/dms/image/D4D03AQGIsTT9eby63g/profile-displayphoto-shrink_400_400/0/1683102580430?e=1690416000&v=beta&t=2WS6XU_89qWxvim42gtRnS06yJzY3fDjC7d5NI8IySI" />
             </div>
             <div class="card-body">
               <h4 class="card-title text-center">Simone Marino</h4>
-              <p class="card-text text-center"></p>
+              <p class="card-text text-center">
+                Sono un appassionato di tecnologia, in particolare dell'informatica e dello sviluppo web,
+                utilizzo molto del mio tempo libero per studiare e capire le nuove tecnologie proposte e rimanere
+                costantemente aggiornato sulle ultime tendenze del settore. <br>
+                Inoltre, sono molto appassionato di viaggi e, quando non scrivo linee dicodice, amo passare il mio tempo
+                scoprendo posti, cibi, storia e cultura dei posti che visito.
+              </p>
             </div>
             <div class="card-footer">
               <div class="text-center">
