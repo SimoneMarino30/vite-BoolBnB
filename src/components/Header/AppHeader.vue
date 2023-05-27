@@ -114,7 +114,8 @@ export default {
                 </button>
                 <ul class="dropdown-menu">
                   <li>
-                    <a class="dropdown-item" href="http://127.0.0.1:8000/dashboard" target="_blank">Area personale</a>
+                    <a class="dropdown-item" href="http://127.0.0.1:8000/admin/apartments" target="_blank">Area
+                      personale</a>
                   </li>
                   <li>
                     <button @click="logout()" id="logout_button" type="button" class="dropdown-item">
