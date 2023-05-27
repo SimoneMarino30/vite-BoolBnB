@@ -60,7 +60,6 @@ export default {
         <div class="container-fluid text-center">
           <a class="navbar-brand p-0" href="/">
             <img src="../../assets/images/logo_boolbnb.png" alt="Logo" class="d-inline-block align-text-top logo" />
-            <span></span>
           </a>
           <button class="navbar-toggler color" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
             aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
