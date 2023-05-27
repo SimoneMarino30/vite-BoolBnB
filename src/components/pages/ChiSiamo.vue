@@ -14,7 +14,7 @@ export default {
     <div class="container">
       <!-- Inizio Row -->
       <div class="row justify-content-md-center">
-        <div class="col-md-3">
+        <div class="col-lg-3 col-md-6 col-sm-12">
           <div class="card h-100">
             <div class="img1">
               <img
@@ -47,7 +47,7 @@ export default {
             </div>
           </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-lg-3 col-md-6 col-sm-12 responsive">
           <div class="card h-100">
             <div class="img1">
               <img src="" />
@@ -70,7 +70,7 @@ export default {
             </div>
           </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-lg-3 col-md-6 col-sm-12 responsive medium">
           <div class="card h-100">
             <div class="img1">
               <img src="" />
@@ -98,7 +98,7 @@ export default {
 
       <!-- Inzio Row -->
       <div class="row justify-content-md-center mt-4">
-        <div class="col-md-3">
+        <div class="col-lg-3 col-md-6 col-sm-12">
           <div class="card h-100">
             <div class="img1">
               <img src="" />
@@ -121,7 +121,7 @@ export default {
             </div>
           </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-lg-3 col-md-6 col-sm-12 responsive">
           <div class="card h-100">
             <div class="img1">
               <img src="" />
@@ -184,5 +184,17 @@ i {
   color: #907160;
   font-size: 15px;
   padding: 0 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .responsive {
+    margin-top: 90px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .medium {
+    margin-top: 6rem;
+  }
 }
 </style>
