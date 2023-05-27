@@ -39,7 +39,7 @@ export default {
     <!-- <AppCard v-if="apartment" :apartment="apartment" /> -->
     <div class="container detail-appartment py-2 px-5 my-4 rounded-4">
       <div class="row py-3">
-        <h2>{{ apartment.title }}</h2>
+        <h2 class="title-section">{{ apartment.title }}</h2>
         <div class="col-12 pt-3">
           <!-- image appartment  -->
           <div class="appartment-image-frame rounded-4">
