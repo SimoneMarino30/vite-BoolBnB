@@ -25,6 +25,8 @@ export default {
       filteredApartments: [],
       resetApartments: [],
       showAll: true, // Variabile che serve nel template come parametro della condizione per la prop di AppList
+
+      rangeValue: null,
     };
   },
   props: {
@@ -79,9 +81,13 @@ export default {
     },
 
     // Calcola il raggio e aggiunge appartamenti all'array appartamenti filtrati se la distanza è minore o uguale al range nel parametro
-    calculateDistance() {
-      const range = this.range;
-      console.log(range);
+    calculateDistance(radius) {
+      if (this.rangeValue === null) {
+        radius = 20;
+      } else {
+        radius = this.rangeValue;
+      }
+      console.log(radius);
       this.filteredApartments = [];
       // Variabile per non stampare tutti gli appartamenti ma solo quelli filtrati per raggio
       this.showAll = false;
@@ -104,24 +110,53 @@ export default {
         const a =
           Math.sin(dLat / 2) * Math.sin(dLat / 2) +
           Math.cos(this.toRadians(lat_a)) *
-            Math.cos(this.toRadians(lat_b)) *
-            Math.sin(dLon / 2) *
-            Math.sin(dLon / 2);
+          Math.cos(this.toRadians(lat_b)) *
+          Math.sin(dLon / 2) *
+          Math.sin(dLon / 2);
 
         const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         const distance = earthRadius * c;
         // console.log(`Distanza: ${distance} km`);
-        if (distance <= range) {
+        if (distance <= radius) {
           this.filteredApartments.push({
             ...this.apartments.list[i],
             distance: distance, // Add the distance property to each filtered apartment
           });
         }
+
+        console.log(this.filteredApartments);
         // console.log("ApP filtrati " + this.searchedApartments);
         // console.log("i " + i);
         console.log("distance " + distance); // console.log("range " + range);
-        this.filteredApartments.sort((a, b) => a.distance - b.distance); // Sort the filtered apartments by distance
+        // QUESTO FUNZIONA:
+        // this.filteredApartments.sort((a, b) => a.distance - b.distance);
+
+
+
+        this.filteredApartments.sort(function (a, b) {
+
+          // Verifica se a ha la caratteristica desiderata
+          const hasCharacteristicA = a.hasOwnProperty('sponsored');
+
+          // Verifica se b ha la caratteristica desiderata
+          const hasCharacteristicB = b.hasOwnProperty('sponsored');
+
+          // Se a ha la caratteristica e b non l'ha, a viene considerato minore di b
+          if (hasCharacteristicA && !hasCharacteristicB) {
+            return -1;
+          }
+
+          // Se b ha la caratteristica e a non l'ha, a viene considerato maggiore di b
+          if (!hasCharacteristicA && hasCharacteristicB) {
+            return 1;
+          }
+
+          return a.distance - b.distance;
+        }); // Sort the filtered apartments by distance
+
       }
+
+      // console.log(this.filteredApartments.sort((a, b) => a.distance - b.distance));
       console.log("n App filtrati " + this.filteredApartments.length);
     },
 
@@ -129,9 +164,9 @@ export default {
     toRadians(degrees) {
       return (degrees * Math.PI) / 180;
     },
-    updateRange(range) {
-      this.searchApartmentsFilter(range);
-    },
+    // updateRange(range) {
+    //   this.searchApartmentsFilter(range);
+    // },
 
     // Ritorna l'array chiamato sul created
     resetFilters() {
@@ -156,63 +191,48 @@ export default {
 <template>
   <div class="page-container margin-fix">
     <div class="filter-container d-flex">
-      <FilterSection
-        @filterApartments="filterApartments"
-        :allApartments="filteredApartments"
-        @resetFilters="resetFilters"
-        @changeRange="updateRange"
-      />
+      <FilterSection @filterApartments="filterApartments" :allApartments="filteredApartments" @resetFilters="resetFilters"
+        @changeRange="updateRange" />
     </div>
 
     <div class="apartments-container min-height flex-column">
       <!-- <SearchBar @on-search="fetchApartmentsByAddress()" /> -->
       <!-- * SEARCHBAR -->
-      <div
-        class="search-bar-container my-3 d-flex align-items-end justify-content-end"
-      >
-        <div
-          class="search-bar"
-          id="searchBarContainer"
-        >
-          <form
-            class="d-flex"
-            role="search"
-            @submit.prevent="fetchCoordinates()"
-          >
-            <input
-              class="form-control"
-              type="search"
-              :placeholder="placeholder"
-              aria-label="Search"
-              v-model="address"
-              id="address"
-              name="address"
-            />
-            <button
-              class="btn primary-btn mx-2"
-              type="submit"
-            >
+      <div class="search-bar-container my-3 d-flex align-items-end justify-content-end">
+        <div class="search-bar" id="searchBarContainer">
+          <form class="d-flex" role="search" @submit.prevent="fetchCoordinates()">
+            <input class="form-control" type="search" :placeholder="placeholder" aria-label="Search" v-model="address"
+              id="address" name="address" />
+            <button class="btn primary-btn mx-2" type="submit">
               <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
             </button>
           </form>
         </div>
       </div>
 
+      <!-- * RADIUS -->
+      <div class="km-container mt-3 mb-0">
+        <label for="km" class="fs-5">Raggio</label>
+        <!-- <input type="number" v-model="rangeValue" min="0" max="20" /> -->
+        <div class="d-flex">
+          <!-- displayed km -->
+          <input class="form-control" type="number" id="rangeValue" v-model.number="rangeValue" min="0" max="100"
+            placeholder="Distanza Km" />
+          <!--slide bar-->
+          <input type="range" class="rangeSliderDistance my-3" min="0" max="20" v-model="rangeValue" />
+          <div class="d-flex flex-row justify-content-between m-0">
+            <p id="">0 Km</p>
+            <p id="">20 Km</p>
+          </div>
+        </div>
+      </div>
+
       <Loader v-if="isLoading" />
       <!-- Aggiungi il componente Loader quando isLoading è true -->
 
-      <AppList
-        v-else-if="showAll"
-        :apartments="apartments.list"
-      />
-      <AppList
-        v-else-if="!showAll"
-        :apartments="sortedFilteredApartments"
-      />
-      <div
-        v-else
-        class="text-muted text-center"
-      >
+      <AppList v-else-if="showAll" :apartments="apartments.list" />
+      <AppList v-else-if="!showAll" :apartments="sortedFilteredApartments" />
+      <div v-else class="text-muted text-center">
         <h2>Nessun appartamento trovato</h2>
         <h3>Prova Modificando i termini di ricerca</h3>
       </div>
