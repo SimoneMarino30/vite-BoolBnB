@@ -25,7 +25,7 @@ export default {
       /* slider */
       currentMinPrice: null,
       currentMaxPrice: null,
-      currentDistance: null,
+      // currentDistance: null,
     };
   },
 
@@ -271,21 +271,21 @@ export default {
         <!-- FORM -->
         <div class="filters-form">
           <!-- km range -->
-          <div class="km-container mt-3 mb-0">
+          <!-- <div class="km-container mt-3 mb-0">
             <label for="km" class="fs-5">Raggio</label>
             <input type="number" v-model="rangeValue" min="0" max="20" />
-            <div class="d-flex">
-              <!-- displayed km -->
-              <input class="form-control" type="number" id="rangeKm" v-model.number="rangeKm" min="0" max="100"
-                placeholder="Distanza Km" />
-              <!--slide bar-->
-              <input type="range" class="rangeSliderDistance my-3" min="0" max="20" v-model="currentDistance" />
+            <div class="d-flex"> -->
+          <!-- displayed km -->
+          <!-- <input class="form-control" type="number" id="rangeKm" v-model.number="rangeKm" min="0" max="100"
+                placeholder="Distanza Km" /> -->
+          <!--slide bar-->
+          <!-- <input type="range" class="rangeSliderDistance my-3" min="0" max="20" v-model="currentDistance" />
               <div class="d-flex flex-row justify-content-between m-0">
                 <p id="">0 Km</p>
                 <p id="">20 Km</p>
               </div>
             </div>
-          </div>
+          </div> -->
           <!-- price range -->
           <div class="price-container m-0">
             <label for="price" class="fs-5">Prezzo</label>
