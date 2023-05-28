@@ -110,9 +110,9 @@ export default {
         const a =
           Math.sin(dLat / 2) * Math.sin(dLat / 2) +
           Math.cos(this.toRadians(lat_a)) *
-          Math.cos(this.toRadians(lat_b)) *
-          Math.sin(dLon / 2) *
-          Math.sin(dLon / 2);
+            Math.cos(this.toRadians(lat_b)) *
+            Math.sin(dLon / 2) *
+            Math.sin(dLon / 2);
 
         const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         const distance = earthRadius * c;
@@ -129,11 +129,8 @@ export default {
         // console.log("i " + i);
         console.log("distance " + distance); // console.log("range " + range);
 
-
-
         // ORDINAMENTO PER DISTANZA FUNZIONA:
         // this.filteredApartments.sort((a, b) => a.distance - b.distance); // Sort the filtered apartments by distance
-
       }
 
       // console.log(this.filteredApartments.sort((a, b) => a.distance - b.distance));
@@ -159,7 +156,6 @@ export default {
     this.fetchApartments();
   },
 
-
   // ORDINAMENTO DISTANZA
   // computed: {
   //   sortedFilteredApartments() {
@@ -174,19 +170,42 @@ export default {
 <template>
   <div class="page-container margin-fix">
     <div class="filter-container d-flex">
-      <FilterSection @filterApartments="filterApartments" :allApartments="filteredApartments" @resetFilters="resetFilters"
-        @changeRange="updateRange" />
+      <FilterSection
+        @filterApartments="filterApartments"
+        :allApartments="filteredApartments"
+        @resetFilters="resetFilters"
+        @changeRange="updateRange"
+      />
     </div>
 
     <div class="apartments-container min-height flex-column">
       <!-- <SearchBar @on-search="fetchApartmentsByAddress()" /> -->
       <!-- * SEARCHBAR -->
-      <div class="search-bar-container my-3 d-flex align-items-end justify-content-end">
-        <div class="search-bar" id="searchBarContainer">
-          <form class="d-flex" role="search" @submit.prevent="fetchCoordinates()">
-            <input class="form-control" type="search" :placeholder="placeholder" aria-label="Search" v-model="address"
-              id="address" name="address" />
-            <button class="btn primary-btn mx-2" type="submit">
+      <div
+        class="search-bar-container mt-3 d-flex align-items-end justify-content-end"
+      >
+        <div
+          class="search-bar"
+          id="searchBarContainer"
+        >
+          <form
+            class="d-flex"
+            role="search"
+            @submit.prevent="fetchCoordinates()"
+          >
+            <input
+              class="form-control"
+              type="search"
+              :placeholder="placeholder"
+              aria-label="Search"
+              v-model="address"
+              id="address"
+              name="address"
+            />
+            <button
+              class="btn primary-btn mx-2"
+              type="submit"
+            >
               <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
             </button>
           </form>
@@ -194,18 +213,45 @@ export default {
       </div>
 
       <!-- * RADIUS -->
-      <div class="km-container mt-3 mb-0">
-        <label for="km" class="fs-5">Raggio</label>
+      <div class="km-container mb-0 d-flex flex-column align-items-center">
+        <label
+          for="km"
+          class="fs-6"
+          >Restingi il raggio</label
+        >
         <!-- <input type="number" v-model="rangeValue" min="0" max="20" /> -->
-        <div class="d-flex">
-          <!-- displayed km -->
-          <input class="form-control" type="number" id="rangeValue" v-model.number="rangeValue" min="0" max="100"
-            placeholder="Distanza Km" />
+        <div class="d-flex flex-column align-items-center w-100">
           <!--slide bar-->
-          <input type="range" class="rangeSliderDistance my-3" min="0" max="20" v-model="rangeValue" />
-          <div class="d-flex flex-row justify-content-between m-0">
-            <p id="">0 Km</p>
-            <p id="">20 Km</p>
+          <input
+            type="range"
+            class="rangeSliderDistance my-3"
+            min="0"
+            max="20"
+            v-model="rangeValue"
+          />
+          <div class="d-flex flex-row justify-content-between m-0 w-50 pt-1">
+            <p
+              id=""
+              class="small"
+            >
+              0 Km
+            </p>
+            <!-- displayed km -->
+            <input
+              class="form-control small"
+              type="number"
+              id="rangeValue"
+              v-model.number="rangeValue"
+              min="0"
+              max="20"
+              placeholder="Km"
+            />
+            <p
+              id=""
+              class="small"
+            >
+              20 Km
+            </p>
           </div>
         </div>
       </div>
@@ -213,11 +259,20 @@ export default {
       <Loader v-if="isLoading" />
       <!-- Aggiungi il componente Loader quando isLoading è true -->
 
-      <AppList v-else-if="showAll" :apartments="apartments.list" />
+      <AppList
+        v-else-if="showAll"
+        :apartments="apartments.list"
+      />
       <!-- * ORDINAMENTO DISTANZA -->
       <!-- <AppList v-else-if="!showAll" :apartments="sortedFilteredApartments" /> -->
-      <AppList v-else-if="!showAll" :apartments="filteredApartments" />
-      <div v-else class="text-muted text-center">
+      <AppList
+        v-else-if="!showAll"
+        :apartments="filteredApartments"
+      />
+      <div
+        v-else
+        class="text-muted text-center"
+      >
         <h2>Nessun appartamento trovato</h2>
         <h3>Prova Modificando i termini di ricerca</h3>
       </div>
@@ -231,10 +286,47 @@ export default {
 @use "../../style/general.scss" as *;
 
 @include btn_hover();
+.rangeSliderDistance {
+  -webkit-appearance: none;
+  background: $main_color;
+  height: 0.3rem;
+  width: 50%;
+  border-radius: 25px;
 
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 0.7rem;
+    height: 1.5rem;
+    border-radius: 20%;
+    background-color: $dark_color;
+    cursor: pointer;
+  }
+}
+
+#rangeValue {
+  width: 4rem;
+  height: 1.5rem;
+  font-size: small;
+}
 // SEARCHBAR
 .search-bar-container {
   width: 100%;
+
+  .rangeSliderDistance {
+    -webkit-appearance: none;
+    background: $secondary_color;
+    height: 0.5rem;
+    border-radius: 25px;
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 1rem;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background-color: red; // Cambia il colore del background in rosso
+      cursor: pointer;
+    }
+  }
 
   .search-bar {
     width: 70%;
