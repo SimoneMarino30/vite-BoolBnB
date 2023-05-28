@@ -15,7 +15,7 @@ export default {
   <div class="container">
     <div
       v-if="apartments.length"
-      class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 py-5"
+      class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 pb-5 pt-1"
     >
       <AppCard
         v-for="apartment in apartments"

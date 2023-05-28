@@ -242,8 +242,14 @@ export default {
 </script>
 
 <template>
-  <div id="mainContainer" class="main-container d-flex m-0">
-    <div id="overlayFilters" class="overlay-container d-flex">
+  <div
+    id="mainContainer"
+    class="main-container d-flex m-0"
+  >
+    <div
+      id="overlayFilters"
+      class="overlay-container d-flex"
+    >
       <!-- aside -->
       <aside class="px-sm-3 px-md-4 px-lg-5 py-5">
         <!-- SEARCH BAR -->
@@ -288,22 +294,48 @@ export default {
           </div> -->
           <!-- price range -->
           <div class="price-container m-0">
-            <label for="price" class="fs-5">Prezzo</label>
+            <label
+              for="price"
+              class="fs-5"
+              >Prezzo</label
+            >
             <div class="d-flex flex-row justify-content-between">
               <!-- min price-->
-              <input class="form-control shorter-input" type="number" v-model.number="currentMinPrice" min="0"
-                :max="currentMaxPrice - 1" placeholder="Min €" />
+              <input
+                class="form-control shorter-input"
+                type="number"
+                v-model.number="currentMinPrice"
+                min="0"
+                :max="currentMaxPrice - 1"
+                placeholder="Min €"
+              />
               <!--slide bar min price-->
-              <input type="range" class="rangeSliderPrice mt-3" min="0" :max="currentMaxPrice"
-                v-model="currentMinPrice" />
+              <input
+                type="range"
+                class="rangeSliderPrice mt-3"
+                min="0"
+                :max="currentMaxPrice"
+                v-model="currentMinPrice"
+              />
             </div>
             <div class="d-flex flex-row justify-content-between">
               <!-- max price -->
-              <input class="form-control shorter-input" type="number" v-model.number="currentMaxPrice"
-                :min="currentMinPrice + 1" max="1000" placeholder="Max €" />
+              <input
+                class="form-control shorter-input"
+                type="number"
+                v-model.number="currentMaxPrice"
+                :min="currentMinPrice + 1"
+                max="1000"
+                placeholder="Max €"
+              />
               <!--slide bar max price-->
-              <input type="range" class="rangeSliderPrice mt-3" :min="currentMinPrice" max="1000"
-                v-model="currentMaxPrice" />
+              <input
+                type="range"
+                class="rangeSliderPrice mt-3"
+                :min="currentMinPrice"
+                max="1000"
+                v-model="currentMaxPrice"
+              />
             </div>
 
             <!--    <div class="d-flex flex-row justify-content-between m-0">
@@ -314,22 +346,45 @@ export default {
 
           <!-- number room bed bathroom -->
           <div class="brb-container m-0">
-            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start">
+            <div
+              class="d-flex flex-row justify-content-between align-items-start"
+            >
               <div class="room d-flex align-items-center">
                 <label for="number_room">Stanze</label>
-                <input class="form-control brb" id="number_room" type="number" min="1" max="10" v-model.number="rooms"
-                  placeholder="1" />
+                <input
+                  class="form-control brb"
+                  id="number_room"
+                  type="number"
+                  min="1"
+                  max="10"
+                  v-model.number="rooms"
+                  placeholder="1"
+                />
               </div>
               <div class="bed d-flex align-items-center">
                 <label for="number_bed">Posti letto</label>
-                <input class="form-control brb" id="number_bed" type="number" min="1" max="20" v-model.number="beds"
-                  placeholder="1" />
+                <input
+                  class="form-control brb"
+                  id="number_bed"
+                  type="number"
+                  min="1"
+                  max="20"
+                  v-model.number="beds"
+                  placeholder="1"
+                />
               </div>
 
               <div class="bath d-flex align-items-center">
                 <label for="number_bath">n° Bagni</label>
-                <input class="form-control brb" id="number_bath" type="number" min="1" max="8" v-model.number="bathrooms"
-                  placeholder="1" />
+                <input
+                  class="form-control brb"
+                  id="number_bath"
+                  type="number"
+                  min="1"
+                  max="8"
+                  v-model.number="bathrooms"
+                  placeholder="1"
+                />
               </div>
             </div>
           </div>
@@ -339,16 +394,33 @@ export default {
             <span class="fs-4">Seleziona servizi</span>
             <div>
               <ul class="d-flex flex-wrap">
-                <li v-for="service in allServices" :key="service.id">
-                  <label :class="[
-                    'service-label  form-check px-3 justify-content-center',
-                    { 'selected-service': services.includes(service.id) },
-                  ]">
-                    <input type="checkbox" class="form-check-input" :value="service.id" v-model="services" />
+                <li
+                  v-for="service in allServices"
+                  :key="service.id"
+                >
+                  <label
+                    :class="[
+                      'service-label  form-check px-3 justify-content-center',
+                      { 'selected-service': services.includes(service.id) },
+                    ]"
+                  >
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      :value="service.id"
+                      v-model="services"
+                    />
                     <div class="d-flex flex-row">
-                      <div class="service-icon d-flex flex-row align-items-center">
-                        <span class="align-items-center"><font-awesome-icon :icon="service.icon" /></span>
-                        <div class="service-name" v-if="services.includes(service.id)">
+                      <div
+                        class="service-icon d-flex flex-row align-items-center"
+                      >
+                        <span class="align-items-center"
+                          ><font-awesome-icon :icon="service.icon"
+                        /></span>
+                        <div
+                          class="service-name"
+                          v-if="services.includes(service.id)"
+                        >
                           <span class="ms-2">{{ service.name }}</span>
                         </div>
                       </div>
@@ -361,10 +433,16 @@ export default {
         </div>
 
         <div class="d-flex flex-row justify-content-between mt-3">
-          <button @click="searchApartmentsFilter(), requireServices()" class="btn primary-btn">
+          <button
+            @click="searchApartmentsFilter(), requireServices()"
+            class="btn primary-btn"
+          >
             Filtra
           </button>
-          <button @click="resetFilters()" class="btn btn-secondary">
+          <button
+            @click="resetFilters()"
+            class="btn btn-secondary"
+          >
             Resetta filtri
           </button>
         </div>
@@ -373,7 +451,10 @@ export default {
 
     <!-- FILTER ICON -->
     <div>
-      <button class="btn primary-btn filter mt-2" @click="toggleAside()">
+      <button
+        class="btn primary-btn filter mt-2"
+        @click="toggleAside()"
+      >
         <font-awesome-icon icon="fa-solid fa-filter" />
       </button>
     </div>
@@ -513,6 +594,11 @@ export default {
             transition: display 3.5s;
           }
         }
+      }
+    }
+    @media (max-width: 768px) {
+      aside {
+        padding: 1rem;
       }
     }
   }

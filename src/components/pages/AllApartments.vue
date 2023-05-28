@@ -209,49 +209,51 @@ export default {
               <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
             </button>
           </form>
-        </div>
-      </div>
-
-      <!-- * RADIUS -->
-      <div class="km-container mb-0 d-flex flex-column align-items-center">
-        <label
-          for="km"
-          class="fs-6"
-          >Restingi il raggio</label
-        >
-        <!-- <input type="number" v-model="rangeValue" min="0" max="20" /> -->
-        <div class="d-flex flex-column align-items-center w-100">
-          <!--slide bar-->
-          <input
-            type="range"
-            class="rangeSliderDistance my-3"
-            min="0"
-            max="20"
-            v-model="rangeValue"
-          />
-          <div class="d-flex flex-row justify-content-between m-0 w-50 pt-1">
-            <p
-              id=""
-              class="small"
-            >
-              0 Km
-            </p>
-            <!-- displayed km -->
-            <input
-              class="form-control small"
-              type="number"
-              id="rangeValue"
-              v-model.number="rangeValue"
-              min="0"
-              max="20"
-              placeholder="Km"
-            />
-            <p
-              id=""
-              class="small"
-            >
-              20 Km
-            </p>
+          <!-- * RADIUS -->
+          <div
+            class="km-container mb-0 d-flex flex-column align-items-start pt-2"
+          >
+            <label
+              for="km"
+              class="fs-6"
+            ></label>
+            <!-- <input type="number" v-model="rangeValue" min="0" max="20" /> -->
+            <div class="d-flex flex-column align-items-start w-100">
+              <!--slide bar-->
+              <input
+                type="range"
+                class="rangeSliderDistance my-3"
+                min="0"
+                max="20"
+                v-model="rangeValue"
+              />
+              <div
+                class="text-range d-flex flex-row justify-content-between m-0 pt-1"
+              >
+                <p
+                  id=""
+                  class="small"
+                >
+                  0 Km
+                </p>
+                <!-- displayed km -->
+                <input
+                  class="form-control small"
+                  type="number"
+                  id="rangeValue"
+                  v-model.number="rangeValue"
+                  min="0"
+                  max="20"
+                  placeholder="Km"
+                />
+                <p
+                  id=""
+                  class="small"
+                >
+                  20 Km
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -286,51 +288,62 @@ export default {
 @use "../../style/general.scss" as *;
 
 @include btn_hover();
-.rangeSliderDistance {
-  -webkit-appearance: none;
-  background: $main_color;
-  height: 0.3rem;
-  width: 50%;
-  border-radius: 25px;
 
-  &::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 0.7rem;
-    height: 1.5rem;
-    border-radius: 20%;
-    background-color: $dark_color;
-    cursor: pointer;
-  }
-}
-
-#rangeValue {
-  width: 4rem;
-  height: 1.5rem;
-  font-size: small;
-}
 // SEARCHBAR
 .search-bar-container {
   width: 100%;
 
   .rangeSliderDistance {
     -webkit-appearance: none;
-    background: $secondary_color;
-    height: 0.5rem;
+    background: $main_color;
+    height: 0.3rem;
+    width: 30%;
     border-radius: 25px;
 
     &::-webkit-slider-thumb {
       -webkit-appearance: none;
-      width: 1rem;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      background-color: red; // Cambia il colore del background in rosso
+      width: 0.7rem;
+      height: 1.5rem;
+      border-radius: 20%;
+      background-color: $dark_color;
       cursor: pointer;
     }
+  }
+
+  #rangeValue {
+    width: 4rem;
+    height: 1.5rem;
+    font-size: small;
+  }
+
+  .text-range {
+    width: 30%;
   }
 
   .search-bar {
     width: 70%;
     margin: 2rem auto;
+  }
+
+  //sm
+  @media (max-width: 768px) {
+    .rangeSliderDistance {
+      width: 100%;
+    }
+    .text-range {
+      width: 100%;
+    }
+  }
+
+  //md
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .rangeSliderDistance {
+      width: 50%;
+    }
+
+    .text-range {
+      width: 50%;
+    }
   }
 }
 
