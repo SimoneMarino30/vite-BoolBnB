@@ -57,16 +57,20 @@ export default {
         <div class="col-lg-3 col-md-6 col-sm-12 responsive">
           <div class="card h-100">
             <div class="img1">
-              <img src="" />
+              <img src="../../assets/images/carlo.jpg" />
             </div>
             <div class="card-body">
               <h4 class="card-title text-center">Carlo Colletti</h4>
-              <p class="card-text text-center"></p>
+              <p class="card-text text-center">
+                Sono il classico ragazzo nerd, appassionato di software e hardware in tutte le loro forme e diramazioni, sono sempre alla ricerca di informazioni 
+                sulle nuove tecnologie e passo la maggior parte del mio tempo a sperimentare e comprenderle. <br>
+                Ho voluto stravolgere la mia vita e ho deciso che questa mia passione non doveva rimanere tale, ed ho lavorato per farne il mio lavoro.
+              </p>
             </div>
             <div class="card-footer">
               <div class="text-center">
                 <a
-                  href="https://www.linkedin.com/in/michele-pio-bombai-071348275"
+                  href="https://www.linkedin.com/in/carlo-c-mrcb"
                   target="_blank"
                 >
                   <font-awesome-icon
