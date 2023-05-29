@@ -64,7 +64,7 @@ export default {
               <p class="card-text text-center">
                 Sono il classico ragazzo nerd, appassionato di software e hardware in tutte le loro forme e diramazioni, sono sempre alla ricerca di informazioni 
                 sulle nuove tecnologie e passo la maggior parte del mio tempo a sperimentare e comprenderle. <br>
-                Ho voluto stravolgere la mia vita e ho deciso che questa mia passione non doveva rimanere tale, ed ho lavorato per farne il mio lavoro.
+                Ho voluto stravolgere la mia vita e ho deciso che questa mia passione non doveva rimanere tale, ed ho voluto farne il mio lavoro.
               </p>
             </div>
             <div class="card-footer">
