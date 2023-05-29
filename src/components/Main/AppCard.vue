@@ -9,36 +9,25 @@ export default {
   <!-- init card -->
   <div class="">
     <div class="py-3 d-flex justify-content-center w-100">
-      <router-link
-        :to="{
-          name: 'AppDetail',
-          params: {
-            slug: apartment.slug,
-          },
-        }"
-        :apartment="apartment"
-        class="text-reset w-100"
-      >
+      <router-link :to="{
+        name: 'AppDetail',
+        params: {
+          slug: apartment.slug,
+        },
+      }" :apartment="apartment" class="text-reset w-100">
         <!-- card container  -->
-        <div class="card-box px-3 pt-3 text-center rounded-3 position-relative">
-          <!-- Icona sponsorizzazione -->
-          <div
-            v-show="apartment.sponsored == true"
-            class="sponsored-icon m-3"
-          >
-            <span>
-              <font-awesome-icon :icon="['fas', 'crown']" />
-            </span>
-          </div>
+        <div class="card-box px-3 pt-3 text-center rounded-3">
           <!-- title appartment  -->
           <h2 class="name fw-semibolder fs-4 pt-3">{{ apartment.title }}</h2>
           <!-- image appartment  -->
-          <div class="image image-card rounded-3">
-            <img
-              :src="apartment.image"
-              class="image-frame rounded-3"
-              alt="#"
-            />
+          <div class="image image-card rounded-3 position-relative">
+            <img :src="apartment.image" class="image-frame rounded-3" alt="#" />
+            <!-- Icona sponsorizzazione -->
+            <div v-show="apartment.sponsored == true" class="sponsored-icon m-3">
+              <span>
+                <font-awesome-icon :icon="['fas', 'crown']" />
+              </span>
+            </div>
           </div>
           <!-- detail container  -->
           <div class="details mb-3 rounded-2">

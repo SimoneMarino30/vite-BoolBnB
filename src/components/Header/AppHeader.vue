@@ -72,7 +72,7 @@ export default {
               </li>
               <li class="nav-item link-space">
                 <router-link class="nav-link" :to="{ name: 'AllApartments' }">
-                  Tutte le Case
+                  Appartamenti
                 </router-link>
               </li>
               <li class="nav-item link-space">
