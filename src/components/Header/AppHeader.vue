@@ -68,7 +68,10 @@ export default {
           <div class="collapse navbar-collapse justify-content-between" id="navbarScroll">
             <ul class="navbar-nav my-2 my-lg-0 ms-0 ms-lg-3 flex-grow-1">
               <li class="nav-item link-space">
-                <a class="nav-link" aria-current="page" href="/">Home</a>
+                <!-- <a class="nav-link" aria-current="page" href="/">Home</a> -->
+                <router-link class="nav-link" :to="{ name: 'home' }">
+                  Home
+                </router-link>
               </li>
               <li class="nav-item link-space">
                 <router-link class="nav-link" :to="{ name: 'AllApartments' }">
@@ -171,6 +174,10 @@ header {
     a {
       padding: 0;
       margin-top: 1rem;
+    }
+
+    .active {
+      color: $lighter_accent_color;
     }
   }
 
